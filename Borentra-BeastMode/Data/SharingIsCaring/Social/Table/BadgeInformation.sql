@@ -1,0 +1,11 @@
+﻿CREATE TABLE [Social].[BadgeInformation]
+(
+	[Identifier] TINYINT NOT NULL PRIMARY KEY, 
+    [Title] NVARCHAR(30) NOT NULL, 
+    [Description] NVARCHAR(65) NULL, 
+    [Points] TINYINT NOT NULL DEFAULT 0, 
+    [IconName] NVARCHAR(30) NULL, 
+    [CreatedOn] SMALLDATETIME NOT NULL DEFAULT GETUTCDATE(), 
+    [ModifiedOn] SMALLDATETIME NOT NULL DEFAULT GETUTCDATE(), 
+    [DeletedOn] SMALLDATETIME NULL
+)

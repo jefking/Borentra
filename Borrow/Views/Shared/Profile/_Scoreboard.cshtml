@@ -1,0 +1,32 @@
+﻿<div class="score-board">
+  <div class="row">
+      @if (0 < Model.GiveCount)
+      {
+    <div class="col-xs-3 text-center">
+      <h3>@Model.GiveCount</h3>
+      <p>Given</p>
+    </div>
+      }
+      @if (0 < Model.RecieveCount)
+      {
+    <div class="col-xs-3 text-center">
+      <h3>@Model.RecieveCount</h3>
+      <p>Received</p>
+    </div>
+      }
+      @if (0 < Model.LendCount)
+      {
+    <div class="col-xs-3 text-center">
+      <h3>@Model.LendCount</h3>
+      <p>Lent</p>
+    </div>
+      }
+      @if (0 < Model.BorrowCount)
+      {
+    <div class="col-xs-3 text-center">
+      <h3>@Model.BorrowCount</h3>
+      <p>Borrowed</p>
+    </div>
+      }
+  </div>
+</div>

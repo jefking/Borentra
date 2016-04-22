@@ -1,0 +1,37 @@
+﻿@using Borentra
+﻿
+@model IEnumerable<Borentra.Models.Item>
+
+@if (0 < Model.Count())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>About</th>
+                <th>Info</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @Html.Partial("~/Views/Shared/Admin/_ThingColumns.cshtml", item)
+                    <td>
+                        Tag: <a href="/admin/tag?key=@item.Key" target="_blank">tag</a>
+                        <br/>
+                        Sharing: @item.SharePrivacyLevel.ToString()
+                        <br />
+                        Renting: @item.RentPrivacyLevel.ToString()
+                        <br />
+                        Giving: @item.FreePrivacyLevel.ToString()
+                        <br />
+                        Trading: @item.TradePrivacyLevel.ToString()
+                        <br />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

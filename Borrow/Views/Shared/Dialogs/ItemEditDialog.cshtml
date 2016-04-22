@@ -1,0 +1,69 @@
+﻿@using Borentra
+
+<div id="dialogEditItem" class="modal fade dialog-edit-item" tabindex="-1" role="dialog" aria-labelledby="editDialogModalLabel" aria-hidden="true">
+    <form id="quick-edit-item-form" action="/api/Product/UploadImage">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3>Update your offer</h3>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="itemId" name="itemId" value="" />
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Title</h4>
+                    <input type="text" id="item-title" class="form-control" placeholder="A luxurious cat tuxedo!" maxlength="256" required>
+                    <h4>Description</h4>
+                    <textarea class="form-control" id="item-description" placeholder="Describe your item and add #hashtags!" rows="8" maxlength="1024"></textarea>
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <h5>Free</h5>
+                            <select id="item-free-privacy" class="form-control">
+                                <option value="1">Give Away</option>
+                                <option value="3">Give to a friend</option>
+                                <option value="4">Not Free</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-5">
+                            <h5>Lending/Borrowing</h5>
+                            <select id="item-share-privacy" class="form-control">
+                                <option value="1">Lend</option>
+                                <option value="3">Lend to a friend</option>
+                                <option value="4">Not Lending</option>
+                            </select>
+                        </div>
+                        <br />
+                        <div class="col-xs-5">
+                            <h5>Trade</h5>
+                            <select id="item-trade-privacy" class="form-control">
+                                <option value="1" selected>Tradeable</option>
+                                <option value="3">Trade with a friend</option>
+                                <option value="4">Not tradeable</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-5">
+                            <h5>Rent</h5>
+                            <select id="item-rent-privacy" class="form-control">
+                                <option value="2" selected>Renting</option>
+                                <option value="3">Rent with friends</option>
+                                <option value="4">Not renting</option>
+                            </select>
+                            <input type="text" name="price" id="price" class="form-control" value="0.99" />
+                            <input type="hidden" name="unit" id="unit" value="1" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <h4>Photos <span class="badge badge-info photos-count">0</span></h4>
+                    <ul class="thumbnails items"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn btn-danger btn-dialog-delete-item2" title="Delete" onclick="_gaq.push(['_trackEvent', 'Item', 'Delete', 'Item']);">
+                <span class="glyphicon glyphicon-remove"></span>
+            </a>
+            <button type="submit" class="btn btn-primary btn-success" data-loading-text="Saving Item Information! Please wait!" onclick="_gaq.push(['_trackEvent', 'Dialogue', 'Item', 'Update']);">Save</button>
+        </div>
+    </form>
+</div>

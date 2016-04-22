@@ -1,0 +1,169 @@
+﻿@{
+    ViewBag.Title = "Administrator Home Page";
+    Layout = "~/Views/Shared/Layouts/_AdminLayout.cshtml";
+}
+<div class="item-view container-fluid admin-reports">
+    <div class="gutter">
+        <div class="row">
+            <div class="col-xs-10">
+
+                <div class="page-header">
+                    <h1>Administration Console <small>Let's HUSTLE</small></h1>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="alert alert-info text-center">
+                            <h2>@ViewBag.Totals.Members</h2>
+                            <span class="glyphicon glyphicon-user" title="Members"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="alert alert-info text-center">
+                            <h2>@ViewBag.Totals.MembersOnDevices</h2>
+                            <span><span class="glyphicon glyphicon-user" title="Members"></span> on <span class="glyphicon glyphicon-phone" title="Device"></span></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="alert alert-info text-center">
+                            <h2>@ViewBag.Totals.Devices</h2>
+                            <span><span class="glyphicon glyphicon-phone" title="Device"></span> Installs</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="alert alert-success text-center">
+                            <h2>@ViewBag.Totals.Offers</h2>
+                            <span class="glyphicon glyphicon-th-list" title="Offers"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="alert alert-success text-center">
+                            <h2>@ViewBag.Totals.Requests</h2>
+                            <span class="glyphicon glyphicon-hand-up" title="Wanted"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="alert alert-success text-center">
+                            <h2>@(ViewBag.Totals.Requests + ViewBag.Totals.Offers)</h2>
+                            <span>
+                                <span class="glyphicon glyphicon-th-list" title="Offers"></span> + <span class="glyphicon glyphicon-hand-up" title="Wanted"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-3">
+                        <h2>Operations</h2>
+                        <ul>
+                            <li><a href="https://manage.windowsazure.com" target="_blank">Azure</a></li>
+                            <li><a href="https://sharingiscaring.accesscontrol.windows.net/v2/mgmt/web" target="_blank">Azure ACS</a></li>
+                            <li><a href="http://www.pingdom.com/" target="_blank">PingDom</a></li>
+                            <li><a href="http://stats.pingdom.com/31aiv2hwjmx2" target="_blank">PingDom Public</a></li>
+                            <li><a href="http://www.windowsazure.com/en-us/support/service-dashboard/" target="_blank">Azure Status</a></li>
+                            <li><a href="https://status.github.com/" target="_blank">GitHub Status</a></li>
+                            <li><a href="http://www.godaddy.com" target="_blank">Go Daddy</a></li>
+                            <li><a href="http://www.mailgun.com" target="_blank">Mail Gun</a></li>
+                            <li><a href="http://domains.live.com/" target="_blank">Manage Outlook.com</a></li>
+                        </ul>
+                        <h2>References</h2>
+                        <ul>
+                            <li><a href="http://www.peers.org" target="_blank">Peers</a></li>
+                            <li><a href="http://meshing.it/" target="_blank">Meshing It</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-3">
+                        <h2>Staff</h2>
+                        <ul>
+                            <li><a href="http://outlook.com" target="_blank">Email</a></li>
+                            <li><a href="https://github.com/Borentra/Borrow" target="_blank">GitHub</a></li>
+                            <li><a href="https://github.com/Borentra/Borrow/issues" target="_blank">Issue Tracker</a></li>
+                            <li><a href="https://www.google.com/analytics" target="_blank">Google Analytics</a></li>
+                            <li><a href="http://www.google.com/webmaster" target="_blank">Google Webmaster</a></li>
+                            <li><a href="http://www.bing.com/webmaster" target="_blank">Bing Webmaster</a></li>
+                            <li><a href="https://trello.com/b/OGsa1Z5l/borentra-marketing" target="_blank">Marketing (Trello)</a></li>
+                            <li><a href="http://download.geonames.org/export/dump/" target="_blank">Geo Names Dump</a></li>
+                            <li><a href="http://borentrajenkins.cloudapp.net:8080" target="_blank">Jenkins</a></li>
+                            <li><a href="http://ifttt.com" target="_blank">IFTTT</a></li>
+                        </ul>
+                        <h2>Stats</h2>
+                        <ul>
+                            <li><a href="http://bit.ly/BorentraBooks+" target="_blank">Books</a></li>
+                            <li><a href="http://bit.ly/BorentraClothing+" target="_blank">Clothing</a></li>
+                            <li><a href="http://bit.ly/BorentraFreeCycle+" target="_blank">FreeCycle</a></li>
+                            <li><a href="http://bit.ly/BorentraParents+" target="_blank">Parents</a></li>
+                            <li><a href="http://bit.ly/BorentraHiking+" target="_blank">Hiking</a></li>
+                            <li><a href="http://bit.ly/BorentraElectronics+" target="_blank">Electronics</a></li>
+                            <li><a href="http://bit.ly/BorentraGaming+" target="_blank">Gaming</a></li>
+                            <li><a href="http://bit.ly/BorentraHalloween+" target="_blank">Halloween</a></li>
+                            <li><a href="http://bit.ly/BorentraBoardGames+" target="_blank">Board Games</a></li>
+                            <li><a href="http://bit.ly/BorentraJewelry+" target="_blank">Jewelry</a></li>
+                            <li><a href="http://bit.ly/BorentraPurses+" target="_blank">Purses</a></li>
+                            <li><a href="http://bit.ly/BorentraShoes+" target="_blank">Shoes</a></li>
+                            <li><a href="http://bit.ly/BorentraMagicTheGathering+" target="_blank">Magic the Gathering</a></li>
+                            <li><a href="http://bit.ly/TimuTravels+" target="_blank">Timu Travels</a></li>
+                            <li><a href="http://bit.ly/BorentraWorld+" target="_blank">Borentra World</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-3">
+                        <h2>Social</h2>
+                        <ul>
+                            <li><a href="https://twitter.com/Borentra" target="_blank">Twitter</a></li>
+                            <li><a href="https://plus.google.com/106550752085264387024/posts" target="_blank">Google+</a></li>
+                            <li><a href="https://www.facebook.com/Borentra" target="_blank">Facebook</a></li>
+                            <li><a href="http://borentra.tumblr.com" target="_blank">Tumblr</a></li>
+                            <li><a href="https://angel.co/borentra-services-inc" target="_blank">Angel Co</a></li>
+                            <li><a href="/Rss" target="_blank">Item & Wanted RSS</a></li>
+                            <li><a href="/Rss/wanted" target="_blank">Wanted RSS</a></li>
+                            <li><a href="/Rss/item" target="_blank">Item RSS</a></li>
+                        </ul>
+                        <h2>Tools</h2>
+                        <ul>
+                            <li><a href="/report/MembersByCountry">Heat Map</a></li>
+                            <li><a href="/admin/createcompany">Create Company</a></li>
+                            <li>
+                                <img src="http://pr.prchecker.info/getpr.php?codex=aHR0cDovL3d3dy5ib3JlbnRyYS5jb20=&tag=1" alt="Page Rank" style="border: 0;" />
+                            </li>
+                            <li>
+                                <a href="http://tool.motoricerca.info/robots-checker.phtml?checkreferer=1" target="_blank">
+                                    <img src="http://tool.motoricerca.info/pic/valid-robots-small.png" border="0"
+                                         alt="Valid Robots.txt" width="80" height="15">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-3">
+                        <h2>Competition</h2>
+                        <ul>
+                            <li><a href="https://nextdoor.com/" target="_blank">Next Door</a>
+                            <li><a href="http://www.streetbank.com/" target="_blank">StreetBank</a></li>
+                            <li><a href="http://www.neighborgoods.net/" target="_blank">NeighborGoods</a></li>
+                            <li><a href="http://www.wede.al/" target="_blank">WeDeal</a></li>
+                            <li><a href="http://www.yerdle.com/" target="_blank">Yerdle</a></li>
+                            <li><a href="http://www.theforo.com/" target="_blank">The Foro</a></li>
+                            <li><a href="http://beta.neighborrow.com/" target="_blank">NeighBorrow</a></li>
+                            <li><a href="https://www.bondsy.com/" target="_blank">Bondsy</a></li>
+                            <li><a href="http://www.ecomodo.com/" target="_blank">EcoModo</a></li>
+                            <li><a href="http://www.sharepals.com/" target="_blank">Share Pals</a></li>
+                            <li><a href="http://www.compareandshare.com/" target="_blank">Compare & Share</a></li>
+                            <li><a href="http://www.getaround.com/" target="_blank">Get Around</a></li>
+                            <li><a href="http://unstash.com/" target="_blank">UnStash</a></li>
+                            <li><a href="http://offerupnow.com/" target="_blank">OfferUp</a></li>
+                            <li><a href="http://www.gumtree.com/" target="_blank">GumTree</a></li>
+                            <li><a href="http://www.freecycle.org/" target="_blank">FreeCycle</a></li>
+                            <li><a href="http://www.thesharehood.org/" target="_blank">The Sharehood</a></li>
+                            <li><a href="http://www.paperbackswap.com/" target="_blank">Paper Back Swap</a></li>
+                            <li><a href="http://snapgoods.com/" target="_blank">Snap Goods</a></li>
+                            <li><a href="http://www.lyft.me/" target="_blank">Lyft</a></li>
+                            <li><a href="http://qwiqq.me/" target="_blank">Qwiqq</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-xs-2">
+                @Html.Partial("~/Views/Shared/Admin/_AdminMenu.cshtml")
+            </div>
+        </div>
+    </div>
+</div>

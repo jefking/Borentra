@@ -1,0 +1,48 @@
+﻿@using Borentra;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css' />
+    <link href="@Url.ContentCdn("~/assets/bootstrap/css/bootstrap.css")" rel="stylesheet" />
+    <link href="@Url.ContentCdn("~/assets/bootstrap/css/bootstrap-theme.css")" rel="stylesheet" />
+    <link href="@Url.ContentCdn("~/assets/css/bootstrap-image-gallery.css")" rel="stylesheet" />
+    <link href="@Url.ContentCdn("~/assets/css/datepicker.css")" rel="stylesheet" />
+    <link href="@Url.ContentCdn("~/assets/css/bootstrap-modal-bs3patch.css")" rel="stylesheet" />
+    <link href="@Url.ContentCdn("~/assets/css/bootstrap-modal.css")" rel="stylesheet" />
+    <style>
+        .datepicker {
+            z-index: 9999;
+        }
+    </style>
+    <link href="@Url.ContentBlob("~/assets/css/borentra_v2.css")" rel="stylesheet">
+    <!--[if lt IE 9]>
+        <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+    <script>
+        var UserContentBlob = '@Url.ContentBlob("~/user/", true)';
+        var UserContentCDN = '@Url.ContentCdn("~/user/", true)';
+        var ContentDeliveryNetworkScriptsURL = '@Url.ContentCdn("~/assets/js/")';
+        var BlobScriptsURL = '@Url.ContentBlob("~/assets/js/")';
+        var isMobile = (/iphone|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0">
+    </script>
+</head>
+<body class="borentra-body authenticated">
+    @Html.Partial("_LoggedInMasthead")
+    <section class="borentra-content container">
+        @RenderBody()
+    </section>
+    <footer>
+        @Html.Partial("_Footer")
+    </footer>
+    @Html.Partial("Dialogs/ProfileMessageDialog")
+    @Html.Partial("Dialogs/ItemImageGallery")
+</body>
+@Scripts.Render("~/bundles/application")
+@Scripts.Render("~/bundles/admin")
+</html>

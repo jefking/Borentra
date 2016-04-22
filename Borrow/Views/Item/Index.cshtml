@@ -1,0 +1,94 @@
+﻿@using System.Linq;
+@using Borentra;
+
+@model Borentra.Models.SearchResults<Borentra.Models.Item>
+
+@{
+    ViewBag.Title = "Search Offers";
+    ViewBag.Description = "The offers available to our community";
+    Layout = "~/Views/Shared/Layouts/_LoggedInLayout.cshtml";
+    var search = Request.QueryString["s"];
+    var title = string.IsNullOrWhiteSpace(search) ? "Offer Search" : string.Format("Offer Search: '{0}'", search);
+    var searchParam = string.IsNullOrWhiteSpace(search) ? null : string.Format("?s={0}&amp;c=tab", search);
+    bool filterByFriendsParam = false;
+    bool.TryParse(Request.QueryString["friends"], out filterByFriendsParam);
+}
+
+<div class="borentra-view">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="page-header">
+                    <h1><span class="glyphicon glyphicon-search"></span>&nbsp;Search Results</h1>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="borentra-view-cta">
+                    <div class="pull-right">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (filterByFriendsParam)
+                            {
+                                <a href="/search/offer?s=@search" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span>&nbsp;All Offers</a>
+                            }
+                            else
+                            {
+                                <a href="/dashboard/friendoffers" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span>&nbsp;Friends Offers</a>
+                            }
+                            <a href="/dashboard/inventory" class="btn btn-default"><span class="glyphicon glyphicon-list"></span>&nbsp;My Offers</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active">
+                        <a href="/search/offer@(searchParam)"><span class="glyphicon glyphicon-hand-up"></span>&nbsp;Offers</a>
+                    </li>
+                    <li>
+                        <a href="/search/wanted@(searchParam)"><span class="glyphicon glyphicon-th-list"></span>&nbsp;Wanted</a>
+                    </li>
+                    <li>
+                        <a href="/search/member@(searchParam)"><span class="glyphicon glyphicon-user"></span>&nbsp;Members</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-10">
+                <div class="page-header">
+                    <h1>Offers <small>@Model.Manifest.Count()</small></h1>
+                </div>
+                @if (null != Model.User)
+                {
+                    <a href="/profile/@Model.User.Key">
+                        <img class="breadcrumb-user-image pull-left img-rounded" src="@Model.User.Picture?width=32&height=32" title="@Model.User.Name" />
+                    </a>
+                    if (!string.IsNullOrWhiteSpace(Model.SearchDisplayText))
+                    {
+                        <div>is ready to</div>
+                    }
+                }
+
+                @if (null != Model.Manifest && 0 < Model.Manifest.Count())
+                {
+                    @Html.Partial("~/Views/Shared/_Things.cshtml", Model.Manifest)
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        <h4><span class="glyphicon glyphicon-info-sign"></span>&nbsp;No results found for <em>"@Model.SearchDisplayText"</em></h4>
+                        <p>Sorry your search query yielded no results. Please try to broaden your search.</p>
+
+                    </div>
+                }
+            </div>
+            <div class="col-md-2">
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+﻿CREATE FUNCTION [dbo].[Trim]
+(
+	@string NVARCHAR(MAX)
+)
+RETURNS NVARCHAR(MAX)
+BEGIN
+
+	RETURN LTRIM(RTRIM(@string));
+
+END

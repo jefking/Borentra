@@ -1,0 +1,40 @@
+\:root .css3-gaussian-blur
+  *
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important
+    color: transparent !important
+    background-image: none !important
+    border-color: rgba(0, 0, 0, 0.05) !important
+    -moz-pointer-events: none !important
+    -webkit-pointer-events: none !important
+    pointer-events: none !important
+  input, textarea, button, select
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important
+    border-color: rgba(0, 0, 0, 0.05) !important
+    resize: none !important
+    opacity: .5 !important
+  img
+    opacity: .2 !important
+    background: transparent none !important
+  input
+    opacity: .2 !important
+    background: transparent none !important
+    &[type="file"], &[type="checkbox"], &[type="radio"] :root .css3-gaussian-blur textarea
+      opacity: .2 !important
+      background: transparent none !important
+  select
+    opacity: .2 !important
+    background: transparent none !important
+  fieldset
+    border-color: transparent !important
+  img
+    filter: progid:DXImageTransform.Microsoft.Blur(pixelradius=20) \9  !important
+    -ms-filter: progid:DXImageTransform.Microsoft.Blur(pixelradius=20) \9  !important
+    opacity: 1\9 !important
+  *
+    color: #ccc !important\9
+
+@media screen and (-webkit-min-device-pixel-ratio: 0)
+  \:root .css3-gaussian-blur img
+    -webkit-filter: blur(15px) !important
+    filter: blur(15px) !important
+    opacity: 1 !important

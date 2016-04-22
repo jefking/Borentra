@@ -1,0 +1,49 @@
+﻿@model System.Collections.Generic.IEnumerable<Borentra.Models.Company>
+@{
+    ViewBag.Title = "Companies";
+    Layout = "~/Views/Shared/Layouts/_AdminLayout.cshtml";
+}
+
+<div class="company-view admin-reports">
+    <div class="row">
+        <div class="col-xs-10">
+            @if (0 < Model.Count())
+            {
+                <div class="page-header">
+                    <h1>Companies <small>@Model.Count()</small></h1>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Logo</th>
+                            <th>Key</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Website</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var company in Model)
+                        {
+                            <tr>
+                                <td>@company.Name</td>
+                                <td><img src="@company.LogoThumbnail" /></td>
+                                <td><a href="/company/@company.Key" target="_blank">@company.Key</a></td>
+                                <td><a href="mailto:@company.Email">@company.Email</a></td>
+                                <td>@company.PhoneNumber</td>
+                                <td><a href="@company.WebsiteUrl" target="_blank">@company.WebsiteUrl</a></td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">@company.Description</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+        <div class="col-xs-2">
+            @Html.Partial("~/Views/Shared/Admin/_AdminMenu.cshtml")
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+﻿<div id="dialogItemRequestFulfill" class="modal fade dialog-request-item-fulfill" tabindex="-1" role="dialog" aria-labelledby="addDialogModalLabel" aria-hidden="true">
+  <form id="quick-request-item-fulfill-form">
+    <input type="hidden" id="requestIdentifier" name="requestIdentifier" />
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="addDialogModalLabel">Can you help them out?</h3>
+    </div>
+    <div class="modal-body">
+      <div class="row-fluid">
+        <h4><em>Want to say something?</em></h4>
+
+        <textarea class="span12" style="width:100%;" id="comment" placeholder="Enter a bit of information about where to meet, when to meet, and how to get in contact with you!" rows="5" maxlength="2000"></textarea>
+
+        <div id="fulfill-request-free">
+          For Free
+                <input type="checkbox" id="for-free" name="for-free" title="For Free" />
+        </div>
+        <div id="fulfill-request-share">
+          To Borrow
+                <input type="checkbox" id="for-share" name="for-share" title="To Lend" />
+        </div>
+        <div id="fulfill-request-trade">
+          To Trade
+                <input type="checkbox" id="for-trade" name="for-trade" title="To Trade" />
+        </div>
+        <div id="fulfill-request-rent">
+          To Rent
+                <input type="checkbox" id="for-rent" name="for-rent" title="To Rent" />
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary" data-loading-text="Working it! Please wait!" onclick="_gaq.push(['_trackEvent', 'Dialogue', 'Item', 'FulfillRequest']);">Done</button>
+    </div>
+  </form>
+</div>

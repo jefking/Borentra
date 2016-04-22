@@ -1,0 +1,56 @@
+﻿@using System.Linq;
+@using Borentra;
+
+@model IEnumerable<Borentra.Models.Item>
+@{
+    var title = "Inventory";
+    if (null != ViewData["Heading"])
+    {
+        title = ViewData["Heading"].ToString();
+    }
+}
+@if (0 < Model.Count())
+{
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-12 item-row">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <a href="/offer/@item.Key" title="@item.Title">
+                            @if (string.IsNullOrWhiteSpace(item.PrimaryImageThumbnail))
+                            {
+                                <img src="@Url.ContentCdn("~/assets/img/ui/thumbnail.png")" class="img-responsive" />
+                            }
+                            else
+                            {
+                                <img src="@Url.ContentCdn("~" + item.PrimaryImageThumbnail, true)" class="img-responsive" title="@item.Title" />
+                            }
+                        </a>
+                    </div>
+                    <div class="col-xs-10">
+
+                        <div class="item-controls pull-right">
+                            <a href="/offer/@item.Key" class="btn btn-success btn-dialog-edit-item" data-id="@item.Identifier" data-title="@item.Title" data-description="@item.Description" data-shareprivacylevel="@((int)item.SharePrivacyLevel)" data-freeprivacylevel="@((int)item.FreePrivacyLevel)" data-tradeprivacylevel="@((int)item.TradePrivacyLevel)" data-rentprivacylevel="@((int)item.RentPrivacyLevel)" data-price="@item.Price.ToString("0.00")" title="Edit" onclick="_gaq.push(['_trackEvent', 'Item', 'Edit', 'Items']);"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit</a>
+                            <a href="/offer/@item.Key" class="btn btn-danger btn-dialog-delete-item" data-id="@item.Identifier" data-delete="true" title="Delete" onclick="_gaq.push(['_trackEvent', 'Item', 'Delete', 'Items']);"><span class="glyphicon glyphicon-remove"></span></a>
+                        </div>
+                        <h3><a href="/offer/@item.Key" title="@item.Title">@item.Title</a></h3>
+                        <div>
+                            @Html.Partial("Item/_ItemPrivacy", item) <span class="glyphicon glyphicon-time"></span>&nbsp;Added on @item.CreatedOn.ToShortDateString()
+                            <p>
+                                @Html.Raw(item.RenderDisplayHtml())
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="alert alert-info">
+        No offers available. Use the quick add widget on your dashboard!
+    </div>
+}

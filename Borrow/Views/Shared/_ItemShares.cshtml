@@ -1,0 +1,32 @@
+﻿@using System.Linq;
+@using Borentra;
+
+@model IEnumerable<Borentra.Models.ItemShare>
+  <div class="row">
+    <div class="col-md-12">
+<ul class="thumbnails items">
+    @foreach (var item in Model)
+    {
+        <li class="thumbnail">
+            <a href="/offer/@item.ItemKey"  style="display: block;" title="@item.On.ToShortDateString()">
+                <div class="item-photo">
+                    <a href="/Profile/@item.OwnerKey" title="You are borrowing this item from @item.OwnerDisplayName.">
+                        <img src="@item.OwnerPicture" class="img-owner" />
+                    </a>
+                    @if (!string.IsNullOrWhiteSpace(item.PrimaryImageThumbnail))
+                    {
+                        <a href="/offer/@item.ItemKey" title="View Item Details" style="display: block;" >
+                            <img src="@Url.ContentCdn("~" + item.PrimaryImageThumbnail, true)" /></a>
+                    }
+                    else
+                    {
+                        <a href="/offer/@item.ItemKey" title="View Item Details" style="display: block;" >
+                            <img src="@Url.ContentCdn("~/assets/img/ui/thumbnail.png")" /></a>
+                    }
+                </div>
+            </a>
+        </li>
+    }
+</ul>
+</div>
+</div>

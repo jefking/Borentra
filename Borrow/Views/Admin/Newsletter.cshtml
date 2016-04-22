@@ -1,0 +1,33 @@
+﻿@{
+  ViewBag.Title = "Create Newsletter";
+  Layout = "~/Views/Shared/Layouts/_AdminLayout.cshtml";
+}
+
+<div class="admin-reports">
+  <div class="row">
+
+    <div class="col-xs-10">
+      <div class="page-header">
+        <h1>Send a Newsletter <small>Notify Users With Headlines</small></h1>
+
+      </div>
+        <form method="post" enctype="multipart/form-data" action="/admin/SendNewsLetter">
+            <h4>Title</h4>
+            <br />
+            <input type="text" id="title" name="title" class="form-control" required />
+            <br />
+            <h4>Body (HTML)</h4>
+            <br />
+            <input type="file" id="file" name="file" />
+            <br />
+            To All:
+            <input type="checkbox" name="all" id="all" />; when checked all users will recieve the email, when not checked only you will recieve the email.
+            <br />
+            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-send"></span>&nbsp;Send</button>
+        </form>
+    </div>
+    <div class="col-xs-2">
+      @Html.Partial("~/Views/Shared/Admin/_AdminMenu.cshtml")
+    </div>
+  </div>
+</div>

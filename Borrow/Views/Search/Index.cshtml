@@ -1,0 +1,43 @@
+﻿@using System.Linq;
+@using Borentra;
+
+@model IEnumerable<Borentra.Models.SearchResult>
+@{
+    ViewBag.Title = "Search";
+    ViewBag.Description = "Everything available to our community";
+    Layout = "~/Views/Shared/Layouts/_LoggedInLayout.cshtml";
+    var search = Request.QueryString["s"];
+    var title = string.IsNullOrWhiteSpace(search) ? "Search Results" : string.Format("Search Results for: '{0}'", search);
+}
+
+<div class="borentra-view">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="page-header">
+                    <h1><a href="@Request.Url"><span class="glyphicon glyphicon-search"></span>&nbsp;@title</a>&nbsp;<small>@Model.Count()</small></h1>
+                    <hr />
+                </div>
+            </div>
+            <div class="col-md-10">
+                @if (null != Model && 0 < Model.Count())
+                {
+                    @Html.Partial("~/Views/Shared/Search/_Results.cshtml", Model)
+                }
+                else if (string.IsNullOrWhiteSpace(search))
+                {
+                    <div class="alert alert-info">
+                        <h4><span class="glyphicon glyphicon-info-sign"></span>&nbsp;No results found</h4>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        <h4><span class="glyphicon glyphicon-info-sign"></span>&nbsp;No results found for <em>"@search"</em></h4>
+                        <p>Sorry your search query yielded no results. Please try to broaden your search.</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

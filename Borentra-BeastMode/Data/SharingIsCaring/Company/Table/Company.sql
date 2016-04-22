@@ -1,0 +1,18 @@
+﻿CREATE TABLE [Company].[Company]
+(
+	[Identifier] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(), 
+    [Key] NVARCHAR(286) NOT NULL,
+    [BannerPath] NVARCHAR(256) NULL, 
+    [LogoPath] NVARCHAR(256) NULL, 
+    [Description] NVARCHAR(300) NULL, 
+    [WebsiteUrl] NVARCHAR(256) NULL, 
+    [PhoneNumber] NVARCHAR(25) NULL, 
+    [CreatedOn] SMALLDATETIME NOT NULL DEFAULT GETUTCDATE(), 
+    [ModifiedOn] SMALLDATETIME NOT NULL DEFAULT GETUTCDATE(), 
+    [DeletedOn] SMALLDATETIME NULL, 
+    [TwitterHandle] NVARCHAR(128) NULL, 
+    [FacebookHandle] NVARCHAR(128) NULL, 
+    CONSTRAINT [AK_Company_Key] UNIQUE ([Key]), 
+)
+
+GO

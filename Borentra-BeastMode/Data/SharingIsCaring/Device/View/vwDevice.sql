@@ -1,0 +1,15 @@
+﻿CREATE VIEW [Device].[vwDevice]
+AS
+	SELECT [Identifier]
+      , [UserIdentifier]
+      , [FacebookIsValidated]
+      , [Amplitude]
+      , [VerticalOffset]
+      , [AngularFrequency]
+      , [PhaseShift]
+      , [KeyExpiresOn]
+	  , [DeviceIdentifier]
+	  , [CreatedOn]
+	  , [OS]
+	FROM [Device].[Device]
+	WHERE DeletedOn IS NULL

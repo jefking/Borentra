@@ -1,0 +1,43 @@
+﻿@using Borentra
+@model IList<Borentra.Models.Activity>
+<div class="component activity-feed">
+  <h5>Recent Activity</h5>
+  <ul class="media-list">
+
+    @if (null != Model && 0 < Model.Count)
+    {
+      foreach (var activity in Model)
+      {
+      <li class="media">
+        <div class="media-body">
+          <h6 class="media-heading">
+            <span class="text-info">@activity.UserDisplayName</span>
+            @switch (activity.Type)
+            {
+              case Borentra.Models.Reference.User:
+              <a href="/profile/@activity.ReferenceKey" title="@activity.Text" class="muted">@activity.Text</a>
+                break;
+              case Borentra.Models.Reference.Item:
+              <a href="/offer/@activity.ReferenceKey" title="@activity.Text" class="muted">@activity.Text</a>
+                break;
+              case Borentra.Models.Reference.ItemRequest:
+              <a href="/wanted/@activity.ReferenceKey" title="@activity.Text" class="muted">@activity.Text</a>
+                break;
+              default:
+              <span class="muted">@activity.Text</span>
+                break;
+            }
+          </h6>
+
+        </div>
+      </li>
+      }
+    }
+    else
+    {
+      <li class="media">
+        <p>No current activity.</p>
+      </li>
+    }
+  </ul>
+</div>

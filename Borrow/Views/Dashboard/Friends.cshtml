@@ -1,0 +1,52 @@
+﻿@using Borentra
+
+@model Borentra.Models.DashboardInfo<Borentra.Models.ProfileMaster>
+@{
+    ViewBag.Title = "Your Friends | Borentra: Borrow, Rent, Trade";
+    Layout = "~/Views/Shared/Layouts/_LoggedInLayout.cshtml";
+}
+<div class="dashboard dashboard-friends borentra-view">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="page-header">
+                    <h1><span class="glyphicon glyphicon-user"></span>&nbsp; Your Friends <small>@Model.Info.Friends.Count()</small></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-10">
+                @if (0 != Model.Info.Display.Latitude && 0 != Model.Info.Display.Longitude)
+                {
+                    ViewBag.User = Model.Info.Display;
+                    @Html.Partial("~/Views/Shared/Dashboard/_Map.cshtml", Model.Info.Friends)
+                }
+
+                @if (null != Model.Info.Friends && 0 < Model.Info.Friends.Count())
+                {
+                    @Html.Partial("~/Views/Shared/_Profiles.cshtml", Model.Info.Friends)
+                }
+                else
+                {
+                    <hr />
+                    <h4>Invite your friends</h4>
+                    <p>
+                        With every person who signs up you will have more offers. We ask for your support in spreading the word, please tell your friends, family and community.
+                    </p>
+
+                    <div>
+                        <span class='st_facebook_large' st_url="http://www.borentra.com/@Model.Info.Display.Key"></span>
+                        <span class='st_twitter_large' st_url="http://www.borentra.com/@Model.Info.Display.Key" st_title="I have joined Borentra" st_summary="With Borentra, you can make your life easier by borrowing anything from your friends and family!"></span>
+                        <span class='st_googleplus_large' st_url="http://www.borentra.com/@Model.Info.Display.Key"></span>
+                    </div>
+                }
+            </div>
+            <div class="col-xs-2">
+                @Html.Partial("~/Views/Shared/Dashboard/_Menu.cshtml", Model)
+            </div>
+        </div>
+    </div>
+</div>

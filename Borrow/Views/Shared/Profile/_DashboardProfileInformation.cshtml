@@ -1,0 +1,30 @@
+﻿@model Borentra.Models.MyProfile
+
+<div class="row profile-section">
+  <div class="col-xs-3 profile-picture">
+    <a href="/Profile/@Model.Key" title="View your public profile.">
+      <img class="img-rounded" src="@Model.Picture" /></a>
+  </div>
+  <div class="col-xs-9 profile-description">
+    <a href="#" class="btn pull-right hidden-phone" title="Edit Profile Details" onclick="GlobalProfileCommand();_gaq.push(['_trackEvent', 'Profile', 'Edit', 'Profile']);"><span class="glyphicon glyphicon-pencil"></span>&nbsp; Edit Profile</a>
+    <h1>@Model.Name</h1>
+    @if (string.IsNullOrWhiteSpace(Model.Status) || string.IsNullOrWhiteSpace(Model.Location))
+    {
+      <div class="well">
+        <p>Your profile is <b style="color: red;">incomplete</b>; to <b style="color: green;">complete</b> click this icon: <a href="#" title="Edit Profile Details"  onclick="GlobalProfileCommand();_gaq.push(['_trackEvent', 'Profile', 'Edit', 'Incomplete']);"><span class="glyphicon glyphicon-pencil"></span></a></p>
+      </div>
+    }
+    <div class="well">
+      @if (!string.IsNullOrWhiteSpace(Model.Status))
+      {
+        <p>@Html.Raw(Model.Status.Replace("\n", "<br/>"))</p>
+      }
+    </div>
+    @if (!string.IsNullOrWhiteSpace(Model.Location))
+    {
+      <ul class="list-unstyled">
+        <li><span class="glyphicon-map-marker"></span>&nbsp;<a href="/dashboard/peoplenearby" title="Find other people in your area.">@Model.Location</a></li>
+      </ul>
+    }
+  </div>
+</div>

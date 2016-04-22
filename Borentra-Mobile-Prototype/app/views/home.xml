@@ -1,0 +1,27 @@
+<Alloy>
+  <TabGroup>
+    <Tab id="tabNewsFeed" title="News Feed" icon="icons/home.png">
+      <Window  title="News Feed">
+
+        <View id="viewNewsFeed" class="container">
+        </View>
+
+      </Window>
+    </Tab>
+    <Tab id="tabCollection" title="Collectoin" icon="icons/list.png">
+      <Window title="Collection">
+        <Label>Collection</Label>
+      </Window>
+    </Tab>
+    <Tab id="tabAddItem" title="Add Item" icon="icons/plus-sign.png">
+      <Window title="Add Item">
+        <Label>Add An Item</Label>
+      </Window>
+    </Tab>
+    <Tab id="tabProfile" title="My Profile" icon="icons/card.png">
+      <Window title="My Profile">
+        <Label>My Profile</Label>
+      </Window>
+    </Tab>
+  </TabGroup>
+</Alloy>

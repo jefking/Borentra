@@ -1,0 +1,167 @@
+﻿@using Borentra;
+
+@model Borentra.Models.HomePage
+@{
+    Layout = "~/Views/Shared/Layouts/_HomepageLayout.cshtml";
+
+    var theme = Request.QueryString["theme"] != null;
+    var selectedTheme = Request.QueryString["theme"] ?? "snowboarding";
+
+    if (selectedTheme == "books")
+    {
+        ViewBag.Title = "Borrow, rent, trade textbooks, novels, comic books, and more | Borentra";
+    }
+    else if (selectedTheme == "hiking")
+    {
+        ViewBag.Title = "Borrow, Rent, Trade Outdoor Gear and more | Hiking, Camping, Outdoors | Borentra";
+    }
+    else if (selectedTheme == "clothing")
+    {
+        ViewBag.Title = "Borrow, Rent, Trade clothes and more | Borentra";
+    }
+    else if (selectedTheme == "parenting")
+    {
+        ViewBag.Title = "Borrow, Rent, Trade Baby clothes, toys, baby strollers and more from your friends and family | Borentra";
+    }
+    else if (selectedTheme == "freecycle")
+    {
+        ViewBag.Title = "FreeCycle on Borentra: Get and give away free things to friends and family | Borentra";
+    }
+    else if (selectedTheme == "electronics")
+    {
+        ViewBag.Title = "Borrow, Rent, Trade, or Give away Electronics and more from your friends and family | Borentra";
+    }
+    else if (selectedTheme == "gaming")
+    {
+        ViewBag.Title = "Borrow, Rent, Trade Video Games and more from your friends and family | Borentra";
+    }
+    else if (selectedTheme == "halloween")
+    {
+        ViewBag.Title = "Borrow, Rent, Trade Halloween Costumes from your friends and family | Borentra";
+    }
+    else if (selectedTheme == "jewelry")
+    {
+        ViewBag.Title = "Borrow, Rent, Trade Jewellery from your friends and family | Borentra";
+    }
+    else if (selectedTheme == "boardgames")
+    {
+        ViewBag.Title = "Borrow, Rent, Trade Board Games from your friends and family | Borentra";
+    }
+    else if (selectedTheme == "shoes")
+    {
+        ViewBag.Title = "Borrow, Rent, Trade Shoes with your friends and family | Borentra";
+    }
+    else if (selectedTheme == "purses")
+    {
+        ViewBag.Title = "Borrow, Rent, Trade Purses from your friends and family | Borentra";
+    }
+    else if (selectedTheme == "magicthegathering")
+    {
+        ViewBag.Title = "Trade, Borrow, or Rent Magic: The Gathering cards and decks from your friends and family | Borentra";
+    }
+    else if (selectedTheme == "pokemon")
+    {
+        ViewBag.Title = "Trade, Borrow, Rent Pokemon cards and decks from your friends and family | Borentra";
+    }
+    else if (selectedTheme == "auto")
+    {
+        ViewBag.Title = "Borrow, Rent, Trade auto parts including rims, exhausts, stereos, and more | Borentra";
+    }
+    else if (selectedTheme == "tools")
+    {
+        ViewBag.Title = "Borrow, Rent, Trade Power Tools Including Drills, Screw Drivers, Saws, and More | Borentra";
+    }
+    else if (selectedTheme == "snowboarding")
+    {
+        ViewBag.Title = "Borrow, Rent, Trade Snowboarding and Skiing Gear | Borentra";
+    }
+    else if (selectedTheme == "hockey")
+    {
+        ViewBag.Title = "Borrow, Rent, Trade Hockey Gear | Borentra";
+    }
+    else
+    {
+        selectedTheme = "snowboarding";
+        ViewBag.Title = "Borrow, Rent, Trade Snowboarding and Skiing Gear | Borentra";
+    }
+}
+@if (null != Model && null != Model.Share)
+{
+    if (selectedTheme == "books")
+    {
+        @Html.Partial("Home/_Books")
+    }
+    else if (selectedTheme == "clothing")
+    {
+        @Html.Partial("Home/_Clothing")
+    }
+    else if (selectedTheme == "hiking")
+    {
+        @Html.Partial("Home/_Hiking")
+    }
+    else if (selectedTheme == "parenting")
+    {
+        @Html.Partial("Home/_Parenting")
+    }
+    else if (selectedTheme == "freecycle")
+    {
+        @Html.Partial("Home/_Freecycle")
+    }
+    else if (selectedTheme == "electronics")
+    {
+        @Html.Partial("Home/_Electronics")
+    }
+    else if (selectedTheme == "gaming")
+    {
+        @Html.Partial("Home/_Gaming")
+    }
+    else if (selectedTheme == "halloween")
+    {
+        @Html.Partial("Home/_Halloween")
+    }
+    else if (selectedTheme == "jewelry")
+    {
+        @Html.Partial("Home/_Jewelry")
+    }
+    else if (selectedTheme == "boardgames")
+    {
+        @Html.Partial("Home/_BoardGames")
+    }
+    else if (selectedTheme == "shoes")
+    {
+        @Html.Partial("Home/_Shoes")
+    }
+    else if (selectedTheme == "purses")
+    {
+        @Html.Partial("Home/_Purses")
+    }
+    else if (selectedTheme == "magicthegathering")
+    {
+        @Html.Partial("Home/_MagicTheGathering")
+    }
+    else if (selectedTheme == "pokemon")
+    {
+        @Html.Partial("Home/_Pokemon")
+    }
+    else if (selectedTheme == "auto")
+    {
+        @Html.Partial("Home/_Auto")
+    }
+    else if (selectedTheme == "tools")
+    {
+        @Html.Partial("Home/_Tools")
+    }
+    else if (selectedTheme == "snowboarding")
+    {
+        @Html.Partial("Home/_Snowboarding")
+    }
+    else if (selectedTheme == "hockey")
+    {
+        @Html.Partial("Home/_Hockey")
+    }
+    else
+    {
+        @Html.Partial("Home/_Generic")
+    }
+}
+@Html.Partial("Home/_Bottom", Model.Share)

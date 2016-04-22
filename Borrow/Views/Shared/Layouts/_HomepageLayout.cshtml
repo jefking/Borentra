@@ -1,0 +1,54 @@
+﻿@using Borentra
+@{
+    var selectedTheme = ViewBag.SelectedTheme ?? Request.QueryString["theme"] ?? "snowboarding";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="@ViewBag.Title" />
+    <link rel="apple-touch-icon" href="@Url.ContentCdn("~/assets/img/ui/logo-borentra-150x150.png")" />
+
+    @*    Facebook meta data *@
+    <meta property="fb:app_id" content="315854161864272" />
+    <meta property="og:image" content="@Url.ContentCdn("~/assets/img/ui/logo-borentra-250x250_v2.png")" />
+    @if (!string.IsNullOrWhiteSpace(ViewBag.DisplayName))
+    {
+        <meta property="og:type" content="profile" />
+        <meta property="og:profile:username" content="@ViewBag.DisplayName" />
+    }
+    else
+    {
+        <meta property="og:type" content="website" />
+    }
+    <meta property="og:url" content="@Request.Url" />
+    <meta property="og:title" content="@ViewBag.Title" />
+    <meta property="og:description" content="@ViewBag.Description" />
+    <meta property="og:site_name" content="Borentra" />
+
+    <meta name="author" content="Borentra Services Inc.">
+    <link rel="alternate" type="application/rss+xml" href="/Rss" title="Borentra Community Latest Offers & Requests">
+    <link rel="shortcut icon" href="@Url.ContentCdn("~/assets/img/favicon.ico")">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href="@Url.ContentCdn("~/assets/bootstrap/css/bootstrap.css")" rel="stylesheet">
+    <link href="@Url.ContentBlob("~/assets/css/borentra_home.css")" rel="stylesheet">
+    <!--[if lt IE 9]>
+        <script src="@Url.ContentBlob("~/assets/js/lib/html5.js")"></script>
+      <![endif]-->
+    <script src="//ajax.aspnetcdn.com/ajax/jquery/jquery-1.10.2.min.js"></script>
+    @Html.Partial("Analytics/_PingDomScript")
+</head>
+@Html.Partial("Analytics/_GoogleAnalyticsScript")
+<body class="logged-out borentra-homepage-theme theme-@selectedTheme">
+    @Html.Partial("Analytics/_FacebookPileScript")
+    @Html.Partial("_Masthead", new ViewDataDictionary { { "HideNavigation", true } })
+    <section class="borentra-content">
+        @RenderBody()
+    </section>
+    <div class="container">
+        @Html.Partial("_Footer")
+    </div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+﻿@using System.Linq;
+
+@model Borentra.DataAccessLayer.Admin.Statistics<Borentra.DataAccessLayer.Admin.ItemCount>
+@{
+    ViewBag.Title = "Thing Growth";
+    Layout = "~/Views/Shared/Layouts/_AdminLayout.cshtml";
+
+    var dailyTotal = 0;
+    foreach (var item in Model.Daily)
+    {
+        dailyTotal += item.Count;
+    }
+
+    var monthlyTotal = 0;
+    foreach (var item in Model.Monthly)
+    {
+        monthlyTotal += item.Count;
+    }
+
+    var lastMonth = 0;
+    var lastMonthOffer = 0;
+    var lastMonthRequest = 0;
+}
+
+<div class="admin-reports admin-reports-item-growth">
+    <div class="row">
+
+        <div class="col-xs-10">
+            <div class="page-header">
+                <h1>Thing Growth Month over Month <small>@monthlyTotal</small></h1>
+                <div>
+                    <a href="?days=7">7</a>
+                    <a href="?days=14">14</a>
+                    <a href="?days=31">31</a>
+                    <a href="?days=90">90</a>
+                </div>
+
+            </div>
+            <div class="row">
+
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            @foreach (var item in Model.Monthly)
+                            {
+                                if (lastMonth > 0 && item.Count > 0)
+                                {
+                                    var data = (((float)item.Count / lastMonth) * 100);
+                                    if (item.CreateDate > DateTime.Now.AddMonths(-4))
+                                    {
+                                        <td>
+
+                                            <h3 class="text-center">@item.CreateDate.ToString("MMMM")</h3>
+                                            <div class="alert alert-success text-center">
+
+                                                <h3>@(data.ToString("#.##"))%</h3>
+                                                <p>Growth</p>
+                                            </div>
+                                            <div class="well">
+                                                <div>
+                                                    <div>
+                                                        <span class="badge">@lastMonthOffer</span>+<span class="badge badge-success">@item.OfferCount</span>=<span class="badge badge-success">@(item.OfferCount + lastMonthOffer)</span>
+                                                        <br />
+                                                        <span class="badge">@lastMonthRequest</span>+<span class="badge badge-success">@item.RequestCount</span>=<span class="badge badge-success">@(item.RequestCount + lastMonthRequest)</span>
+                                                        <br />
+                                                        <span class="badge">@lastMonth</span>+<span class="badge badge-success">@item.Count</span>=<span class="badge badge-success">@(item.Count + lastMonth)</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    }
+                                }
+
+                                lastMonthOffer += item.OfferCount;
+                                lastMonthRequest += item.RequestCount;
+                                lastMonth += item.Count;
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="graph">
+                        <div class="graph-visualization">
+                        </div>
+                        <div class="graph-data hide">
+                            @foreach (var item in Model.Daily)
+                            {
+                                <span class="record">
+                                    <span class="key">@item.CreateDate.ToShortDateString()</span>
+                                    <span class="value">@item.Count</span>
+                                </span>
+                                <span class="offer">
+                                    <span class="key">@item.CreateDate.ToShortDateString()</span>
+                                    <span class="value">@item.OfferCount</span>
+                                </span>
+                                <span class="request">
+                                    <span class="key">@item.CreateDate.ToShortDateString()</span>
+                                    <span class="value">@item.RequestCount</span>
+                                </span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-2">
+            @Html.Partial("~/Views/Shared/Admin/_AdminMenu.cshtml")
+        </div>
+    </div>
+</div>

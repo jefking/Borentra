@@ -1,0 +1,29 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+Hi <#=User.Name#>,
+<b>Welcome to Borentra</b>
+<br />
+<p>
+	Borentra is a community of people who are generous and kind, like you. With every new member we grow as a community, so thanks for joining!
+</p>
+<p>
+Getting started on Borentra is super easy. Add an item to share with your friends, family and community.
+</p>
+<p>
+Invite your friends from Facebook to join, when you do they will show up in your friends list automatically.
+</p>
+<p>If you have already lent something to a friend add it now so that you don't forget.</p>
+<p>
+	Thanks,
+	<br />
+	<b>
+		<a href="http://www.borentra.com/profile/jef-king?utm_campaign=email_engadgement&utm_medium=email&utm_source=founder&utm_content=profile">Jef</a> and <a href="http://www.borentra.com/profile/jaime-bueza?utm_campaign=email_engadgement&utm_medium=email&utm_source=founder&utm_content=profile">Jaime</a>
+	</b>
+	<br />
+	<br />
+	P.S. Your profile page is <a href="http://www.borentra.com/profile/<#=User.Key#>?utm_campaign=email_engadgement&utm_medium=email&utm_source=user_registration&utm_content=profile">here</a>.
+</p>

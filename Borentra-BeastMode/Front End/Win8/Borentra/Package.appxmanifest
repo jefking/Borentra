@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
+  <Identity Name="borentra.Borentra" Publisher="CN=990C1836-CC7F-4AE1-8E62-A538E195E314" Version="1.1.0.17" />
+  <Properties>
+    <DisplayName>Borentra</DisplayName>
+    <PublisherDisplayName>borentra</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.3.0</OSMinVersion>
+    <OSMaxVersionTested>6.3.0</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Borentra.App">
+      <m2:VisualElements DisplayName="Borentra" Square150x150Logo="Assets\Logo150x150.png" Square30x30Logo="Assets\Logo30x30.png" Description="Borentra wishlist, an easy way to keep track of your wants!" ForegroundText="light" BackgroundColor="#464646">
+        <m2:DefaultTile Square70x70Logo="Assets\Logo70x70.png" Wide310x150Logo="Assets\Logo310x150.png">
+        </m2:DefaultTile>
+        <m2:SplashScreen Image="Assets\Logo846x468.png" BackgroundColor="#ffffff" />
+      </m2:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <DeviceCapability Name="location" />
+  </Capabilities>
+</Package>

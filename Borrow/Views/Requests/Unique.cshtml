@@ -1,0 +1,153 @@
+﻿@using System.Linq;
+@using Borentra;
+
+@model Borentra.Models.ItemRequestMaster
+@{
+    if (null == Model.Display.Categories)
+    {
+        ViewBag.Title = Model.Display.Title;
+    }
+    else
+    {
+        ViewBag.Title = string.Format("{0} | {1}", Model.Display.Title, string.Join(", ", Model.Display.Categories));
+    }
+
+    if (!string.IsNullOrWhiteSpace(Model.Display.PrimaryImageThumbnail))
+    {
+        ViewBag.Image = Url.ContentCdn("~" + Model.Display.PrimaryImageThumbnail, true);
+    }
+    ViewBag.Description = Model.Display.Description;
+    Layout = "~/Views/Shared/Layouts/_LoggedInLayout.cshtml";
+    var newItem = Request.QueryString["new"] != null;
+}
+<div itemscope itemtype="http://schema.org/Product" class="item-view container">
+    @if (!newItem)
+    {
+        <div class="pull-right">
+            @Html.Partial("~/Views/Shared/_ShareSocial.cshtml", string.Format("wanted/{0}", Model.Display.Key))
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-9">
+            <div class="page-header">
+                <h1><a href="/wanted/@Model.Display.Key"><span itemprop="name">@Model.Display.Title</span></a></h1>
+            </div>
+
+            @if (newItem)
+            {
+                <div class="alert alert-success text-center">Make sure you share this with your friends: @Html.Partial("~/Views/Shared/_ShareSocial", string.Format("wanted/{0}", Model.Display.Key))</div>
+            }
+
+            <div class="row">
+                <div class="col-md-8">
+                    @if (string.IsNullOrWhiteSpace(Model.Display.PrimaryImageLarge))
+                    {
+                        <img src="@Url.ContentCdn("~/assets/img/ui/bg-missing-photo.png")" class="img-rounded img-responsive" title="@Model.Display.Title" />
+                    }
+                    else
+                    {
+                        <div class="text-center">
+                            <img itemprop="image" src="@Url.ContentCdn("~" + Model.Display.PrimaryImageLarge, true)" title="@Model.Display.Title" alt="@Model.Display.Title" class="img-rounded img-responsive item-view-thumbnail item-detail-big-image" />
+                        </div>
+                    }
+                    <hr />
+                    <div class="component request-image-gallery-component" data-id="@Model.Display.Identifier">
+                        <ul id="item-image-gallery" class="list-inline thumbnails items " data-bind="foreach: $root.Photos">
+                            <li class="gallery-item">
+                                <img src="" class="img-rounded" width="50" height="50" data-bind="click: $root.Show, attr: { src: '//cdn.borentra.com' + $data.Thumbnail }" />
+                            </li>
+                        </ul>
+                    </div>
+                    @if (string.IsNullOrWhiteSpace(Model.Display.Description))
+                    {
+                        <p class="alert visible-lg">
+                            It looks like there's no description on this item.
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            @Html.Raw(Model.Display.RenderDisplayHtml(false))
+                        </p>
+                    }
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-unstyled item-operations-menu">
+                        @if (!this.User.Identity.IsAuthenticated)
+                        {
+                            <li><a href="https://sharingiscaring.accesscontrol.windows.net/v2/wsfederation?wa=wsignin1.0&wtrealm=http://@Request.Url.Authority" class="btn btn-lg btn-primary" title="Log in with Facebook" onclick="_gaq.push(['_trackEvent', 'Offsite', 'Registration', 'ItemRequest']);">Log in to fulfill</a></li>
+                        }
+                        else if (Model.Display.IsMine)
+                        {
+                            <li>
+                                <button class="btn btn-lg btn-primary btn-dialog-item-request-edit" data-requestidentifier="@Model.Display.Identifier" data-title="@Model.Display.Title" data-description="@Model.Display.Description" data-forshare="@(Model.Display.ForShare ? 1 : 0)" data-forfree="@(Model.Display.ForFree ? 1 : 0)" data-fortrade="@(Model.Display.ForTrade ? 1 : 0)" data-forrent="@(Model.Display.ForRent ? 1 : 0)" title="Edit" onclick="_gaq.push(['_trackEvent', 'Item', 'Edit', 'Request']);"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Request</button>
+                            </li>
+                        }
+                        else
+                        {
+                            <li><button class="btn btn-lg btn-primary btn-dialog-item-request-fulfill" data-requestidentifier="@Model.Display.Identifier" data-forshare="@(Model.Display.ForShare ? 1 : 0)" data-forfree="@(Model.Display.ForFree ? 1 : 0)" data-fortrade="@(Model.Display.ForTrade ? 1 : 0)" data-forrent="@(Model.Display.ForRent ? 1 : 0)" title="Fulfill" onclick="_gaq.push(['_trackEvent', 'Item', 'Request', 'Fulfill']);"><span class="glyphicon glyphicon-ok"></span>Fulfill Request</button></li>
+                        }
+
+                        @if (Model.Display.IsMine)
+                        {
+                            <li>
+                                <form action="/api/ItemRequest/UploadImage" method="post" class="upload-photos">
+                                    <div class="upload-form-ui">
+                                        <input class="item-files" type="file" name="files[]" multiple>
+                                        <input type="hidden" name="identifier" value="@Model.Display.Identifier" />
+                                        <div class="drag-drop-target upload-content">
+                                            <span class="glyphicon glyphicon-cloud-upload"></span>
+                                            <h5>Drag photos here!</h5>
+                                        </div>
+                                    </div>
+                                    <div class="hide progress progress-striped active">
+                                        <div class="bar" style="width: 0%;"></div>
+                                    </div>
+                                    <div class="alert hide alert-info">
+                                        Please wait while we upload your photos!
+                                    </div>
+                                </form>
+                            </li>
+                        }
+                        <li>
+                            <h4>Looking to</h4>
+                            @if (Model.Display.ForRent)
+                            {
+                                <span>&nbsp;<span class="glyphicon glyphicon-usd"></span>Rent</span>
+                            }
+                            @if (Model.Display.ForShare)
+                            {
+                                <span>&nbsp;<span class="glyphicon glyphicon-refresh"></span>Borrow</span>
+                            }
+                            @if (Model.Display.ForTrade)
+                            {
+                                <span>&nbsp;<span class="glyphicon glyphicon-retweet"></span>Trade</span>
+                            }
+                            @if (Model.Display.ForFree)
+                            {
+                                <span>&nbsp;<span class="glyphicon glyphicon-gift"></span>Keep</span>
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            @Html.Partial("~/Views/Shared/Thing/_SideBar.cshtml", Model.Display)
+            <hr />
+
+            <div class="fb-like" data-href="@Request.Url" data-colorscheme="light" data-layout="standard" data-action="like" data-show-faces="true" data-send="false"></div>
+
+            @if (Model.Results != null && 0 < Model.Results.Count())
+            {
+                <div class="page-header">
+                    <h5>Offers You'll Love</h5>
+                </div>
+
+                @Html.Partial("~/Views/Shared/Search/_RelatedSideResults.cshtml", Model.Results)
+
+            }
+        </div>
+    </div>
+</div>

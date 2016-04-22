@@ -1,0 +1,28 @@
+﻿<div id="dialogOfferConversation" class="modal fade" tabindex="-1" role="dialog">
+  <form id="offer-conversation-form">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3>Offer Conversation</h3>
+    </div>
+    <div class="modal-body">
+      <div class="row-fluid">
+        <input type="hidden" id="itemId" name="itemId" value="" />
+
+        <section class="comments"></section>
+      </div>
+      <script type="text/x-handlebars-template" class="record">
+        {{#each comments}}
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="{{UserPicture}}?width=30&height=30">
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading">{{UserIdentifer}}</h4>
+            {{Comment}}
+          </div>
+        </div>
+        {{/each}}
+      </script>
+    </div>
+  </form>
+</div>

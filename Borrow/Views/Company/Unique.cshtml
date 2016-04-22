@@ -1,0 +1,162 @@
+﻿@using System.Linq;
+@using Borentra
+
+@model Borentra.Models.Company
+@{
+  ViewBag.Title = string.Format("{0} | Borentra: Borrow, Rent, Trade.", Model.Name);
+  ViewBag.Description = string.Format("{0} - {1}", Model.Name, Model.Description);
+  ViewBag.Image = Model.LogoLarge;
+  ViewBag.DisplayName = Model.Name;
+  ViewBag.ThumbnailWidth = "50";
+  Layout = "~/Views/Shared/Layouts/_CompanyLayout.cshtml";
+}
+
+<div class="company-profile">
+  <div class="company-header">
+    <div class="company-cover-photo">
+    </div>
+    <div class="company-info">
+      <div class="sheet"></div>
+      <div class="info">
+        <div class="container">
+          <div class="media">
+            <a class="pull-left" href="/company/@Model.Key">
+              <img class="company-logo media-object" src="@Model.LogoLarge" alt="@Model.Name" title="@Model.Name" width="100" />
+            </a>
+            <div class="media-body">
+              <h1 class="media-heading">
+                @Model.Name
+
+              </h1>
+              <span class="company-meta">
+                <span class="glyphicon glyphicon-map-marker"></span>&nbsp;@Model.Location&nbsp;
+                <span class="glyphicon glyphicon-globe"></span>&nbsp;<a href="@Model.WebsiteUrl" target="_blank" onclick="_gaq.push(['_trackEvent', 'Company', 'Profile', 'Website']);">Web Site</a>&nbsp;
+                <span class="glyphicon glyphicon-envelope"></span>&nbsp;<a href="mailto:@Model.Email" onclick="_gaq.push(['_trackEvent', 'Company', 'Profile', 'Email']);">Email</a>&nbsp;
+                <span class="glyphicon glyphicon-phone"></span>&nbsp;@Model.PhoneNumber&nbsp;
+
+                @*TOO MUCH INFORMATION*@
+                @*@Model.CreatedOn.ToString("MMMM, yyyy")*@
+              </span>
+
+              <h3>
+                @if (!string.IsNullOrWhiteSpace(Model.Description))
+                {
+
+                  @Html.Raw(Model.Description.Replace("\n", "<br />"))
+                }
+            
+              </h3>
+            </div>
+          </div>
+
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="company-content">
+    <div class="container">
+      <h2>Services and Offerings</h2>
+
+
+      <!-- the viewport -->
+      <div class="m-scooch m-fluid m-scooch-photos">
+        <!-- the slider -->
+        <div class="m-scooch-inner">
+          <!-- the items -->
+          <div class="m-item m-active">
+
+            <div class="row">
+              <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                  <img src="http://images.the-house.com/marmot-traillight-2person-tent-alpenglow-12-zoom.jpg" class="img-responsive" alt="...">
+                  <div class="caption">
+                    <h3>2 Person Tent</h3>
+                    <p>$10<small>/day</small></p>
+                    <p><a href="#" class="btn btn-primary" role="button">Rent</a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                  <img src="http://images.the-house.com/marmot-traillight-2person-tent-alpenglow-12-zoom.jpg" class="img-responsive" alt="...">
+                  <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>...</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Rent</a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                  <img src="http://images.the-house.com/marmot-traillight-2person-tent-alpenglow-12-zoom.jpg" class="img-responsive" alt="...">
+                  <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>...</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Rent</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="m-item">
+            <div class="row">
+              <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                  <img src="http://images.the-house.com/marmot-traillight-2person-tent-alpenglow-12-zoom.jpg" class="img-responsive" alt="...">
+                  <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>...</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Rent</a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                  <img src="http://images.the-house.com/marmot-traillight-2person-tent-alpenglow-12-zoom.jpg" class="img-responsive" alt="...">
+                  <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>...</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Rent</a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                  <img src="http://images.the-house.com/marmot-traillight-2person-tent-alpenglow-12-zoom.jpg" class="img-responsive" alt="...">
+                  <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>...</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Rent</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- the controls -->
+        <div class="m-scooch-controls m-scooch-bulleted">
+          <a href="#" data-slide="prev">Previous</a>
+          <a href="#" data-slide="1" class="m-active">1</a>
+          <a href="#" data-slide="2">2</a>
+          <a href="#" data-slide="next">Next</a>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+  <div class="container">
+    @Html.Partial("~/Views/Shared/_ShareSocial.cshtml", string.Format("company/{0}", Model.Key))
+
+
+  </div>
+
+
+</div>

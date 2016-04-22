@@ -1,0 +1,29 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Borentra.Resources">
+    <Style TargetType="TextBlock" x:Key="DefaultHeader" BasedOn="{StaticResource HeaderTextBlockStyle}">
+        <Setter Property="FontSize" Value="46" />
+        <Setter Property="Padding" Value="4" />
+        <Setter Property="FontFamily" Value="Open Sans" />
+    </Style>
+    <Style TargetType="TextBlock" x:Key="DefaultBody" BasedOn="{StaticResource BodyTextBlockStyle}">
+        <Setter Property="FontSize" Value="28" />
+        <Setter Property="Padding" Value="4" />
+        <Setter Property="FontFamily" Value="Open Sans" />
+    </Style>
+    <Style TargetType="TextBlock" x:Key="DefaultCaption" BasedOn="{StaticResource CaptionTextBlockStyle}">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Padding" Value="4" />
+        <Setter Property="FontFamily" Value="Open Sans" />
+    </Style>
+    <Style TargetType="ListView" x:Key="Menu">
+        <Setter Property="Background" Value="Black" />
+    </Style>
+    <Style TargetType="StackPanel" x:Key="MenuHeader">
+        <Setter Property="Background" Value="Black" />
+    </Style>
+    <Style TargetType="Grid" x:Key="Main">
+        <Setter Property="Background" Value="DarkGray" />
+    </Style>
+</ResourceDictionary>

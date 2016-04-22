@@ -1,0 +1,73 @@
+﻿@using Borentra
+@{
+    var hideNavigation = null != ViewData["HideNavigation"] && (bool)ViewData["HideNavigation"];
+    var search = Request.QueryString["s"];
+    var currentController = this.ViewContext.RouteData.GetRequiredString("controller").ToLowerInvariant();
+    var searchAction = string.Empty;
+    if (currentController == "profile")
+    {
+        searchAction = "/member";
+    }
+    else if (currentController == "requests")
+    {
+        searchAction = "/wanted";
+    }
+    else if (currentController == "item")
+    {
+        searchAction = "/offer";
+    }
+}
+
+<header>
+    <nav class="navbar" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="nav-brand" title="Borentra: Borrow, Rent, Trade">
+                    <span>Borentra</span>
+                </a>
+                <div class="search-component">
+                    <form class="navbar-search form-search pull-left" id="item-search-form" action="/search@(searchAction)">
+                        <input type="text" name="s" class="search-query form-control input-sm" placeholder="Find people or things to borrow and trade" value="@search">
+                        <input type="hidden" id="c" name="c" value="organic" />
+                    </form>
+                </div>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav menu">
+                    @if (!hideNavigation)
+                    {
+                        <li><a href="/search/offer" class="menu-item" title="Explore what is offered.">Offers</a></li>
+                        <li><a href="/search/wanted" class="menu-item" title="Things which others are in search of.">Wanted</a></li>
+                        <li><a href="http://blog.borentra.com" class="menu-item" title="Our Blog" target="_blank" onclick="_gaq.push(['_trackEvent', 'Offsite', 'Link', 'Blog']);">Blog</a></li>
+                    }
+                </ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="component component-user-plate hidden-xs hidden-sm hidden pull-right" data-bind="css: { hidden: false }">
+                        <div class=" user-plate-photo">
+                            <a href="#" data-bind="attr: { href: '/profile/' + $root.Key() }">
+                                <img src="@Url.ContentCdn("~/assets/img/ui/thumbnail.png")" class="img-rounded" width="30" height="30" data-bind="attr: { src: $root.Picture() + '?width=30&height=30' }" />
+                            </a>
+                        </div>
+                        <div class=" user-plate-info">
+                            <a href="#" data-bind="text: $root.Name, attr: { href: '/profile/' + $root.Key() }" class="user-name"></a>
+                            <br />
+                            <a href="/dashboard/settings" class="user-edit" title="Edit Profile">Edit Profile</a><br />
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="pull-right menu">
+                        <a href="https://sharingiscaring.accesscontrol.windows.net/v2/wsfederation?wa=wsignin1.0&wtrealm=http://@Request.Url.Authority" title="Lo in using Facebook" class="btn" onclick="_gaq.push(['_trackEvent', 'Offsite', 'Registration', 'Login']);"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Log in with Facebook</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </nav>
+</header>

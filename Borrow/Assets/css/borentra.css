@@ -1,0 +1,38 @@
+header.masthead {
+  background: transparent url("../img/ui/bg-masthead.png") top left repeat-x;
+  height: 45px;
+}
+header.masthead a.brand {
+  background: transparent url("../img/ui/logo-borentra.png") top left no-repeat;
+  width: 205px;
+  height: 45px;
+  display: block;
+}
+header.masthead div.menu {
+  margin: 15px 0;
+}
+header.masthead div.menu a {
+  margin-left: 10px;
+}
+footer {
+  margin: 10px 0;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #888;
+  font-size: 12px;
+}
+footer span.separator {
+  margin: 0 10px;
+}
+ul.thumbnails.items li.thumbnail .item-controls {
+  padding: 2px;
+  background: #ccc;
+}
+ul.thumbnails.items li.thumbnail img.img-requester,
+ul.thumbnails.items li.thumbnail img.img-owner {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  width: 30px;
+  height: 30px;
+}

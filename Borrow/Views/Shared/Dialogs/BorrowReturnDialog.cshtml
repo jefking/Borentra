@@ -1,0 +1,38 @@
+﻿<div id="dialogBorrowReturn" class="modal fade" tabindex="-1" role="dialog">
+  <form id="return-borrow-form">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3>Was your item Returned?</h3>
+    </div>
+    <div class="modal-body">
+
+      <div class="row-fluid">
+
+        <input type="hidden" id="itemId" name="itemId" value="" />
+        <h4>Comment</h4>
+        <section class="comments"></section>
+        <hr />
+        <textarea class="form-control input-sm" id="comment" style="width:100%;" placeholder="Something for the owner to read." rows="5" maxlength="1024"></textarea>
+
+      </div>
+    </div>
+
+    <script type="text/x-handlebars-template" class="record">
+      {{#each comments}}
+            <div class="media">
+              <a class="pull-left" href="#">
+                <img class="media-object" src="{{UserPicture}}?width=30&height=30">
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading">{{UserName}}</h4>
+                {{Comment}}
+              </div>
+            </div>
+      {{/each}}
+    </script>
+
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary" data-loading-text="Working it! Please wait!" onclick="_gaq.push(['_trackEvent', 'Dialogue', 'Borrow', 'Returned']);">Yes!</button>
+    </div>
+  </form>
+</div>

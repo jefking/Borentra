@@ -1,0 +1,62 @@
+﻿@using System.Linq;
+@using Borentra;
+
+@model IEnumerable<Borentra.Models.SearchResult>
+
+@if (0 < Model.Count())
+{
+    <ul class="media-list">
+        @foreach (var item in Model)
+        {
+            <li class="media">
+                <a href="@item.RelativeLink()" class="pull-left" title="@item.Title">
+
+                    @if (string.IsNullOrWhiteSpace(item.Thumbnail))
+                    {
+                        <img src="@Url.ContentCdn("~/assets/img/ui/thumbnail.png")" class="img-rounded media-object" width="100" alt="@item.Title" title="@item.Title" />
+                    }
+                    else if (item.Type == Borentra.Models.Reference.User)
+                    {
+                        <img src="@item.Thumbnail?width=100&height=100" width="100" class="img-rounded img-responsive" alt="@item.Title" title="@item.Title" />
+                    }
+                    else
+                    {
+                        <img src="@Url.ContentCdn(item.Thumbnail, true)" class="img-rounded media-object" width="100" alt="@item.Title" title="@item.Title" />
+                    }
+                </a>
+                <div class="media-body">
+                    <h3 class="media-heading">
+                        <a href="@item.RelativeLink()" title="@item.Title">
+                            @switch (item.Type)
+                            {
+                                case Borentra.Models.Reference.Item:
+                                    <span class="glyphicon glyphicon-th-list" title="Offer"></span>
+                                    break;
+                                case Borentra.Models.Reference.ItemRequest:
+                                <span class="glyphicon glyphicon-hand-up" title="Wanted"></span>
+                                    break;
+                                case Borentra.Models.Reference.User:
+                                <span class="glyphicon glyphicon-user" title="Member"></span>
+                                    break;
+                            }
+                            @item.Title
+                        </a>
+                    </h3>
+                    @if (!string.IsNullOrWhiteSpace(item.Description))
+                    {
+                        <p>@Html.Raw(item.RenderDisplayHtml())</p>
+                    }
+                    <div class="offer-meta">
+                        <span>@item.MemberName</span> | <span>@item.Location</span> | <span>Added @item.CreatedOn.ToString("MMMM, yyyy")</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p>&nbsp;</p>
+                    </div>
+                </div>
+                <hr />
+            </li>
+        }
+    </ul>
+}

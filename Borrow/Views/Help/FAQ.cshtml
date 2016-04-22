@@ -1,0 +1,47 @@
+﻿@using Borentra;
+@{
+    ViewBag.Title = "Frequently Asked Questions | Borentra: Borrow, Rent, Trade.";
+    ViewBag.Description = "Some questions our members have asked us. Borrow what you need, when you need it; from your family, friends & community!";
+
+    Layout = "~/Views/Shared/Layouts/_ContentLayout.cshtml";
+    ViewBag.DisableJavaScript = true;
+}
+
+<section class="main-content">
+    <div class="container marketing-content">
+        <h1>Frequently Asked Questions</h1>
+        <br />
+        <div class="content-container">
+            <div class="gutter">
+                <h4>Do I have to use Facebook to sign up?</h4>
+                <p>Yes; we provide a facebook sign up so you can trust the people who you are sharing with. We will not post in anyway to your Facebook account.</p>
+                <br />
+                <h4>Who can see my profile?</h4>
+                <p>
+                    By default it is publicly available. However you can change this to be viewable by only the community, by editing your profile.
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <span>To change this click here: <a href="/dashboard/settings">profile settings</a></span>
+                    }
+                </p>
+                <br />
+                <h4>Who can see my offers?</h4>
+                <p>By default when you post an item, it is publicly available to be viewed. However you can change this to be only viewable to the community, by editing the item.</p>
+                <br />
+                <h4>Who can borrow my items?</h4>
+                <p>Anyone can request to borrow an offer, it is up to you to decide if you want to lend the item out to that particular person.</p>
+                <br />
+                <h4>When someone I don't know asks to borrow my item, do I have to lend it out?</h4>
+                <p>
+                    Same rules apply as the real-world. You are not obligated to lend anything out. We are here to help facilitate you in your borrowing and lending needs.
+                    Please only lend your items to people who you trust.
+                </p>
+                <br />
+                <h4>How do I log out?</h4>
+                <p>Click the "Log Out" link in your Dashboard, it is that easy. To ensure your privacy, clicking this logs you out of Facebook as well as Borentra.</p>
+                <br />
+            </div>
+        </div>
+    </div>
+</section>
+

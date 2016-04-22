@@ -1,0 +1,46 @@
+﻿@using Borentra;
+
+@{
+    ViewBag.Title = "Facebook Registration Cancelled | Borentra: Borrow, Rent, Trade";
+    ViewBag.Description = "An error occured during Facebook registation process. Borrow what you need, when you need it; from your family, friends & community!";
+
+    Layout = "~/Views/Shared/Layouts/_ContentLayout.cshtml";
+    ViewBag.DisableJavaScript = true;
+}
+<div class="container">
+    <div class="gutter">
+        <h3>Facebook Permissions</h3>
+
+        <p>We're all about keeping the quality of our sharing community as high as possible -- in order to do this, we'll need to ensure we get a few small details about you. Below is a screenshot of the Facebook data permissions, which are required to be a part of the Borentra community.</p>
+        <br />
+        <br />
+
+        <div class=" text-center">
+            <img src="@Url.ContentCdn("~/assets/img/help/bg-data-permissions.png")" class="img-rounded" />
+        </div>
+        <br />
+        <br />
+
+        <p>In the next <em>optional</em> step, you can allow Borentra to post updates to your friends and family on Facebook with your activity on the Borentra community.</p>
+        <br />
+        <br />
+
+        <div class=" text-center">
+            <img src="@Url.ContentCdn("~/assets/img/help/bg-posting-permissions.png")" class="img-rounded" />
+        </div>
+        <br />
+        <br />
+
+        <p>If you chose not to allow Borentra to access your Facebook data, we understand. Borentra uses your Facebook data only to help ensure that you are borrowing and lending things to your trusted community. This enables you to have the maximum level of safety.</p>
+
+        <p>If you feel more comfortable knowing this you can try again with the link below.</p>
+
+        <hr />
+        <a href="https://sharingiscaring.accesscontrol.windows.net/v2/wsfederation?wa=wsignin1.0&wtrealm=http://@Request.Url.Authority" title="Log in using Facebook" class="btn btn-large btn-success input-block-level" onclick="_gaq.push(['_trackEvent', 'Offsite', 'Registration', 'Retry']);" title="Log in with Facebook">Log in with Facebook</a>
+        @Html.Partial("Home/Partials/_Facepile")
+        <p class="muted text-center">
+            <small>We <strong>never</strong> post to your wall. Your safety &amp; privacy is paramount!</small>
+        </p>
+    </div>
+</div>
+@Html.Partial("Analytics/_FacebookPileScript")

@@ -1,0 +1,49 @@
+﻿@using Borentra
+@{
+    var currentAction = this.ViewContext.RouteData.GetRequiredString("action").ToLowerInvariant();
+    var rootCss = (currentAction == "index" || currentAction == "admin") ? "active" : null;
+    var usersCss = currentAction == "users" ? "active" : null;
+    var itemsCss = currentAction == "items" ? "active" : null;
+    var itemRequestsCss = currentAction == "itemrequests" ? "active" : null;
+    var communitySharesCss = currentAction == "communityshares" ? "active" : null;
+    var communityRentsCss = currentAction == "communityrents" ? "active" : null;
+    var communityTradesCss = currentAction == "communitytrades" ? "active" : null;
+    var communityGivesCss = currentAction == "communitygives" ? "active" : null;
+    var newsletterCss = currentAction == "newsletter" ? "active" : null;
+
+    var globalReportCss = currentAction == "goingglobal" ? "active" : null;
+    var userGrowthCss = currentAction == "usergrowth" ? "active" : null;
+    var itemGrowthCss = currentAction == "itemgrowth" ? "active" : null;
+    var deviceGrowthCss = currentAction == "devicegrowth" ? "active" : null;
+    var companiesCss = currentAction == "companies" ? "active" : null;
+    var landingThemeCss = currentAction == "landingpage" ? "active" : null;
+    var marketTestCss = currentAction == "markettest" ? "active" : null;
+
+}
+<h4>Main Menu</h4>
+<ul class="borentra nav nav-pills nav-stacked">
+    <li class="first"><a href="#"></a></li>
+    <li class="@rootCss"><a href="/admin"><span class="glyphicon glyphicon-home"></span>&nbsp;<span class="link-label">Console</span></a></li>
+    <li class="@usersCss"><a href="/admin/users"><span class="glyphicon glyphicon-user"></span>&nbsp;<span class="list-group-item-label">Users</span></a></li>
+    <li class="@companiesCss"><a href="/admin/companies"><span class="glyphicon glyphicon-book"></span>&nbsp;<span class="list-group-item-label">Companies</span></a></li>
+    <li class="@itemsCss"><a href="/admin/items"><span class="glyphicon glyphicon-th-list"></span>&nbsp;<span class="list-group-item-label">Offers</span></a></li>
+    <li class="@itemRequestsCss"><a href="/admin/itemrequests"><span class="glyphicon glyphicon-hand-up"></span>&nbsp;<span class="list-group-item-label">Requests</span></a></li>
+    <li class="@communitySharesCss"><a href="/admin/communityshares"><span class="glyphicon glyphicon-refresh"></span>&nbsp;<span class="list-group-item-label">Shares</span></a></li>
+    <li class="@communityRentsCss"><a href="/admin/communityrents"><span class="glyphicon glyphicon-usd"></span>&nbsp;<span class="list-group-item-label">Rent</span></a></li>
+    <li class="@communityTradesCss"><a href="/admin/communitytrades"><span class="glyphicon glyphicon-retweet"></span>&nbsp;<span class="list-group-item-label">Trades</span></a></li>
+    <li class="@communityGivesCss"><a href="/admin/communitygives"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;<span class="list-group-item-label">Free</span></a></li>
+    <li class="@newsletterCss"><a href="/admin/newsletter"><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;<span class="list-group-item-label">Newsletter</span></a></li>
+    <li class="last"><a href="#"></a></li>
+</ul>
+<br />
+<h4>Reports</h4>
+<ul class="borentra nav nav-pills nav-stacked">
+    <li class="first"><a href="#"></a></li>
+    <li class="@globalReportCss"><a href="/admin/goingglobal"><span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="link-label">Globe</span></a></li>
+    <li class="@userGrowthCss"><a href="/admin/usergrowth"><span class="glyphicon glyphicon-user"></span>&nbsp;<span class="list-group-item-label">User Growth</span></a></li>
+    <li class="@deviceGrowthCss"><a href="/admin/devicegrowth"><span class="glyphicon glyphicon-phone"></span>&nbsp;<span class="list-group-item-label">Device Growth</span></a></li>
+    <li class="@itemGrowthCss"><a href="/admin/itemgrowth"><span class="glyphicon glyphicon-stats"></span>&nbsp;<span class="list-group-item-label">Item Growth</span></a></li>
+    <li class="@landingThemeCss"><a href="/admin/landingpage"><span class="glyphicon glyphicon-stats"></span>&nbsp;<span class="list-group-item-label">Themes</span></a></li>
+    <li class="@marketTestCss"><a href="/admin/markettest"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;<span class="list-group-item-label">Tests</span></a></li>
+    <li class="last"><a href="#"></a></li>
+</ul>

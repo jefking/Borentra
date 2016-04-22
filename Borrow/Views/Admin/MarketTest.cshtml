@@ -1,0 +1,54 @@
+﻿@using Borentra.Models
+
+@model System.Collections.Generic.IEnumerable<TestSignUp>
+@{
+    ViewBag.Title = "Market Tests";
+    Layout = "~/Views/Shared/Layouts/_AdminLayout.cshtml";
+}
+
+<div class="item-view admin-reports">
+    <div class="row">
+        <div class="col-xs-10">
+            @if (null != Model)
+            {
+                <div class="page-header">
+                    <h1>Captured <small>@Model.Count()</small></h1>
+                </div>
+                if (0 < Model.Count())
+                {
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Created On</th>
+                                <th>Member</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var test in Model)
+                            {
+                                <tr>
+                                    <td>@test.Type</td>
+                                    <td>@test.Name</td>
+                                    <td><a href="mailto:@test.Email">@test.Email</a></td>
+                                    <td>@test.CreatedOn.ToShortDateString()</td>
+                                    <td>
+                                        @if (test.UserIdentifier.HasValue && Guid.Empty != test.UserIdentifier.Value)
+                                        {
+                                            <a href="/profile/@test.Key" title="@test.DisplayName"><img src="@test.Picture()" />@test.DisplayName</a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            }
+        </div>
+        <div class="col-xs-2">
+            @Html.Partial("~/Views/Shared/Admin/_AdminMenu.cshtml")
+        </div>
+    </div>
+</div>

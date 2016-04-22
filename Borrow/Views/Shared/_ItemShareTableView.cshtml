@@ -1,0 +1,133 @@
+﻿@using System.Linq;
+@using Borentra;
+
+@model IEnumerable<Borentra.Models.ItemShare>
+
+
+<ul class="media-list">
+  @foreach (var item in Model)
+  {
+    <li class="media">
+      @if (string.IsNullOrWhiteSpace(item.PrimaryImageThumbnail))
+      {
+        <a class="pull-left" href="/offer/@item.ItemKey" title="View Item Details">
+          <img class="media-object img-rounded" src="@Url.ContentCdn("~/assets/img/ui/thumbnail.png")" width="40" height="40" />
+        </a>
+      }
+      else
+      {
+        <a class="pull-left" href="/offer/@item.ItemKey" title="View Item">
+          <img class="media-object img-rounded" src="@Url.ContentCdn("~" + item.PrimaryImageThumbnail, true)" width="40" height="40" />
+        </a>
+      }
+      <div class="media-body">
+        <h5 class="media-heading"><a href="/offer/@item.ItemKey">@item.ItemTitle</a></h5>
+        <div class="media">
+          @if (item.Item.IsMine)
+          {
+            <a class="pull-left" href="/profile/@item.RequesterKey">
+              <img src="@item.RequesterPicture?width=30&height=30" width="30" height="30" class="img-requester img-rounded" />
+            </a>
+            <div class="media-body">
+              <h6 class="media-heading">
+                <a href="/profile/@item.RequesterKey">@item.RequesterDisplayName</a>
+                <a href="/api/Conversation/Save" class="btn-profile-message" data-user="@item.RequesterUserIdentifier"><span class="glyphicon glyphicon-envelope"></span></a>
+              </h6>
+              <div class="muted">
+                <small>
+                  <span class="glyphicon glyphicon-calendar"></span>&nbsp;Requested on @item.On.ToShortDateString()
+                  @if (item.Until.HasValue)
+                  {
+                    <span>- @item.Until.Value.ToShortDateString()</span>
+                  }
+                </small>
+              </div>
+              <div class="text-muted">
+                <small><span class="glyphicon glyphicon-map-marker"></span>&nbsp;@item.RequesterLocation</small>
+              </div>
+            </div>
+
+          }
+          else
+          {
+            <a class="pull-left" href="/profile/@item.OwnerKey" title="You are borrowing this item from @item.OwnerDisplayName.">
+              <img src="@item.OwnerPicture?width=30&height=30" width="30" height="30" class="img-owner img-rounded" />
+            </a>
+            <div class="media-body">
+              <h6 class="media-heading">
+                <a href="/profile/@item.OwnerKey">@item.OwnerDisplayName</a>
+                <a href="/api/Conversation/Save" class="btn-profile-message" data-user="@item.OwnerIdentifier"><span class="glyphicon glyphicon-envelope"></span></a>
+              </h6>
+              <div class="muted">
+                <small>
+                  <span class="glyphicon glyphicon-calendar"></span>&nbsp;Requested on @item.On.ToShortDateString()
+                  @if (item.Until.HasValue)
+                  {
+                    <span>- @item.Until.Value.ToShortDateString()</span>
+                  }
+                </small>
+              </div>
+              <div class="text-muted"><small><span class="glyphicon glyphicon-map-marker"></span>&nbsp;@item.OwnerLocation</small></div>
+              <div class="text-success"><small><span class="glyphicon glyphicon-info-sign"></span>&nbsp;@item.Status</small></div>
+            </div>
+          }
+
+          <h6>Actions</h6>
+          <ul class="list-unstyled">
+            @if (User.Identity.IsManager())
+            {
+              <li>
+                <small><a href="#" class="text-muted btn-offer-conversation" title="View Conversation" data-id="@item.Identifier" onclick="_gaq.push(['_trackEvent', 'Item', 'Transaction', 'Conversation']);"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;View Conversation</a></small>
+              </li>
+            }
+            <li>
+              <small>
+                @if (item.Item.IsMine)
+                {
+                  <a href="#" class="text-muted" title="Add @item.RequesterDisplayName as a Friend on Facebook" onclick="_gaq.push(['_trackEvent', 'Item', 'Transaction', 'AddFriend']); FB.ui({ method: 'friends', id: '@item.RequesterFacebookId' }, function (response) { });"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add @item.RequesterDisplayName as a Friend</a>
+                }
+                else
+                {
+                  <a href="#" class="text-muted" title="Add @item.OwnerDisplayName as a Friend on Facebook" onclick="_gaq.push(['_trackEvent', 'Item', 'Transaction', 'AddFriend']); FB.ui({ method: 'friends', id: '@item.OwnerFacebookId' }, function (response) { });"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add @item.OwnerDisplayName as a Friend</a>
+                }
+              </small>
+            </li>
+
+            @if (item.Item.IsMine)
+            {
+              switch (item.Status)
+              {
+                case Borentra.Models.BorrowStatus.Pending:
+                  <li>
+                    <small>
+                      <span class="glyphicon glyphicon-question-sign"></span>&nbsp;<span>Would you like to approve this borrow request?</span>
+                      <a href="#" class="text-success btn-borrow-accept" title="Lend" data-id="@item.Identifier" onclick="_gaq.push(['_trackEvent', 'Item', 'Borrow', 'Lend']);"><span class="glyphicon glyphicon-ok"></span>&nbsp;Yes</a>&nbsp;|&nbsp;
+                      <a href="#" class="text-muted btn-borrow-reject" title="Decline" data-id="@item.Identifier" onclick="_gaq.push(['_trackEvent', 'Item', 'Borrow', 'Decline']);"><span class="glyphicon glyphicon-remove"></span>&nbsp;No</a>
+                    </small>
+                  </li>
+                  break;
+                case Borentra.Models.BorrowStatus.Accepted:
+                <li><small><a href="#" class="text-muted btn-borrow-returned" title="Mark as returned" data-id="@item.Identifier" onclick="_gaq.push(['_trackEvent', 'Item', 'Borrow', 'Return']);"><span class="glyphicon glyphicon-check"></span>&nbsp;Mark as Returned</a></small></li>
+                  break;
+              }
+
+            }
+            else
+            {
+              switch (item.Status)
+              {
+                case Borentra.Models.BorrowStatus.Pending:
+                  <li>  <a href="#" class="text-muted btn-borrow-delete" title="Cancel Request" data-id="@item.Identifier"><span class="glyphicon glyphicon-remove"></span>&nbsp;Cancel</a></li>
+                  break;
+              }
+
+            }
+          </ul>
+
+        </div>
+
+      </div>
+    </li>
+
+  }
+</ul>

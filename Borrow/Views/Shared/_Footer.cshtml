@@ -1,0 +1,57 @@
+﻿@using Borentra
+<footer class="container">
+    <div class="footer row">
+        <div class="col-xs-5 company-footer">
+            <ul class="list-inline">
+                <li>
+                    <a href="/mantra" title="Our Mantra">Mantra</a>
+                </li>
+                <li>
+                    <a href="/about" title="About Borentra, and the people involved">About</a>
+                </li>
+                <li>
+                    <a href="/contact" title="Contact Us: Help, Feedback, Support, Investors">Contact</a>
+                </li>
+                <li>
+                    <a href="/help" title="Help and Information">Help</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-2">
+            <div class="text-center">
+                <a href="/" class="footer-logo" title="Home" onclick="_gaq.push(['_trackEvent', 'Footer', 'Mascot', 'Home']);">Red Panda</a>
+            </div>
+        </div>
+        <div class="col-xs-5 misc-footer">
+            <ul class="list-inline pull-right">
+                <li>
+                    <a href="mailto:jef@borentra.com?Subject=Borentra%20Feedback" title="Feedback">Feedback</a>
+                </li>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li>
+                        <a href="http://blog.borentra.com" target="_blank" title="Borentra Blog" onclick="_gaq.push(['_trackEvent', 'Offsite', 'Link', 'Blog']);">Blog</a>
+                    </li>
+                }
+                <li>
+                    <a href="/terms" title="Terms of Use">Terms of Use</a>
+                </li>
+                <li>
+                    <a href="/rss" title="Offer & Wanted RSS Feed" target="_blank" onclick="_gaq.push(['_trackEvent', 'Offsite', 'Link', 'Rss'])">
+                        <img src="@Url.ContentCdn("~/assets/img/rss.png")" width="20" />
+                    </a>
+                    <a href="https://plus.google.com/106550752085264387024" title="Google+" target="_blank" rel="publisher" onclick="_gaq.push(['_trackEvent', 'Offsite', 'Link', 'Google+']);">
+                        <img src="@Url.ContentCdn("~/assets/img/google_plus.png")" width="20" />
+                    </a>
+                    <a href="https://twitter.com/Borentra" target="_blank" title="Twitter" rel="publisher" onclick="_gaq.push(['_trackEvent', 'Offsite', 'Link', 'Twitter']);">
+                        <img src="@Url.ContentCdn("~/assets/img/twitter_logo.jpg")" width="20" />
+                    </a>
+                    <a href="https://www.facebook.com/Borentra" target="_blank" title="Facebook" rel="publisher" onclick="_gaq.push(['_trackEvent', 'Offsite', 'Link', 'Facebook']);">
+                        <img src="@Url.ContentCdn("~/assets/img/facebook_small.jpg")" width="20" />
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</footer>

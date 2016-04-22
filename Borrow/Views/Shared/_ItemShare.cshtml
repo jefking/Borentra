@@ -1,0 +1,60 @@
+﻿@using System.Linq;
+@using Borentra;
+
+@model IEnumerable<Borentra.Models.ItemShare>
+<ul class="thumbnails items">
+    @foreach (var item in Model)
+    {
+        <li class="thumbnail">
+            <a href="/offer/@item.ItemKey"  style="display: block;" title="@item.On.ToShortDateString()">
+                <div class="item-photo">
+                    @if (item.Item.IsMine)
+                    {
+                        <a href="/Profile/@item.RequesterKey" title="@item.RequesterDisplayName is requesting to borrow this.">
+                            <img src="@item.RequesterPicture" class="img-requester" /></a>
+                    }
+                    else
+                    {
+                        <a href="/Profile/@item.OwnerKey" title="You are borrowing this item from @item.OwnerDisplayName.">
+                            <img src="@item.OwnerPicture" class="img-owner" /></a>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(item.PrimaryImageThumbnail))
+                    {
+                        <a href="/offer/@item.ItemKey" title="View Item Details" style="display: block;" >
+                            <img src="@Url.ContentCdn("~" + item.PrimaryImageThumbnail, true)" /></a>
+                    }
+                    else
+                    {
+                        <a href="/offer/@item.ItemKey" title="View Item Details" style="display: block;" >
+                            <img src="@Url.ContentCdn("~/assets/img/ui/thumbnail.png")" /></a>
+                    }
+                </div>
+            </a>
+            <div class="item-controls pull-right hide">
+                @if (item.Item.IsMine)
+                {
+                    switch (item.Status)
+                    {
+                        case Borentra.Models.BorrowStatus.Pending:
+                    <a href="#" class="btn-borrow-accept" title="Lend" data-id="@item.Identifier" ><span class="glyphicon glyphicon-share"></span></a>
+                    <a href="#" class="btn-borrow-reject" title="Decline" data-id="@item.Identifier" ><span class="glyphicon glyphicon-remove"></span></a>
+                            break;
+                        case Borentra.Models.BorrowStatus.Accepted:
+                    <a href="#" class="btn-borrow-returned" title="Returned" data-id="@item.Identifier" data-id="@item.Identifier" ><span class="glyphicon glyphicon-check"></span></a>
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (item.Status)
+                    {
+                        case Borentra.Models.BorrowStatus.Pending:
+                    <a href="#" class="btn-borrow-delete" title="Cancel Request" data-id="@item.Identifier" data-id="@item.Identifier" ><span class="glyphicon glyphicon-remove"></span></a>
+                            break;
+                    }
+                }
+
+            </div>
+        </li>
+    }
+</ul>

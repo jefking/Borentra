@@ -1,0 +1,4 @@
+MainPackage=C:\Users\jamie_000\Documents\GitHub\Borentra-BeastMode\Front End\Win8\Borentra\bin\Release\Borentra_1.1.0.16_Bundle\Borentra_1.1.0.16_AnyCPU.appx
+SymbolPackage=C:\Users\jamie_000\Documents\GitHub\Borentra-BeastMode\Front End\Win8\Borentra\AppPackages\Borentra_1.1.0.16_Test\Borentra_1.1.0.16_AnyCPU.appxsym
+ResourcePack=C:\Users\jamie_000\Documents\GitHub\Borentra-BeastMode\Front End\Win8\Borentra\bin\Release\Borentra_1.1.0.16_Bundle\Borentra_1.1.0.16_scale-140.appx
+ResourcePack=C:\Users\jamie_000\Documents\GitHub\Borentra-BeastMode\Front End\Win8\Borentra\bin\Release\Borentra_1.1.0.16_Bundle\Borentra_1.1.0.16_scale-180.appx

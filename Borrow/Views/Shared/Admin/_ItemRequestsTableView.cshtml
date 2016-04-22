@@ -1,0 +1,34 @@
+﻿@using Borentra
+﻿
+@model IEnumerable<Borentra.Models.ItemRequest>
+
+@if (0 < Model.Count())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>About</th>
+                <th>Info</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @Html.Partial("~/Views/Shared/Admin/_ThingColumns.cshtml", item)
+                    <td>Sharing: @item.ForShare.ToString()
+                        <br />
+                        Renting: @item.ForRent.ToString()
+                        <br />
+                        Giving: @item.ForFree.ToString()
+                        <br />
+                        Trading: @item.ForTrade.ToString()
+                        <br />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

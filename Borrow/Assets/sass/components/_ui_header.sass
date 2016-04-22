@@ -1,0 +1,101 @@
+.navbar
+  background: #e55445
+  background-image: linear-gradient(#e06d61, #e55445)
+  border-bottom: 1px solid #e5e5e5
+  border-radius: 0
+  height: 45px
+  min-height: 45px
+  z-index: 9999
+  position: relative
+  a.nav-brand 
+    float: left
+    display: block
+    color: #fff
+    width: 120px
+    background: transparent url(/Assets/img/ui/logo-borentra-45x45.png) 0 15px no-repeat
+    margin-left: 0px
+    padding-right: 0px
+    height: 43px
+
+    -webkit-transition: background-position 400ms ease
+    &:hover
+      text-decoration: none
+      color: #f0f0f0
+      background-position: 0 0px
+    span
+      font-size: 22px
+      text-shadow: 0px 1px 1px #333
+      display: block
+      letter-spacing: -1px
+      font-weight: bold
+      padding-left: 38px
+      padding-top: 5px
+
+  .navbar-search
+    margin-left: 15px
+    margin-top: 5px
+  .search-query
+    border-radius: 2px
+    width: 300px
+  .menu
+    padding-top: 5px
+    
+    a
+      color: #fff
+      margin: 0 5px 0 5px
+      text-shadow: 0 -1px rgba(0, 0, 0, .5)
+      font-size: 12px
+      padding: 5px 10px
+      border-radius: 2px
+      font-weight: 600
+      &:hover
+        text-decoration: none
+        color: #fff0dc
+        background: #472825  
+  .navbar-toggle
+    margin-top: 5px
+    margin-right: 8px
+    &:hover
+      background: #472825
+      span
+        background-color: #fff0dc
+    span
+      background-color: #fff
+  .search-component
+    float: left
+
+@media (max-width: 767px)
+  .navbar
+    .menu
+      background: #e55445
+    .search-query
+      width: 275px
+
+@media (max-width: 480px)
+  .navbar
+    min-height: 30px
+    height: 30px
+    margin-bottom: 10px
+    .navbar-toggle
+      margin: 0px 0 0 0
+      padding: 5px
+      &:hover
+        background: none
+      .icon-bar
+        height: 2px
+    a.nav-brand
+      background-position: 0 0
+      height: 28px
+      width: 100px
+      span
+        font-size: 14px
+    .navbar-search
+      margin-left: 5px
+  div.search-component
+    margin-top: -5px
+
+    .search-query
+      height: 26px !important
+      width: 160px !important
+      font-size: 11px
+      min-height: 26px

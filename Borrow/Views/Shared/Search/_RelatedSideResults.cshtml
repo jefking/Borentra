@@ -1,0 +1,34 @@
+﻿@using System.Linq;
+@using Borentra;
+
+@model IEnumerable<Borentra.Models.SearchResult>
+
+@if (0 < Model.Count())
+{
+    <div class="component related-side-results-component">
+        <ul class="media-list">
+            @foreach (var relate in Model)
+            {
+                <li class="media">
+                    <a href="@relate.RelativeLink()" class="pull-left" title="@relate.Title">
+                        @if (string.IsNullOrWhiteSpace(relate.Thumbnail))
+                        {
+                            <img src="@Url.ContentCdn("~/assets/img/ui/thumbnail.png")" class="media-object" width="50" alt="@relate.Title" title="@relate.Title" />
+                        }
+                        else
+                        {
+                            <img src="@relate.Thumbnail" class="media-object" width="50" alt="@relate.Title" title="@relate.Title" />
+                        }
+                    </a>
+                    <div class="media-body">
+                        <h5 class="media-heading">
+                            <a href="@relate.RelativeLink()" title="@relate.Title">
+                                @relate.Title
+                            </a>
+                        </h5>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+}

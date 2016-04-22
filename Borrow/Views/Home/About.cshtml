@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "About the people that make this possible.";
+    ViewBag.Description = "Borrow, Rent, Trade; from your friends & local community!";
+    Layout = "~/Views/Shared/Layouts/_ContentLayout.cshtml";
+}
+<section class="main-content">
+    <div class="container marketing-content">
+        <div class="page-header">
+            <h1>About Us:&nbsp;&nbsp;&nbsp;<small>We are passionate about Sharing</small></h1>
+            <hr />
+        </div>
+        <div class="content-container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>We are making the Sharing Economy a reality! Borentra makes it incredibly safe and simple for people to borrow, rent and trade.</p>
+                    <p>For more information about us and our thoughts head to our <a href="http://blog.borentra.com" target="_blank" onclick="_gaq.push(['_trackEvent', 'Offsite', 'Link', 'Blog']);">Blog</a>.</p>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="text-center">
+                        <a href="/profile/jef-king">
+                            <img src="http://graph.facebook.com/792590172/picture?width=100&height=100" class="img-rounded" title="Jef King" />
+                        </a>
+                        <h4>Jef King</h4>
+                        <h5>Co-founder</h5>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="text-center">
+
+                        <a href="/profile/jaime-bueza">
+                            <img src="http://graph.facebook.com/791600503/picture?width=100&height=100" class="img-rounded" title="Jaime Bueza" />
+                        </a>
+                        <h4>Jaime Bueza</h4>
+                        <h5>Co-founder</h5>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="text-center">
+                        <a href="/profile/honey-mae">
+                            <img src="http://graph.facebook.com/848705472/picture?width=100&height=100" class="img-rounded" title="Honey Mae" />
+                        </a>
+                        <h4>Honey Mae</h4>
+                        <h5>Marketing</h5>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="text-center">
+                        <a href="/profile/susannah-poon">
+                            <img src="http://graph.facebook.com/21007356/picture?width=100&height=100" class="img-rounded" title="Susannah Poon" />
+                        </a>
+                        <h4>Susannah Poon</h4>
+                        <h5>Marketing</h5>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            @if (!User.Identity.IsAuthenticated)
+            {
+                @Html.Partial("~/Views/Shared/Home/Partials/_Facepile.cshtml")
+                <hr />
+            }
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="well text-center">
+                        People can make money off of things they barely use and they would rather borrow or rent than buy things: access over ownership.
+                        <br />
+                        It is a simplified and positive way to live life.
+                    </div>
+                    <hr />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

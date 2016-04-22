@@ -1,0 +1,53 @@
+﻿@using System.Linq;
+
+@model System.Collections.Generic.IEnumerable<Borentra.Models.ItemShare>
+
+@{
+    ViewBag.Title = "Community Shares";
+    Layout = "~/Views/Shared/Layouts/_AdminLayout.cshtml";
+}
+
+<div class="admin-reports">
+    <div class="row">
+        <div class="col-xs-10">
+            @if (0 < Model.Count())
+            {
+                <div class="page-header">
+                    <h1>Community Shares <small>@Model.Count()</small></h1>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Lender</th>
+                            <th>Reciever</th>
+                            <th>Item</th>
+                            <th>Status</th>
+                            <th>Dates</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var share in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="/profile/@share.OwnerKey" target="_blank">@share.OwnerDisplayName</a>
+                                </td>
+                                <td>
+                                    <a href="/profile/@share.RequesterKey" target="_blank">@share.RequesterDisplayName</a>
+                                </td>
+                                <td>
+                                    <a href="/offer/@share.ItemKey" target="_blank">@share.ItemTitle</a>
+                                </td>
+                                <td>@share.Status</td>
+                                <td>@share.On.ToShortDateString() - @share.ReturnedOn</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+        <div class="col-xs-2">
+            @Html.Partial("~/Views/Shared/Admin/_AdminMenu.cshtml")
+        </div>
+    </div>
+</div>

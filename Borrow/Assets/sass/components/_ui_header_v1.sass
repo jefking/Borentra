@@ -1,0 +1,90 @@
+header
+  overflow: hidden
+  position: relative
+  height: 45px
+  border-bottom: 1px solid
+  border-bottom-color: #ccc
+  border-bottom-color: rgba(255, 255, 255, 0.2)
+  background-color: rgba(255, 255, 255, 0.2)
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3)
+  .gaussian-blur
+    -webkit-filter: blur(5px)
+    filter: blur(5px)
+    position: absolute
+    top: -15px
+    left: 0
+    z-index: 8000
+    height: 100px
+    width: 100%
+  .navbar
+    z-index: 9000
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+.navbar
+  background: transparent
+  border-radius: 0
+  height: 45px
+  min-height: 45px
+  border-bottom: 1px solid #ccc
+  a.nav-brand 
+    float: left
+    display: block
+    color: #fff
+    width: 120px
+    background: transparent url(/Assets/img/ui/logo-borentra-45x45.png) 0 0 no-repeat
+    margin-left: 0px
+    padding-right: 0px
+    height: 43px
+    span
+      font-size: 22px
+      text-shadow: 0px 1px 1px #333
+      display: block
+      letter-spacing: -1px
+      font-weight: bold
+      padding-left: 38px
+      padding-top: 5px
+  .navbar-search
+    margin-left: 15px
+    margin-top: 5px
+  .search-query
+    border-radius: 2px
+    width: 200px
+  .menu
+    padding-top: 5px
+    a
+      color: #fff
+      margin: 0 5px 0 5px
+      text-shadow: 0 -1px rgba(0, 0, 0, .5)
+      font-size: 12px
+      padding: 5px 10px
+      border-radius: 2px
+      font-weight: 600
+      &:hover
+        text-decoration: none
+        color: #fff0dc
+        background: #472825  
+  .navbar-toggle
+    background: transparent
+    margin-top: 5px
+    margin-right: 8px
+    &:hover
+      background: #472825
+      span
+        background-color: #fff0dc
+    span
+      background-color: #fff
+  .search-component
+    float: left
+
+@media (max-width: 767px)
+  .navbar
+    a.nav-brand
+      text-align: left
+      width: auto
+      span
+        padding-left: 40px
+    .navbar-nav
+      background: #e55445
+      margin-top: 0

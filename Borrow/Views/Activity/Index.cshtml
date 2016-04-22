@@ -1,0 +1,20 @@
+﻿@using System.Linq;
+@using Borentra;
+
+@model System.Guid
+@{
+    ViewBag.Title = "Activity";
+    ViewBag.Description = "Activity Feed Item";
+    ViewBag.ActivityId = Model;
+    Layout = "~/Views/Shared/Layouts/_LoggedInLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            @Html.Partial("~/Views/Shared/Dashboard/_Activity.cshtml")
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+</div>

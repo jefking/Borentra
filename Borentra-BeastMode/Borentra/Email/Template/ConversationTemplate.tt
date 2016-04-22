@@ -1,0 +1,13 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<p>Hi <#=Latest.ToDisplayName#>,</p>
+<p><#=Latest.FromDisplayName#> sent you a message:</p>
+<p>"<#=Latest.Body#>"</p>
+<br />
+<p>To view your message please come back to your <a href="http://www.borentra.com/Dashboard/Conversation?utm_campaign=email_engadgement&utm_medium=email&utm_source=conversation&utm_content=user">Messages Centre</a>.</p>
+<br />
+<a href="http://www.borentra.com/Profile/<#=Latest.FromKey#>"><img src="http://graph.facebook.com/<#=Latest.FromFacebookId#>/picture" /></a>

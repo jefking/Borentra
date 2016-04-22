@@ -1,0 +1,27 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Borentra.Models" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+Hi <#=Fulfill.OwnerDisplayName#>,
+<p>
+	<a href="http://www.borentra.com/profile/<#=Fulfill.RequesterKey#>?utm_campaign=email_engadgement&utm_medium=email&utm_source=free_request&utm_content=requester"><#=Fulfill.RequesterDisplayName#></a> 
+wants to help you with your request <a href="http://www.borentra.com/wanted/<#=Fulfill.Key#>?utm_campaign=email_engadgement&utm_medium=email&utm_source=free_request&utm_content=item"><#=Fulfill.Title#></a>.
+</p>
+<br />
+<img src="http://graph.facebook.com/<#=Fulfill.RequesterFacebookId#>/picture" />
+<br />
+<hr />
+<#
+	foreach (var comment in Comments)
+	{
+#>
+	<h3><#=comment.UserName#> Says:</h3>
+	<p>
+		<#=comment.Comment#>
+	</p>
+<#
+	}
+#>

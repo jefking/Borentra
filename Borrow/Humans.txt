@@ -1,0 +1,23 @@
+/* TEAM */
+Peer: Jef King
+Email: jef@borentra.com
+GitHub: //github.com/jefkingabc
+Twitter: @JefKingABC
+Location: Williams Lake, British Columbia Canada
+
+Peer: Jaime Bueza
+Site: http://blog.bueza.com
+Email: jaime@borentra.com
+GitHub: //github.com/jbueza
+Twitter: @jbueza
+Location: Vancouver, British Columbia, Canada
+
+/* THANKS */
+Product: Borentra http://www.borentra.com
+Blog: http://blog.Borentra.com
+
+/* SITE */
+Last update: September 2013
+Standards: HTML5, CSS3, JavaScript, XHTML, XML, PNG, GIF, JPG, W3C, REST, AJAX
+Components: Google Analytics, Google Fonts, ChromeFrame, Mojo, JQuery, Windows Azure Active Directory, SQL Azure, Windows Azure SDK, Webgrease, Microsoft Enterprise Library
+Software: Windows Azure, Visual Studio 2013, NotePad, Chrome, HTML, XML, CSS, Internet Explorer, FireFox, Mozilla, JavaScript, TypeScript, Coffee Script, Windows, MVC 4 Razor, .NET, iOS, Android

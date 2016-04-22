@@ -1,0 +1,599 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3799D458-9DD6-4C61-9CCF-6412AEE97300}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Borentra</RootNamespace>
+    <AssemblyName>Borentra</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Facebook">
+      <HintPath>..\packages\Facebook.6.4.2\lib\net45\Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net">
+      <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Store.Azure">
+      <HintPath>..\packages\Lucene.Net.Store.Azure.2.0.4937.26631\lib\net40\Lucene.Net.Store.Azure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Data.Edm.5.6.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Data.OData.5.6.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
+      <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ServiceBus, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.ServiceBus.2.2.1.1\lib\net40-full\Microsoft.ServiceBus.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.2.0.2.0\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WindowsAzure.Storage.3.0.0.0\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Spatial, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Spatial.5.6.0\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bing\SearchContainer.cs" />
+    <Compile Include="Collections\Weight.cs" />
+    <Compile Include="Collections\WeightedDictionary.cs" />
+    <Compile Include="Core\ActivityCore.cs" />
+    <Compile Include="Core\AdminCore.cs" />
+    <Compile Include="Core\BadgeCore.cs" />
+    <Compile Include="Core\BingCore.cs" />
+    <Compile Include="Core\BorrowCore.cs" />
+    <Compile Include="Core\CompanyCore.cs" />
+    <Compile Include="Core\ConversationCore.cs" />
+    <Compile Include="Core\DataCore.cs" />
+    <Compile Include="Core\DeviceCore.cs" />
+    <Compile Include="Core\EmailCore.cs" />
+    <Compile Include="Core\FacebookCore.cs" />
+    <Compile Include="Core\FreeCore.cs" />
+    <Compile Include="Core\GeoCore.cs" />
+    <Compile Include="Core\GoodReadsCore.cs" />
+    <Compile Include="Core\GroupCore.cs" />
+    <Compile Include="Core\HistoryCore.cs" />
+    <Compile Include="Core\ImageCore.cs" />
+    <Compile Include="Core\ItemCore.cs" />
+    <Compile Include="Core\ItemRequestCore.cs" />
+    <Compile Include="Core\LuceneCore.cs" />
+    <Compile Include="Core\MelissaCore.cs" />
+    <Compile Include="Core\NotificationCore.cs" />
+    <Compile Include="Core\ProfileCore.cs" />
+    <Compile Include="Core\RentCore.cs" />
+    <Compile Include="Core\ScheduledTaskCore.cs" />
+    <Compile Include="Core\SocialCore.cs" />
+    <Compile Include="Core\StatisticsCore.cs" />
+    <Compile Include="Core\TradeCore.cs" />
+    <Compile Include="DataAccessLayer\Admin\CountByDate.cs" />
+    <Compile Include="DataAccessLayer\Admin\DeviceCount.cs" />
+    <Compile Include="DataAccessLayer\Admin\ProfileReport.cs" />
+    <Compile Include="DataAccessLayer\Admin\SearchDocument.cs" />
+    <Compile Include="DataAccessLayer\Admin\SearchLocationIp.cs" />
+    <Compile Include="DataAccessLayer\Device.cs" />
+    <Compile Include="DataAccessLayer\Facebook\MeInfo.cs" />
+    <Compile Include="DataAccessLayer\ItemImageInput.cs" />
+    <Compile Include="DataAccessLayer\LocationByIp.cs" />
+    <Compile Include="DataAccessLayer\ProfileFull.cs" />
+    <Compile Include="DataStore\TableStorage.cs" />
+    <Compile Include="DataAccessLayer\ActionNameAttribute.cs" />
+    <Compile Include="DataAccessLayer\Admin\ItemCount.cs" />
+    <Compile Include="DataAccessLayer\Admin\Statistics.cs" />
+    <Compile Include="DataAccessLayer\DataMapperAttribute.cs" />
+    <Compile Include="DataAccessLayer\Enums.cs" />
+    <Compile Include="DataAccessLayer\ExtensionMethods.cs" />
+    <Compile Include="DataAccessLayer\Facebook\Connection.cs" />
+    <Compile Include="DataAccessLayer\Facebook\Friend.cs" />
+    <Compile Include="DataAccessLayer\Facebook\FriendEmail.cs" />
+    <Compile Include="DataAccessLayer\Generated.cs" />
+    <Compile Include="DataAccessLayer\Interfaces.cs" />
+    <Compile Include="DataAccessLayer\Table\BingQueryEntry.cs" />
+    <Compile Include="DataAccessLayer\Table\EmailArchiveEntry.cs" />
+    <Compile Include="DataAccessLayer\Table\ScheduledTaskEntry.cs" />
+    <Compile Include="DataStore\AzureBlobContainer.cs" />
+    <Compile Include="DataStore\AzureStorage.cs" />
+    <Compile Include="DataStore\BinaryContainer.cs" />
+    <Compile Include="DataStore\JsonContainer.cs" />
+    <Compile Include="Drawing\ImageData.cs" />
+    <Compile Include="Drawing\Images.cs" />
+    <Compile Include="Email\Template\NewFriendAdded.cs">
+      <DependentUpon>NewFriendAdded.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Email\Template\NewFriendAdded.partial.cs">
+      <DependentUpon>NewFriendAdded.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="GeoSpatial\Constants.cs" />
+    <Compile Include="GeoSpatial\Coordinate.cs" />
+    <Compile Include="GeoSpatial\ExtensionMethods.cs" />
+    <Compile Include="Melissa\IPCheckContainer.cs" />
+    <Compile Include="Models\Activity.cs" />
+    <Compile Include="Models\Badge.cs" />
+    <Compile Include="Models\ExtensionMethods.cs" />
+    <Compile Include="Models\ItemRental.cs" />
+    <Compile Include="Models\LeaderBoard.cs" />
+    <Compile Include="Models\MobileContact.cs" />
+    <Compile Include="Models\OfferHistory.cs" />
+    <Compile Include="Models\RentalReturned.cs" />
+    <Compile Include="Models\RentalAction.cs" />
+    <Compile Include="Models\BorrowAction.cs" />
+    <Compile Include="Models\DeleteAction.cs" />
+    <Compile Include="Models\BorrowRequest.cs" />
+    <Compile Include="Models\BorrowReturned.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\ConversationSearch.cs" />
+    <Compile Include="Models\CountryPercentage.cs" />
+    <Compile Include="Models\DashboardInfo.cs" />
+    <Compile Include="Models\DashboardStats.cs" />
+    <Compile Include="Models\DataTransferObjects\GenericDTO.cs" />
+    <Compile Include="Models\DataTransferObjects\GuidDTO.cs" />
+    <Compile Include="Models\DataTransferObjects\ItemTradeDTO.cs" />
+    <Compile Include="Models\Enums.cs" />
+    <Compile Include="Models\History.cs" />
+    <Compile Include="Models\HomePage.cs" />
+    <Compile Include="Models\HomePageData.cs" />
+    <Compile Include="Models\HomePageShare.cs" />
+    <Compile Include="Models\ImageInput.cs" />
+    <Compile Include="Models\ImageResult.cs" />
+    <Compile Include="Models\Information.cs" />
+    <Compile Include="Models\Interfaces.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\ItemAction.cs" />
+    <Compile Include="Models\ItemActionComment.cs" />
+    <Compile Include="Models\ItemFree.cs" />
+    <Compile Include="Models\ItemImage.cs" />
+    <Compile Include="Models\ItemImageMetaData.cs" />
+    <Compile Include="Models\ItemMaster.cs" />
+    <Compile Include="Models\ItemRent.cs" />
+    <Compile Include="Models\ItemRequest.cs" />
+    <Compile Include="Models\ItemRequestFulfill.cs" />
+    <Compile Include="Models\ItemRequestImageInput.cs" />
+    <Compile Include="Models\ItemRequestMaster.cs" />
+    <Compile Include="Models\ItemRenting.cs" />
+    <Compile Include="Models\ItemShare.cs" />
+    <Compile Include="Models\LandingTheme.cs" />
+    <Compile Include="Models\Leader.cs" />
+    <Compile Include="Models\LocationSearch.cs" />
+    <Compile Include="Models\Master.cs" />
+    <Compile Include="Models\MyProfile.cs" />
+    <Compile Include="Models\Notifications.cs" />
+    <Compile Include="Models\Profile.cs" />
+    <Compile Include="Models\ProfileMaster.cs" />
+    <Compile Include="Models\PublicImage.cs" />
+    <Compile Include="Models\PublicItemImage.cs" />
+    <Compile Include="Models\PublicItemRequestImage.cs" />
+    <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\RentalRequest.cs" />
+    <Compile Include="Models\SearchPermissions.cs" />
+    <Compile Include="Models\SearchResult.cs" />
+    <Compile Include="Models\SearchResults.cs" />
+    <Compile Include="Models\Social.cs" />
+    <Compile Include="Models\SocialComment.cs" />
+    <Compile Include="Models\SocialFavorite.cs" />
+    <Compile Include="Models\SocialRating.cs" />
+    <Compile Include="Models\SocialTags.cs" />
+    <Compile Include="Models\TestSignUp.cs" />
+    <Compile Include="Models\Thing.cs" />
+    <Compile Include="Models\Totals.cs" />
+    <Compile Include="Models\Trade.cs" />
+    <Compile Include="Models\TradeRequest.cs" />
+    <Compile Include="Models\TradeSelection.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\ExtensionMethods.cs" />
+    <Compile Include="Security\Key.cs" />
+    <Compile Include="Security\TokenCreator.cs" />
+    <Compile Include="WorkerRole\ArchiveDeletedData.cs" />
+    <Compile Include="WorkerRole\DeleteBingCache.cs" />
+    <Compile Include="WorkerRole\FacebookFriendGatherer.cs" />
+    <Compile Include="WorkerRole\GenerateBadges.cs" />
+    <Compile Include="WorkerRole\GenerateForProfile.cs" />
+    <Compile Include="WorkerRole\GenerateHeatMap.cs" />
+    <Compile Include="WorkerRole\ContentSearchIndexer.cs" />
+    <Compile Include="WorkerRole\LocationIpIndexer.cs" />
+    <Compile Include="WorkerRole\SetTopLocation.cs" />
+    <Compile Include="WorkerRole\SetTopGeoLocation.cs" />
+    <Compile Include="WorkerRole\GenerateSocialData.cs" />
+    <Compile Include="WorkerRole\GeneratHomePageData.cs" />
+    <Compile Include="WorkerRole\Manager.cs" />
+    <Compile Include="WorkerRole\ScheduledManager.cs" />
+    <Compile Include="WorkerRole\ScheduledProcedure.cs" />
+    <Compile Include="Email\Template\BorrowDeclinedTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BorrowDeclinedTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\RentDeclinedTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RentDeclinedTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\FreeAcceptTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FreeAcceptTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\FreeDeclineTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FreeDeclineTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\FreeRequestTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FreeRequestTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\GenericTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GenericTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\ItemRequestFulfillTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ItemRequestFulfillTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\ItemRequestFulfillAcceptTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ItemRequestFulfillAcceptTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\ItemRequestFulfillDeclineTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ItemRequestFulfillDeclineTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\TradeAcceptedTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TradeAcceptedTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\TradeAcceptedTemplate.partial.cs">
+      <DependentUpon>TradeAcceptedTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\TradeDeclinedTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TradeDeclinedTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\TradeDeclinedTemplate.partial.cs">
+      <DependentUpon>TradeDeclinedTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\TradeRequestTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TradeRequestTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\TradeRequestTemplate.partial.cs">
+      <DependentUpon>TradeRequestTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\BorrowAcceptedTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BorrowAcceptedTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\RentAcceptedTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RentAcceptedTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\ItemRequestFulfillTemplate.partial.cs">
+      <DependentUpon>ItemRequestFulfillTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\ItemRequestFulfillDeclineTemplate.partial.cs">
+      <DependentUpon>ItemRequestFulfillDeclineTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\ItemRequestFulfillAcceptTemplate.partial.cs">
+      <DependentUpon>ItemRequestFulfillAcceptTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\BorrowAcceptedTemplate.partial.cs">
+      <DependentUpon>BorrowAcceptedTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\RentAcceptedTemplate.partial.cs">
+      <DependentUpon>RentAcceptedTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\GenericTemplate.partial.cs">
+      <DependentUpon>GenericTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\ConversationTemplate.partial.cs">
+      <DependentUpon>ConversationTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\BorrowRequestTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BorrowRequestTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\RentRequestTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RentRequestTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\BorrowRequestTemplate.partial.cs">
+      <DependentUpon>BorrowRequestTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\RentRequestTemplate.partial.cs">
+      <DependentUpon>RentRequestTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\BorrowReturnedTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BorrowReturnedTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\RentReturnedTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RentReturnedTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\BorrowReturnedTemplate.partial.cs">
+      <DependentUpon>BorrowReturnedTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\RentReturnedTemplate.partial.cs">
+      <DependentUpon>RentReturnedTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\FriendSignedUpTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FriendSignedUpTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\FriendSignedUpTemplate.partial.cs">
+      <DependentUpon>FriendSignedUpTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\FriendAddedItemTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FriendAddedItemTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\FriendAddedItemTemplate.partial.cs">
+      <DependentUpon>FriendAddedItemTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\BorrowDeclinedTemplate.partial.cs">
+      <DependentUpon>BorrowDeclinedTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\RentDeclinedTemplate.partial.cs">
+      <DependentUpon>RentDeclinedTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\FreeDeclineTemplate.partial.cs">
+      <DependentUpon>FreeDeclineTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\FreeAcceptTemplate.partial.cs">
+      <DependentUpon>FreeAcceptTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\FreeRequestTemplate.partial.cs">
+      <DependentUpon>FreeRequestTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\MailGun.cs" />
+    <Compile Include="Email\Template\NewUser.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NewUser.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\NewUser.Partial.cs">
+      <DependentUpon>NewUser.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Template\ConversationTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConversationTemplate.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\FriendSignedUpTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>FriendSignedUpTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="Email\Template\FriendAddedItemTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>FriendAddedItemTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\BorrowRequestTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>BorrowRequestTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\RentRequestTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>RentRequestTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\BorrowAcceptedTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>BorrowAcceptedTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\RentAcceptedTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>RentAcceptedTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\BorrowReturnedTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>BorrowReturnedTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\RentReturnedTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>RentReturnedTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\BorrowDeclinedTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>BorrowDeclinedTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\RentDeclinedTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>RentDeclinedTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\FreeRequestTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>FreeRequestTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\FreeAcceptTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>FreeAcceptTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\GenericTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>GenericTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\ItemRequestFulfillTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ItemRequestFulfillTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\ItemRequestFulfillDeclineTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ItemRequestFulfillDeclineTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\ItemRequestFulfillAcceptTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ItemRequestFulfillAcceptTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\TradeAcceptedTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>TradeAcceptedTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\TradeDeclinedTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>TradeDeclinedTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\TradeRequestTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>TradeRequestTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\ConversationTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ConversationTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\FreeDeclineTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>FreeDeclineTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\NewUser.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>NewUser.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Template\NewFriendAdded.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>NewFriendAdded.cs</LastGenOutput>
+    </Content>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

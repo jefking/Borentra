@@ -1,0 +1,77 @@
+﻿@using System.Linq;
+@using Borentra;
+@using Borentra.Models;
+@using Borentra.Models.DataTransferObjects;
+
+@model IEnumerable<Borentra.Models.Trade>
+
+<ul class="media-list">
+  @foreach (var trade in Model)
+  {
+      
+    <li class="media">
+
+      <a class="pull-left" href="/profile/@trade.Requester.Key">
+        <img class="media-object img-rounded" src="@trade.Requester.Picture" width="50" height="50" />
+      </a>
+      <div class="media-body">
+
+        <ul class="list-inline pull-right">
+          <li><a href="#" data-bind="click: $root.AcceptRequest" class="btn btn-success btn-trade-accept" data-id="@trade.TradeIdentifier" onclick="_gaq.push(['_trackEvent', 'Item', 'Trade', 'Accept']);"><span class="glyphicon glyphicon-ok"></span></a></li>
+          <li><a href="#" data-bind="click: $root.RejectRequest" class="btn btn-danger btn-trade-reject" data-id="@trade.TradeIdentifier" onclick="_gaq.push(['_trackEvent', 'Item', 'Trade', 'Decline']);"><span class="glyphicon glyphicon-remove"></span></a></li>
+
+        </ul>
+        <small class="muted">@trade.CreatedOn</small>
+        <div class="clearfix">
+          <h5><a href="/profile/@trade.Requester.Key">@trade.Requester.Name</a> would like to trade</h5>
+          <ul class="list-inline">
+            @foreach (var item in trade.RequesterItems)
+            {
+              <li>
+                @if (!string.IsNullOrWhiteSpace(item.PrimaryImagePathFormat))
+                {
+                  <a class="pull-left" href="/offer/@item.Key" title="View Item">
+                    <img class="media-object img-rounded"  src="@Url.ContentCdn("~" + item.PrimaryImageThumbnail, true)" width="50" height="50"  />
+                  </a>
+                }
+                else
+                {
+                  <a class="pull-left" href="/offer/@item.Key" title="View Item Details">
+                    <img class="media-object img-rounded" src="@Url.ContentCdn("~/assets/img/ui/thumbnail.png")" width="50" height="50"  />
+                  </a>
+                           
+                }
+              </li>
+            }
+          </ul>
+        </div>
+        <div class="clearfix">
+          <h5>for your offers</h5>
+
+          <ul class="list-inline">
+            @foreach (var item in trade.ReceiverItems)
+            {
+              <li>
+                @if (!string.IsNullOrWhiteSpace(item.PrimaryImagePathFormat))
+                {
+                  <a class="pull-left" href="/offer/@item.Key" title="@item.Title">
+                    <img class="media-object img-rounded"  src="@Url.ContentCdn("~" + item.PrimaryImageThumbnail, true)" width="50" height="50"  />
+                  </a>
+                }
+                else
+                {
+                  <a class="pull-left" href="/offer/@item.Key" title="@item.Title">
+                    <img class="media-object img-rounded" src="@Url.ContentCdn("~/assets/img/ui/thumbnail.png")" width="50" height="50"  />
+                  </a>
+                           
+                }
+              </li>
+
+            }
+          </ul>
+        </div>
+      </div>
+
+    </li>
+  }
+</ul>

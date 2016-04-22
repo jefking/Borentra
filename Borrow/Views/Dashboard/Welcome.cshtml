@@ -1,0 +1,77 @@
+﻿@using Borentra
+
+@model Borentra.Models.DashboardInfo<Borentra.Models.MyProfile>
+@{
+    ViewBag.Title = "Welcome to Borentra! | Borentra: Borrow, Rent, Trade";
+    ViewBag.ThumbnailWidth = "50";
+    Layout = "~/Views/Shared/Layouts/_LoggedInLayout.cshtml";
+
+    ViewBag.Theme = null;
+    if (!string.IsNullOrWhiteSpace(Model.Info.Theme))
+    {
+        switch (Model.Info.Theme)
+        {
+            case "tools":
+            case "books":
+            case "magicthegathering":
+            case "pokemon":
+                ViewBag.Theme = Model.Info.Theme;
+                break;
+            case "gaming":
+                ViewBag.Theme = "xbox360";
+                break;
+        }
+    }
+}
+
+<div class="borentra-view dashboard dashboard-welcome">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-md-8">
+                        @if (0 == Model.FriendCount)
+                        {
+                            <h1><span class="glyphicon glyphicon-user"></span>&nbsp;Better with friends</h1>
+                            <hr />
+                            <div class="alert alert-info">
+                                <p>Looks like none of your friends have signed up, would you like to invite a couple?</p>
+                                <p><a href="#" onclick="FB.ui({ method: 'apprequests', message: 'Easily borrow, rent, trade on Borentra' }, function () { }); _gaq.push(['_trackEvent', 'Dashboard', 'Welcome', 'Friends']);"><span class="glyphicon glyphicon-user"></span> Invite Friends</a>!</p>
+                            </div>
+                        }
+                        else if (Model.Info.Latitude == 0 || Model.Info.Longitude == 0)
+                        {
+                            <h1><span class="glyphicon glyphicon-globe"></span>&nbsp;Set your location</h1>
+                            <hr />
+                            <div class="alert alert-info">
+                                <p>Please update your location settings so that we can provide better search results on items, requests, and nearby people to borrow and trade with!</p>
+                                <p><a href="/dashboard/settings" onclick="_gaq.push(['_trackEvent', 'Dashboard', 'Welcome', 'Location']);"><span class="glyphicon glyphicon-arrow-right"></span> Update your profile</a>!</p>
+                            </div>
+                        }
+                        else if (!string.IsNullOrWhiteSpace(ViewBag.Theme))
+                        {
+                            <h1><span class="glyphicon glyphicon-list"></span>&nbsp;Get Sharing!</h1>
+                            <hr />
+                            <div class="col-md-8">
+                                @Html.Partial("Dashboard/_QuickAddWidget")
+                            </div>
+                        }
+                        else
+                        {
+                            <h1><span class="glyphicon glyphicon-list"></span>&nbsp;Get Sharing!</h1>
+                            <hr />
+                            @Html.Partial("Dashboard/_MultiAddWidget")
+                            <br />
+                            <div class="alert alert-info">
+                                <p>By using the quick add widget you be able to easily share what you have and what you want.</p>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-4">
+                        @Html.Partial("Dashboard/_QuickStart", Model.Info)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+﻿@using Borentra;
+
+@model IList<Borentra.Models.Badge>
+<div class="component activity-feed">
+    @if (null != Model && 0 < Model.Count)
+    {
+        <h5>Achievements <small>@Model.Count</small></h5>
+        <ul class="list-unstyled">
+            @foreach (var badge in Model)
+            {
+                <li>
+                    <img src="@Url.ContentCdn(string.Format("~/assets/img/badges/{0}", @badge.IconName))" title="@badge.Title" width="50px" height="50px" style="height:50px;width:50px;" />
+                    <span class="muted">@badge.Title</span>
+                </li>
+            }
+        </ul>
+    }
+</div>

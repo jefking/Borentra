@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Create Company";
+    Layout = "~/Views/Shared/Layouts/_AdminLayout.cshtml";
+}
+
+<div class="admin-reports">
+    <div class="row">
+        <div class="col-xs-10">
+            <div class="page-header">
+                <h1><span class="glyphicon glyphicon-book"></span>&nbsp;Create Company</h1>
+            </div>
+            <hr />
+            <form id="quick-edit-item-form" action="/Admin/CreateCompany" method="post">
+                <div class="control-group">
+                    <h5>
+                        <label class="control-label">Company Name</label>
+                    </h5>
+                    <input class="form-control" type="text" name="name" id="name" maxlength="64" required />
+                </div>
+                <div class="control-group">
+                    <h5>
+                        <label class="control-label">Description <small>(300 characters)</small></label>
+                    </h5>
+                    <textarea class="form-control" rows="3" name="description" id="description" maxlength="300" required >
+
+                    </textarea>
+                </div>
+                <div class="control-group">
+                    <h5>
+                        <label class="control-label">Email <small>(will be your username)</small> </label>
+                    </h5>
+                    <input type="email" class="form-control" name="email" id="email" required />
+                </div>
+                <div class="control-group">
+                    <h5>
+                        <label class="control-label">Password</label>
+                    </h5>
+                    <input type="email" class="form-control" name="password" id="password" required />
+                </div>
+                <div class="control-group">
+                    <h5>
+                        <label class="control-label">Phone Number</label>
+                    </h5>
+                    <input type="tel" class="form-control" name="phone" id="phone" required />
+                </div>
+                <div class="control-group">
+                    <h5>
+                        <label class="control-label">Website URL <small>(ie: http://www.borentra.com)</small></label>
+                    </h5>
+                    <input type="url" class="form-control" name="website" id="website" required />
+                </div>
+                <div class="control-group">
+                    <h5>
+                        <label class="control-label">Twitter <small>(ie: @@<b>borentra</b>)</small></label>
+                    </h5>
+                    <input type="text" class="form-control" name="twitter" id="twitter" placeholder="borentra" />
+                </div>
+                <div class="control-group">
+                    <h5>
+                        <label class="control-label">Facebook <small>(ie: http://www.facebook.com/<b>company</b>)</small></label>
+                    </h5>
+                    <input type="url" class="form-control" name="facebook" id="facebok" />
+                </div>
+                <div class="control-group">
+                    <h5>
+                        <label class="control-label">Location</label>
+                    </h5>
+                    <input type="url" class="form-control" name="location" id="location" required />
+                </div>
+                <div class="control-group">
+                    <input class="btn btn-success" type="submit" title="Save" alt="Save" onclick="_gaq.push(['_trackEvent', 'Company', 'New', 'Save']);" />
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-2">
+            @Html.Partial("~/Views/Shared/Admin/_AdminMenu.cshtml")
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿@using Borentra;
+
+@{
+    ViewBag.Title = "We encountered an error, sorry. | Borentra™ a community for sharing.";
+    ViewBag.Description = "An internal server error occurred, we will resolve this as soon as humanly possible. Borrow what you need, when you need it; from your family, friends & community!";
+
+    Layout = "~/Views/Shared/Layouts/_ContentLayout.cshtml";
+    ViewBag.DisableJavaScript = true;
+
+    var url = this.Request.QueryString["aspxerrorpath"];
+}
+<div class="container">
+    <div class="page-header">
+        <h1>Gah! <small>Oops, something broke!</small></h1>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            <p>But here's a cute kitten!</p>
+            <p>
+                <a href="/" class="btn btn-default" title="Back to Home" onclick="_gaq.push(['_trackEvent', 'ErrorPage', 'Link', 'Home']);"><span class="glyphicon glyphicon-home"></span>&nbsp;Back to Homepage</a>
+                @if (!string.IsNullOrWhiteSpace(url))
+                {
+                    <a href="utl" class="btn btn-warning" title="Try link again?" onclick="_gaq.push(['_trackEvent', 'ErrorPage', 'Link', 'TryAgain']);"><span class="glyphicon glyphicon-home"></span>&nbsp;Try again?</a>
+                }
+            </p>
+        </div>
+        <div class="col-xs-8">
+            <div class="text-center">
+                <img src="@Url.ContentCdn("~/assets/img/ui/cats/500.jpg")" class="img-rounded img-responsive" />
+            </div>
+        </div>
+    </div>
+</div>

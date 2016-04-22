@@ -1,0 +1,75 @@
+﻿@using System.Linq;
+@using Borentra;
+
+@model IEnumerable<Borentra.Models.Thing>
+@if (0 < Model.Count())
+{
+    <ul class="media-list">
+        @foreach (var item in Model)
+        {
+            var page = item is Borentra.Models.Item ? "offer" : "wanted";
+            item.SetCategories();
+            
+            <li class="media">
+                <a href="/@page/@item.Key" class="pull-left" title="@item.Title">
+
+                    @if (string.IsNullOrWhiteSpace(item.PrimaryImageThumbnail))
+                    {
+                        <img src="@Url.ContentCdn("~/assets/img/ui/thumbnail.png")" class="img-rounded media-object" width="100" alt="Missing Photo" />
+                    }
+                    else
+                    {
+                        <img src="@Url.ContentCdn("~" + item.PrimaryImageThumbnail, true)" class="img-rounded media-object" width="100" alt="@item.Title" />
+                    }
+                </a>
+
+                <div class="media-body">
+                    <h3 class="media-heading">
+                        <a href="/@page/@item.Key" title="@item.Title">@item.Title</a>
+                    </h3>
+                    <div class="offer-meta">
+                        <span>
+                            <a href="/profile/@item.OwnerKey" class="" title="@item.OwnerName">
+                                <img src="@item.OwnerPicture" class="img-rounded" width="25" alt="@item.Title" />
+                            </a>
+                            <a href="/profile/@item.OwnerKey" class="text-muted">@item.OwnerName</a>
+                        </span> |
+                        <span>@item.Location</span> |
+                        <span>Added @item.CreatedOn.ToString("MMMM, yyyy")</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p>@Html.Raw(item.RenderDisplayHtml(item is Borentra.Models.Item))</p>
+                        </div>
+                        <div class="col-xs-6 hidden">
+                            @if (null != item.Categories && 0 < item.Categories.Count())
+                            {
+                                <h5>Tags</h5>
+
+                                <ul class="list-unstyled">
+
+
+                                    @foreach (var category in item.Categories)
+                                    {
+
+                                        <li><a class="label label-default" href="/@page?s=@category&c=tag_cloud">#@category</a></li>
+
+                                    }
+                                </ul>
+
+                            }
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <div class="alert alert-info">
+        Nothing available.
+    </div>
+}

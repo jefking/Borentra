@@ -1,0 +1,69 @@
+﻿@using System.Linq;
+@using Borentra;
+@using Borentra.Models;
+@using Borentra.Models.DataTransferObjects;
+
+@model IEnumerable<Borentra.Models.Trade>
+
+<ul class="media-list">
+  @foreach (var trade in Model)
+  {
+    <li class="media">
+      <a class="pull-left" href="/profile/@trade.Receiver.Key">
+        <img class="media-object img-rounded" src="@trade.Receiver.Picture" width="50" height="50" />
+      </a>
+      <div class="media-body">
+        <button class="btn btn-danger btn-trade-delete pull-right" data-id="@trade.TradeIdentifier" data-bind="click: $root.CancelRequest"><span class="glyphicon glyphicon-remove"></span></button>
+        <small class="muted">@trade.CreatedOn</small>
+        <div class="clearfix">
+          <h5>Your offers</h5>
+          <ul class="list-inline">
+
+            @foreach (var item in trade.RequesterItems)
+            {
+              <li>
+                @if (!string.IsNullOrWhiteSpace(item.PrimaryImagePathFormat))
+                {
+                  <a class="pull-left" href="/offer/@item.Key" title="@item.Title">
+                    <img class="media-object img-rounded"  src="@Url.ContentCdn("~" + item.PrimaryImageThumbnail, true)" width="50" height="50" />
+                  </a>
+                }
+                else
+                {
+                  <a class="pull-left" href="/offer/@item.Key" title="View Item Details">
+                    <img class="media-object img-rounded" src="//cdn.borentra.com/assets/img/ui/thumbnail.png" width="50" height="50" />
+                  </a>
+
+                }
+              </li>
+            }
+          </ul>
+        </div>
+        <div class="clearfix">
+          <h5>for <a href="/profile/@trade.Receiver.Key">@trade.Receiver.Name</a>'s offers</h5>
+          <ul class="list-inline">
+
+            @foreach (var item in trade.ReceiverItems)
+            {
+              <li>
+                @if (!string.IsNullOrWhiteSpace(item.PrimaryImagePathFormat))
+                {
+                  <a class="pull-left" href="/offer/@item.Key" title="@item.Title">
+                    <img class="media-object img-rounded"  src="@Url.ContentCdn("~" + item.PrimaryImageThumbnail, true)" width="50" height="50" />
+                  </a>
+                }
+                else
+                {
+                  <a class="pull-left" href="/offer/@item.Key" title="View Item Details">
+                    <img class="media-object img-rounded" src="@Url.ContentCdn("~/assets/img/ui/thumbnail.png")" width="50" height="50" />
+                  </a>
+                           
+                }
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </li>
+  }
+</ul>

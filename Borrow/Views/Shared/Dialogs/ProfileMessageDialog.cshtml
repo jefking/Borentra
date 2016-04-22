@@ -1,0 +1,20 @@
+﻿<div id="dialogProfileMessage" class="modal fade" role="dialog">
+  <form id="quick-message-form" action="/api/Conversation/Save" data-bind="submit: $root.Send">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3>Compose Message</h3>
+    </div>
+    <div class="modal-body">
+      <div class="alert alert-success" data-bind="visible: $root.UIMessages().length > 0">
+        <ul class="list-unstyled" data-bind="foreach: $root.UIMessages">
+          <li data-bind="text: $data.message"></li>
+        </ul>
+      </div>
+      <input data-bind="value: $root.ToUserIdentifier" type="hidden" value="" />
+      <textarea class="form-control" data-bind="value: $root.Body" placeholder="Why hello there!" rows="5" maxlength="1024" required></textarea>
+    </div>
+    <div class="modal-footer">
+      <button data-bind="click: $root.Send" type="submit" class="btn btn-primary" data-loading-text="Working it! Please wait!" onclick="_gaq.push(['_trackEvent', 'Dialogue', 'Message', 'Send']);"><span class="glyphicon glyphicon-send"></span>&nbsp;Send</button>
+    </div>
+  </form>
+</div>

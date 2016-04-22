@@ -1,0 +1,34 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#
+if (ReferenceType == Borentra.Models.Reference.ItemRequest)
+{
+#>
+<h2>Wanted</h2>
+<#
+}
+#>
+<#
+if (!string.IsNullOrWhiteSpace(Image))
+{
+#>
+<p style="text-align: center;">
+    <a href="<#=Link#>">
+        <img alt="<#=Title#>" src="<#=Image#>" /></a>
+</p>
+<#
+}
+#>
+
+<#
+if (!string.IsNullOrWhiteSpace(Description))
+{
+#>
+<p><#=Description#></p>
+<#
+}
+#>

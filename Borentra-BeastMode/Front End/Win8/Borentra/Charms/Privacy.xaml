@@ -1,0 +1,45 @@
+﻿<SettingsFlyout
+    x:Class="Borentra.Charms.Privacy"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Borentra.Charms"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    IconSource="Assets/SmallLogo.png"
+    Title="Privacy Policy"
+    d:DesignWidth="400"
+    Width="400">
+
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+        <StackPanel Style="{StaticResource SettingsFlyoutSectionStyle}">
+            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Information Collected" />
+            <TextBlock
+                FontSize="10"
+                Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,0,8" TextWrapping="Wrap">
+                <TextBlock.Text>
+                    Borentra Services Inc. offers a variety of services that are collectively referred to as the "Services." Borentra Services Inc. collects information from individuals who visit the Company’s Web site ("Visitors") and individuals who register to use the Services ("Customers").
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock
+                FontSize="10"
+                Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,0,8" TextWrapping="Wrap">
+                <TextBlock.Text>
+                    When expressing an interest in obtaining additional information about the Services or registering to use the Services, Borentra Services Inc. requires you to provide the Company with personal contact information, such as name, company name, address, phone number, and email address ("Required Contact Information"). When purchasing the Services, Borentra Services Inc. requires you to provide the Company with financial qualification and billing information, such as billing name and address, credit card number, and the number of employees within the organization that will be using the Services ("Billing Information"). Borentra Services Inc. may also ask you to provide additional information, such as company annual revenues, number of employees, or industry ("Optional Information"). Required Contact Information, Billing Information, and Optional Information are referred to collectively as "Data About Borentra Services Inc. Customers."
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock
+                FontSize="10"
+                Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,0,8" TextWrapping="Wrap">
+                <TextBlock.Text>
+                    As you navigate the Company’s Web site, Borentra Services Inc. may also collect information through the use of commonly-used information-gathering tools, such as cookies and Web beacons ("Web Site Navigational Information"). Web Site Navigational Information includes standard information from your Web browser (such as browser type and browser language), your Internet Protocol ("IP") address, and the actions you take on the Company’s Web site (such as the Web pages viewed and the links clicked).
+                </TextBlock.Text>
+            </TextBlock>
+            <HyperlinkButton NavigateUri="http://www.borentra.com/privacy?utm_source=borentra&amp;utm_campaign=privacy&amp;utm_medium=win81client">
+                <TextBlock FontSize="8">
+                    More information
+                </TextBlock>
+            </HyperlinkButton>
+        </StackPanel>
+    </StackPanel>
+</SettingsFlyout>

@@ -1,0 +1,15 @@
+﻿CREATE VIEW [Goods].[vwItemRequest]
+AS
+	SELECT [Identifier]
+		, [UserIdentifier]
+		, [Title]
+		, [Description]
+		, [CreatedOn]
+		, [ModifiedOn]
+		, [ForTrade]
+		, [ForRent]
+		, [ForFree]
+		, [ForShare]
+		, [Key]
+	FROM [Goods].[ItemRequest]
+	WHERE DeletedOn IS NULL;

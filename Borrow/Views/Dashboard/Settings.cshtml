@@ -1,0 +1,146 @@
+﻿@using Borentra
+
+@model Borentra.Models.DashboardInfo<Borentra.Models.Profile>
+@{
+    ViewBag.Title = "My Settings | Borentra: Borrow, Rent, Trade";
+    Layout = "~/Views/Shared/Layouts/_LoggedInLayout.cshtml";
+}
+
+<div class="dashboard dashboard-settings">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="page-header">
+                    <h1><span class="glyphicon glyphicon-cog"></span>&nbsp; Your Account Settings</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-10">
+
+                <div class="component edit-profile-component hidden"
+                     data-bind="css: { hidden: false }"
+                     data-name="@Model.Info.Name"
+                     data-email="@Model.Info.Email"
+                     data-location="@Model.Info.Location"
+                     data-latitude="@Model.Info.Latitude"
+                     data-longitude="@Model.Info.Longitude"
+                     data-status="@Model.Info.Status"
+                     data-privacy="@Model.Info.PrivacyLevel"
+                     data-distance="@Model.Info.SearchRadius"
+                     data-friends="@Model.FriendCount">
+
+                    <div class="loading-screen" data-bind="visible: $root.UILoading() == true"></div>
+                    <form class="form-horizontal" action="?" method="POST" data-bind="submit: $root.Save" onsubmit="return false;">
+
+                        <div class="alert alert-danger" data-bind="visible: $root.UIErrors().length > 0">
+                            <ul data-bind="foreach: $root.UIErrors" class="list-unstyled">
+                                <li data-bind="text: $data.message"></li>
+                            </ul>
+                        </div>
+                        <div class="alert alert-success" data-bind="visible: $root.UIMessages().length > 0">
+                            <ul data-bind="foreach: $root.UIMessages" class="list-unstyled">
+                                <li data-bind="text: $data.message"></li>
+                            </ul>
+                        </div>
+
+                        <div class="control-group">
+                            <h5>
+                                <label class="control-label" for="profile-name">What's your name?</label>
+                            </h5>
+                            <div class="controls">
+                                <input data-bind="value: $root.Name" class="form-control input-sm" id="profile-name" type="text" placeholder="Full Name" required>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <h5>
+                                <label class="control-label" for="profile-name">What's your email?</label>
+                            </h5>
+                            <div class="controls">
+                                <input data-bind="value: $root.Email" class="form-control input-sm" id="profile-email" type="text" placeholder="you@yourdomain.com" required>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <h5>
+                                <label class="control-label" for="profile-location">Where are you from?</label>
+                            </h5>
+                            <div class="controls">
+                                <input data-bind="value: $root.Location, valueUpdate: 'afterkeydown'" class="typeahead form-control input-sm" id="profile-location" type="text" placeholder="Location" required>
+                                <p class="muted"><small>Filling in your location allows you to vastly improve your searches</small></p>
+
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+
+                            <h5>
+                                <label class="control-label" for="profile-status">How do you want to make the world a better place?</label>
+                            </h5>
+                            <div class="controls">
+                                <textarea data-bind="value: $root.Status" class="form-control input-sm" id="profile-status" rows="6" placeholder="I share with family and friends because..." required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <h5>
+                                <label class="control-label" for="profile-privacy">Which group would you like to lend to?</label>
+                            </h5>
+                            <div class="controls">
+                                <select id="profile-privacy" class="form-control input-sm" data-bind="options: $root.PrivacyList, value: $root.PrivacyLevel"></select>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <h5>
+                                <label class="control-label" for="profile-distance">How far do you want to search for things to borrow (km)?</label>
+                            </h5>
+                            <div class="controls">
+                                <select id="profile-distance" class="form-control input-sm" data-bind="options: $root.DistanceList, value: $root.Distance"></select>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="control-group">
+                            <div class="controls">
+                                <button data-bind="click: $root.Save" type="submit" class="btn btn-success" onclick="_gaq.push(['_trackEvent', 'Setting', 'Profile', 'Save']);"><span class="glyphicon glyphicon-ok-sign"></span>&nbsp; Save Profile</button>
+                                <button type="button" class="btn btn-default btn-sm pull-right" data-toggle="collapse" data-target="#advanced"><span class="glyphicon glyphicon-cog"></span> Advanced Options</button>
+
+                            </div>
+                        </div>
+
+
+                        <div id="advanced" class="collapse">
+                            <br /><br />
+
+                            <div class="well">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @if (0 < Model.HistoryCount)
+                                        {
+                                            <a href="/dashboard/history" title="Share History">
+                                                <span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="link-label">History</span>
+                                            </a>
+                                        }
+                                        &nbsp;&nbsp;<a href="mailto:jef@borentra.com?Subject=Please Remove Me @Model.Info.Identifier" onclick="_gaq.push(['_trackEvent', 'Setting', 'Profile', 'Remove']);"><span class="glyphicon glyphicon-remove-sign"></span>&nbsp; Delete My Profile</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="col-xs-2">
+                @Html.Partial("~/Views/Shared/Dashboard/_Menu.cshtml", Model)
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,103 @@
+﻿@using Borentra
+
+@model Borentra.Models.DashboardStats
+@{
+    var currentAction = this.ViewContext.RouteData.GetRequiredString("action").ToLowerInvariant();
+    var rootCss = currentAction == "index" ? "active" : null;
+    var conversationCss = currentAction == "conversation" ? "active" : null;
+    var offersCss = currentAction == "offers" ? "active" : null;
+    var tradesCss = currentAction == "trades" ? "active" : null;
+    var interestsCss = currentAction == "interests" ? "active" : null;
+    var wantedCss = currentAction == "wanted" ? "active" : null;
+    var friendsCss = currentAction == "friends" ? "active" : null;
+    var friendOfferCss = currentAction == "friendoffers" ? "active" : null;
+    var settingsCss = currentAction == "settings" ? "active" : null;
+}
+<ul class="borentra nav nav-pills nav-stacked">
+    <li class="first"><a href="#"></a></li>
+    <li class="@rootCss">
+        <a href="/dashboard" title="My Dashboard">
+            <span class="glyphicon glyphicon-home"></span>&nbsp;<span class="link-label">Dashboard</span>
+        </a>
+    </li>
+    <li class="@interestsCss">
+        <a href="/dashboard/interests" title="Interests">
+            <span class="glyphicon glyphicon-check"></span>&nbsp;<span class="link-label">Interests</span>
+        </a>
+    </li>
+    <li class="@offersCss">
+        <a href="/dashboard/offers" title="My Offers">
+            <span class="glyphicon glyphicon-list"></span>&nbsp;<span class="link-label">Offers</span>
+        </a>
+    </li>
+
+    <li class="@wantedCss">
+        <a href="/dashboard/wanted" title="My Requests">
+            <span class="glyphicon glyphicon-hand-up"></span>&nbsp;<span class="link-label">Wants</span>
+        </a>
+    </li>
+    <li class="@tradesCss">
+        <a href="/dashboard/trades" title="My Trades">
+            <span class="glyphicon glyphicon-retweet"></span>&nbsp;<span class="link-label">Trade</span>
+        </a>
+    </li>
+    <li class="@conversationCss">
+        <a href="/dashboard/conversation" title="Messaages">
+            <span class="glyphicon glyphicon-envelope"></span>&nbsp;<span class="link-label">
+                Messages
+                @if (0 < Model.MessageCount)
+                {
+                    <span class="badge badge-info">&nbsp;@Model.MessageCount</span>
+                }
+            </span>
+        </a>
+    </li>
+    @if (0 < Model.FriendCount)
+    {
+        <li class="@friendsCss">
+            <a href="/dashboard/friends" title="Your Friends">
+                <span class="glyphicon glyphicon-user"></span>&nbsp;<span class="link-label">Friends</span>
+            </a>
+        </li>
+    }
+    @if (0 < Model.FriendsOffersCount)
+    {
+        <li class="@friendOfferCss">
+            <a href="/dashboard/friendoffers" title="Your Friends Offers">
+                <span class="glyphicon glyphicon-list"></span>&nbsp;<span class="link-label">Friends Offers</span>
+            </a>
+        </li>
+    }
+    <li class="@settingsCss">
+        <a href="/dashboard/settings" title="Settings">
+            <span class="glyphicon glyphicon-cog"></span>&nbsp;<span class="link-label">Settings</span>
+        </a>
+    </li>
+    <li>
+        <a href="/help" title="Help & Information">
+            <span class="glyphicon glyphicon-question-sign"></span>&nbsp;<span class="link-label">Help</span>
+        </a>
+    </li>
+    <li>
+        <a href="https://sharingiscaring.accesscontrol.windows.net/v2/wsfederation?wa=wsignout1.0&wtrealm=http://@Request.Url.Authority&wreply=http://@Request.Url.Authority" title="Log Out" onclick="_gaq.push(['_trackEvent', 'Offsite', 'Registration', 'Logout']);">
+            <span class="glyphicon glyphicon-log-out"></span>&nbsp;<span class="link-label">Logout</span>
+        </a>
+    </li>
+    <li class="last"><a href="#"></a></li>
+</ul>
+
+@if (User.Identity.IsManager())
+{
+    <h4 class="hidden-xs">Staff</h4>
+    <ul class="borentra nav nav-pills nav-stacked">
+        <li class="first"><a href="#"></a></li>
+
+        <li class="">
+            <a href="/Admin" title="Administration">
+                <span class="glyphicon glyphicon-fire"></span>&nbsp;<span class="link-label">Administration</span>
+
+            </a>
+        </li>
+        <li class="last"><a href="#"></a></li>
+    </ul>
+}

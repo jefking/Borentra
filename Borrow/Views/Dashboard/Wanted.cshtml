@@ -1,0 +1,43 @@
+﻿@model Borentra.Models.DashboardInfo<System.Collections.Generic.IEnumerable<Borentra.Models.ItemRequest>>
+@{
+    ViewBag.Title = "My Requests | Borentra: Borrow, Rent, Trade";
+    Layout = "~/Views/Shared/Layouts/_LoggedInLayout.cshtml";
+}
+
+<div class="dashboard dashboard-requests borentra-view">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h1><span class="glyphicon glyphicon-hand-up"></span>&nbsp; Your Wants <small>@Model.Info.Count()</small></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-10">
+                @Html.Partial("Dashboard/_MultiAddWidget")
+                @if (null != Model.Info && 0 < Model.Info.Count())
+                {
+                    @Html.Partial("~/Views/Shared/_ItemRequests.cshtml", Model.Info)
+                }
+                else
+                {
+                    <div class="alert">
+                        <h3>No requests found</h3>
+                        <p>It looks like you haven't made any item requests. Is there anything you'd like to borrow that is currently not on the platform?</p>
+                        <p>Making a request will let everyone on the platform know that you're looking for a specific item to borrow.</p>
+                        <a href="/" class="btn btn-default">Make a request</a>
+                    </div>
+                }
+            </div>
+            <div class="col-xs-2">
+                @Html.Partial("~/Views/Shared/Dashboard/_Menu.cshtml", Model)
+
+            </div>
+        </div>
+    </div>
+</div>

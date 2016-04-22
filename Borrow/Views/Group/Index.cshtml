@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Borentra: Official Social Group Registration";
+    ViewBag.Description = "Have an idea for a Social Group on Borentra? ";
+    Layout = "~/Views/Shared/Layouts/_HomepageLayout.cshtml";
+    ViewBag.SelectedTheme = ViewBag.Theme ?? "company";
+}
+
+<div class="container">
+    <div class="hero">
+        <div class="container">
+            <h1>Create your own social group?</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    &nbsp;
+                </div>
+                <div class="col-md-6">
+                    <div class="home-message">
+                        <div class="message-sheet"></div>
+                        <div class="message-gutter">
+                            <form method="post" action="/group">
+                                <input type="hidden" name="email" id="email" value="known-user@borentra.com" required />
+                                <h4><strong>Group</strong></h4>
+                                <input class="form-control" type="text" value="@ViewBag.Theme" name="name" id="name" required />
+                                <br />
+                                <button class="btn btn-success" title="Beta Sign-Up">Beta Sign-Up</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="home-borentra-explanation row" style="background-color:white; opacity:.8">
+                <div class="col-md-4">
+                    <h3>Social</h3>
+                    <p>Create a social club for people who you want in your very own community.</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Shared Interests</h3>
+                    <p>See what people are doing who share your interests.</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>How does it work?</h3>
+                    <p>Create a group profile, and start inviting members to your personal community.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

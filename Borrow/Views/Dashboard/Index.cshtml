@@ -1,0 +1,43 @@
+﻿@using Borentra
+@using System
+
+@model Borentra.Models.DashboardInfo<Borentra.Models.MyProfile>
+@{
+    ViewBag.Title = "My Dashboard | Borentra: Borrow, Rent, Trade";
+    ViewBag.Theme = Model.Info.Theme;
+    ViewBag.ThumbnailWidth = "50";
+    Layout = "~/Views/Shared/Layouts/_LoggedInLayout.cshtml";
+}
+<div class="borentra-view dashboard dashboard-home">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-10">
+                <div class="row">
+                    <div class="col-md-8">
+                        @if ((Model.Info.Latitude == 0) || (Model.Info.Longitude == 0))
+                        {
+                            <div class="alert alert-info">
+                                <p>Please update your location settings so that we can provide better search results on items, requests, and nearby people to borrow and trade with!</p>
+                                <p><a href="/dashboard/settings"><span class="glyphicon glyphicon-arrow-right"></span> Update your profile</a>!</p>
+                            </div>
+                        }
+                        <div class="col-md-4 visible-xs">
+                            @Html.Partial("~/Views/Shared/Dashboard/_QuickStart.cshtml", Model.Info)
+                        </div>
+                        @Html.Partial("Dashboard/_MultiAddWidget")
+                        @Html.Partial("~/Views/Shared/Dashboard/_Activity.cshtml")
+                    </div>
+                    <div class="col-md-4 visible-lg">
+                        @Html.Partial("~/Views/Shared/Dashboard/_QuickStart.cshtml", Model.Info)
+                    </div>
+                    <div class="col-md-4">
+                        @Html.Partial("~/Views/Shared/Dashboard/_Actionable.cshtml", Model.Info)
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                @Html.Partial("~/Views/Shared/Dashboard/_Menu.cshtml", Model)
+            </div>
+        </div>
+    </div>
+</div>

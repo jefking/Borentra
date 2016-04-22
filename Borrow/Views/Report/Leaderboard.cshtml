@@ -1,0 +1,44 @@
+﻿@using Borentra
+
+@model Borentra.Models.LeaderBoard
+@{
+    ViewBag.Title = "Our Leaderboard";
+    ViewBag.Description = "Outstanding community leaders, who have achieved enlightenment!";
+    Layout = "~/Views/Shared/Layouts/_ContentLayout.cshtml";
+}
+<section class="main-content">
+    <div class="container marketing-content">
+        <h1>Karma</h1>
+        <h2>in Indian religions is the concept of "action" or "deed", understood as that which causes the entire cycle of cause and effect.</h2>
+        <div class="row">
+            @if (null != Model.World)
+            {
+                <h2>World Leaders</h2>
+                foreach (var leader in Model.World)
+                {
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <a href="/profile/@leader.Key"><img src="@leader.Picture?width=125&height=125" alt="@leader.DisplayName" class="img-rounded" /></a>
+                            <h3>@leader.DisplayName</h3>
+                            <h4>Karma @leader.Points</h4>
+                        </div>
+                    </div>
+                }
+            }
+            @if (null != Model.Community)
+            {
+                <h2>Community Leaders</h2>
+                foreach (var leader in Model.Community)
+                {
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <a href="/profile/@leader.Key"><img src="@leader.Picture?width=125&height=125" alt="@leader.DisplayName" class="img-rounded" /></a>
+                            <h3>@leader.DisplayName</h3>
+                            <h4>Karma @leader.Points</h4>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>

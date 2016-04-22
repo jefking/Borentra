@@ -1,0 +1,29 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+Hi <#=User.Name#>,
+<p>
+	Sorry your rent request has been <b>Declined</b>
+</p>
+<p>
+	<a href="http://www.borentra.com/profile/<#=Friend.Key#>?utm_campaign=email_engadgement&utm_medium=email&utm_source=borrow_declined&utm_content=accepter"><#=Friend.Name#></a>
+	is currently unable to lend you their: <a href="http://www.borentra.com/offer/<#=Rent.ItemKey#>?utm_campaign=email_engadgement&utm_medium=email&utm_source=borrow_declined&utm_content=item"><#=Rent.Item.Title#></a>.</p>
+	<br />
+<img src="http://graph.facebook.com/<#=Friend.FacebookId#>/picture" />
+<img src="http://cdn.borentra.com<#=Rent.Item.PrimaryImageThumbnail#>" />
+<br />
+<hr />
+<#
+	foreach (var comment in Comments)
+	{
+#>
+	<h3><#=comment.UserName#> Says:</h3>
+	<p>
+		<#=comment.Comment#>
+	</p>
+<#
+	}
+#>

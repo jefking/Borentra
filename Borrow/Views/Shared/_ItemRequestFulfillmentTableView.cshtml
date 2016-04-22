@@ -1,0 +1,63 @@
+﻿@using System.Linq;
+@using Borentra;
+
+@model IEnumerable<Borentra.Models.ItemRequestFulfill>
+<table class="table">
+  <tbody>
+    @foreach (var fulfillment in Model)
+    {
+      <tr>
+        <td class="span9">
+          <div class="media">
+            <div class="media-body">
+              <h4 class="media-heading"><a href="/wanted/@fulfillment.Key">@fulfillment.Title</a></h4>
+              <div class="media">
+                @if (fulfillment.IsMine)
+                {
+                  <a class="pull-left" href="/profile/@fulfillment.OwnerKey" title="You are fulfilling @fulfillment.OwnerDisplayName's want.">
+                    <img src="@fulfillment.OwnerPicture?width=30&height=30" class="img-owner img-rounded" /></a>
+                  <div class="media-body">
+                    <h5 class="media-heading"><a href="/profile/@fulfillment.OwnerKey">@fulfillment.OwnerDisplayName</a></h5>
+                    <p class="muted"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;@fulfillment.OwnerLocation</p>
+                    <p class="text-success"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;@fulfillment.Status</p>
+                  </div>
+                }
+                else
+                {
+                  <a class="pull-left" href="/profile/@fulfillment.RequesterKey">
+                    <img src="@fulfillment.RequesterPicture?width=30&height=30" class="img-requester img-rounded" />
+                  </a>
+                  <div class="media-body">
+                    <h5 class="media-heading"><a href="/profile/@fulfillment.RequesterKey">@fulfillment.RequesterDisplayName</a></h5>
+                    <p class="muted"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;@fulfillment.RequesterLocation</p>
+                    <p class="text-success"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;@fulfillment.Status</p>
+                  </div>
+                }
+
+              </div>
+              @if (fulfillment.IsMine)
+              {
+                switch (fulfillment.Status)
+                {
+                  case Borentra.Models.RequestStatus.Pending:
+                <a href="#" class="btn btn-danger btn-request-fulfill-delete" title="Cancel Fulfillment" data-identifier="@fulfillment.Identifier"><span class="glyphicon glyphicon-remove"></span>&nbsp; Cancel Fulfillment</a>
+                    break;
+                }
+              }
+              else
+              {
+                switch (fulfillment.Status)
+                {
+                  case Borentra.Models.RequestStatus.Pending:
+                <a href="#" class="btn btn-success btn-small btn-request-fulfill-accept" title="Accept Fulfillment" data-identifier="@fulfillment.Identifier"><span class="glyphicon glyphicon-ok"></span>Accept</a> 
+                <a href="#" class="btn btn-danger btn-small btn-request-fulfill-decline" title="Decline Fulfillment" data-identifier="@fulfillment.Identifier"><span class="glyphicon glyphicon-remove"></span>Decline</a>
+                    break;
+                }
+              }
+            </div>
+          </div>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

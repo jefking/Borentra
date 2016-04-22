@@ -1,0 +1,34 @@
+﻿﻿﻿@model IList<Borentra.Models.Profile>
+
+@if (0 < Model.Count)
+{
+    <ul class="list-profiles media-list">
+        @foreach (var profile in Model)
+        {
+            <li class="list-profile-card media">
+                <a class="pull-left" href="/profile/@profile.Key" title="@profile.Name">
+                    <img class="media-object img-rounded" src="@profile.Picture?width=50&height=50" width="50" height="50" alt="@profile.Name" />
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <a href="/profile/@profile.Key" title="@profile.Name">
+                            @if (profile.IsFriend)
+                            {
+                                <span class="glyphicon glyphicon-globe" title="Friend"></span>
+                            }
+                            else
+                            {
+                                <span class="glyphicon glyphicon-map-marker" title="Nearby"></span>
+                            }
+                            @profile.Name
+                        </a>
+                    </h4>
+                    @if (!string.IsNullOrWhiteSpace(profile.Location))
+                    {
+                        <p><span class="glyphicon glyphicon-map-marker"></span>&nbsp;@profile.Location</p>
+                    }
+                </div>
+            </li>
+       }
+    </ul>
+}

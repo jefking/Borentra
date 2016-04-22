@@ -1,0 +1,37 @@
+﻿@using Borentra;
+
+<div class="component quick-add-component" data-theme="@ViewBag.Theme">
+    <div class="loading-screen hidden" data-bind="visible: $root.UILoading() == true, css: { hidden: $root.UILoading() == false}"></div>
+
+    <div class="alert alert-success hidden" data-bind="visible: $root.UIMessages().length > 0, css: { hidden: false }">
+
+        <ul data-bind="foreach: $root.UIMessages" class="list-unstyled">
+            <li data-bind="html: $data.message"></li>
+        </ul>
+    </div>
+
+    <div class="alert alert-danger hidden" data-bind="visible: $root.UIErrors().length > 0, css: { hidden: false }">
+        <ul data-bind="foreach: $root.UIErrors" class="list-unstyled">
+            <li data-bind="text: $data.message"></li>
+        </ul>
+    </div>
+
+    <h4 class="hidden" data-bind="css: { hidden: false }">How about these?</h4>
+    <ul class="media-list quick-list list-unstyled hidden" data-bind="foreach: $root.Results, css: { hidden: false }">
+        <li class="media">
+            <span class="pull-left" data-bind="attr: { title:  $data.Name}">
+                <img src="@Url.ContentCdn("~/assets/img/ui/thumbnail.png")" class="media-object img-responsive" width="@ViewBag.ThumbnailWidth" data-bind="attr: { src: $data.ThumbnailUrl() }" />
+            </span>
+            <div class="media-body">
+                <h5 data-bind="text: $data.Name"></h5>
+                <div class="row quick-list-controls">
+                    <div class="col-xs-12">
+                        <button data-bind="click: $root.ExecuteAddItem" class="btn btn-sm btn-default" onclick="_gaq.push(['_trackEvent', 'Interest', '@ViewBag.Theme', 'Offer']);"><span class="glyphicon glyphicon-list"></span>&nbsp;Have It!</button>
+                        <button data-bind="click: $root.ExecuteAddRequest" class="btn btn-sm btn-default" onclick="_gaq.push(['_trackEvent', 'Interest', '@ViewBag.Theme', 'Want']);"><span class="glyphicon glyphicon-hand-up"></span>&nbsp;Want It!</button>
+                        <a href="#" class="muted" data-bind="click: $root.ExecuteSkip" onclick="_gaq.push(['_trackEvent', 'Interest', '@ViewBag.Theme', 'Skip']);">Skip</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,67 @@
+.component.news-feed-component
+  min-height: 300px
+  .loading-screen
+    background-position: center 100px
+  ul > li.media
+    margin-bottom: 20px
+    > .gutter
+      margin: 8px 0 12px 0
+    .wrapper
+      padding: 10px
+    a.pull-left
+      margin-right: 5px
+    .news-feed-item-body
+      padding-left: 0
+      background: #fff
+      border: 1px solid #d3d6db
+      border-radius: 5px
+
+      .user-name
+        font-weight: bold
+        color: #232B37
+    .news-feed-item-footer
+      background: #f6f7f8
+      border-top: 1px solid #ebebeb
+      .people-like-this
+        border-top: 1px solid #ebebeb
+        border-bottom: 1px solid #ebebeb
+        p
+          margin: 0 0 0 10px
+      form
+        margin: 5px
+    .btn-favorite, .btn-comment
+      color: #232937
+      &:hover
+        color: #2793e6
+        .glyphicon-heart
+          color: #2793e6
+    .btn-favorite
+      color: #232937
+      .btn-label
+        top: -1px
+        position: relative
+        &.active
+          color: #2793e6
+    .glyphicon-heart 
+      -webkit-animation-duration: .5s
+      -webkit-animation-delay: 0
+      -webkit-animation-iteration-count: 1
+      color: #232937
+      font-size: 14px
+      top: 2px
+      &.active
+        color: #2793e6
+    .activity-comments
+      padding: 0 10px
+      li
+        border: none
+        > .gutter
+          margin: 5px 0px
+          span
+            color: #4E5665
+            font-size: 12px
+
+  .btn-link-to-activity
+    color: #adb2bb
+
+ 

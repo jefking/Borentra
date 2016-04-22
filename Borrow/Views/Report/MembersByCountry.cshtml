@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Members By Country";
+    ViewBag.Description = "Members by country as a heat map. Borrow what you need, when you need it; from your family, friends & community!";
+    Layout = "~/Views/Shared/Layouts/_ContentLayout.cshtml";
+}
+<section class="main-content">
+    <div class="container marketing-content">
+        <div class="row">
+            <div class="col-xs-10">
+                <div class="page-header">
+                    <h1>Members Worldwide</h1>
+                </div>
+                @Html.Partial("~/Views/Shared/Reports/_HeatMap.cshtml")
+            </div>
+        </div>
+    </div>
+</section>

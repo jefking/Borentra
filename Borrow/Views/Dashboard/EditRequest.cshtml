@@ -1,0 +1,61 @@
+﻿@using Borentra;
+
+@model Borentra.Models.DashboardInfo<Borentra.Models.ItemRequest>
+@{
+    ViewBag.Title = "Edit Item Request";
+}
+
+<div class="dashboard dashboard-edit-item-request">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="page-header">
+                    <h1><span class="glyphicon glyphicon-pencil"></span>&nbsp; Edit Request</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="container">
+        <div class="col-xs-10">
+            <form id="quick-request-item-edit-form">
+                <div class="row">
+                    <input type="hidden" name="request-identifier" id="request-identifier" value="@Model.Info.Identifier" />
+                    <input type="text" id="title" class="form-control" value="@Model.Info.Title" placeholder="What are you looking for? (required)" maxlength="256" required>
+                    <textarea class="form-control" id="description" placeholder="Do you have additional information on what you are looking for? (optional)" rows="5" maxlength="1024">@Model.Info.Description</textarea>
+                    <div class="hide alert alert-success">
+                        <p>Successfully updated your item request! We'll be redirecting you in a few seconds...</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <span>
+                        Borrow
+                        <input type="checkbox" class="form-group" checked id="for-share" name="for-share" title="To Lend" />
+                    </span>
+                    <span>
+                        Rent
+                        <input type="checkbox" class="form-group" id="for-rent" name="for-rent" title="To Rent" />
+                    </span>
+                    <span>
+                        Trade
+                        <input type="checkbox" class="form-group" id="for-trade" name="for-trade" title="To Trade" />
+                    </span>
+                    <span>
+                        Free
+                        <input type="checkbox" class="form-group " checked id="for-free" name="for-free" title="For Free" />
+                    </span>
+                </div>
+                <a href="#" class="btn btn-sm btn-danger btn-dialog-delete-item-request2" title="Delete" onclick="_gaq.push(['_trackEvent', 'Dialogue', 'Request', 'Delete']);">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+                <a href="#" class="btn btn-sm btn-danger btn-dialog-delete-item-request2" title="Delete" onclick="_gaq.push(['_trackEvent', 'Dialogue', 'Request', 'Delete']);">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+                <button type="submit" class="btn btn-primary btn-success" data-loading-text="Working it! Please wait!" onclick="_gaq.push(['_trackEvent', 'Dialogue', 'Request', 'Update']);">Save</button>
+            </form>
+        </div>
+        <div class="col-xs-2">
+            @Html.Partial("~/Views/Shared/Dashboard/_Menu.cshtml", Model)
+        </div>
+    </div>
+</div>

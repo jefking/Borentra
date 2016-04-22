@@ -1,0 +1,69 @@
+﻿@model Borentra.Models.Item
+
+@switch (Model.SharePrivacyLevel)
+{
+    case Borentra.DataAccessLayer.PrivacyLevel.Friends:
+        if (Model.IsFriend || Model.IsMine)
+        {
+            <span>&nbsp;<span class="glyphicon glyphicon-refresh"></span>Lend with Friends</span>
+        }
+        break;
+    case Borentra.DataAccessLayer.PrivacyLevel.Community:
+    <span>&nbsp;<span class="glyphicon glyphicon-refresh"></span>Lend with Community</span>
+        break;
+    case Borentra.DataAccessLayer.PrivacyLevel.Public:
+    <span>&nbsp;<span class="glyphicon glyphicon-refresh"></span><span itemprop="offers" itemscope itemtype="http://schema.org/Offer">Lend</span></span>
+        break;
+}
+@switch (Model.RentPrivacyLevel)
+{
+    case Borentra.DataAccessLayer.PrivacyLevel.Friends:
+        if (Model.IsFriend || Model.IsMine)
+        {
+            <span>&nbsp;<span class="glyphicon glyphicon-usd"></span>Rent with friends <small>($@Model.Price.ToString("0.00") per day)</small></span>
+        }
+        break;
+    case Borentra.DataAccessLayer.PrivacyLevel.Community:
+        if (User.Identity.IsAuthenticated)
+        {
+            <span>&nbsp;<span class="glyphicon glyphicon-usd"></span>Rent <small>($@Model.Price.ToString("0.00") per day)</small></span>
+        }
+        else
+        {
+            <span>&nbsp;<span class="glyphicon glyphicon-usd"></span><span itemprop="offers" itemscope itemtype="http://schema.org/Offer">Rent</span></span>
+        }
+        break;
+    case Borentra.DataAccessLayer.PrivacyLevel.Public:
+    <span>&nbsp;<span class="glyphicon glyphicon-usd"></span><span itemprop="offers" itemscope itemtype="http://schema.org/Offer">Rent<small>(<span itemprop="price">$@Model.Price.ToString("0.00") per day</span>)</small></span></span>
+        break;
+}
+@switch (Model.TradePrivacyLevel)
+{
+    case Borentra.DataAccessLayer.PrivacyLevel.Friends:
+        if (Model.IsFriend || Model.IsMine)
+        {
+            <span>&nbsp;<span class="glyphicon glyphicon-retweet"></span>Trade with Friends</span>
+        }
+        break;
+    case Borentra.DataAccessLayer.PrivacyLevel.Community:
+    <span>&nbsp;<span class="glyphicon glyphicon-retweet"></span>Trade with Community</span>
+        break;
+    case Borentra.DataAccessLayer.PrivacyLevel.Public:
+    <span>&nbsp;<span class="glyphicon glyphicon-retweet"></span><span itemprop="offers" itemscope itemtype="http://schema.org/Offer">Trade</span></span>
+        break;
+}
+@switch (Model.FreePrivacyLevel)
+{
+    case Borentra.DataAccessLayer.PrivacyLevel.Friends:
+        if (Model.IsFriend || Model.IsMine)
+        {
+            <span>&nbsp;<span class="glyphicon glyphicon-gift"></span>Give to Friends</span>
+        }
+        break;
+    case Borentra.DataAccessLayer.PrivacyLevel.Community:
+    <span>&nbsp;<span class="glyphicon glyphicon-gift"></span>Give to Community</span>
+        break;
+    case Borentra.DataAccessLayer.PrivacyLevel.Public:
+    <span>&nbsp;<span class="glyphicon glyphicon-gift"></span><span itemprop="offers" itemscope itemtype="http://schema.org/Offer">Give</span></span>
+        break;
+}

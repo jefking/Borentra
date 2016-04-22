@@ -1,0 +1,59 @@
+﻿@using Borentra;
+
+@model Borentra.Models.ItemShare
+
+<div class="container home-content">
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well text-center">
+                <h4>
+                    Borentra is a community which enables its members to borrow, rent, and trade their belongings easily.<br />
+                </h4>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="home-borentra-explanation row">
+        <div class="col-md-4">
+            <h3>Local Community</h3>
+            <p>Sharing your power tools or sugar has never been easier. Don't you want to help your friends and community out?</p>
+        </div>
+        <div class="col-md-4">
+            <h3>Safely</h3>
+            <p>We enable communities to share; we encourage friends to connect with each other, write reviews on borrowed belongings, and invite other friends to join!</p>
+        </div>
+        <div class="col-md-4">
+            <h3>How does it work?</h3>
+            <p>Connect to your existing Facebook community, make offers or requests. Quickly and easily share with your friends and local community.</p>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-xs-8">
+            @if (null != Model)
+            {
+                <div class="home-activity row">
+                    <div class="col-xs-3">
+                        <img src="@Model.OwnerPicture?width=150&height=150" class="img-rounded img-responsive pull-right" />
+                    </div>
+                    <div class="col-xs-1">
+                        <p class="text-center"><h4>Lent</h4></p>
+                    </div>
+                    <div class="col-xs-3">
+                        <img src="@Url.ContentCdn("~" + Model.PrimaryImageThumbnail, true)" class="img-rounded img-responsive" />
+                    </div>
+                    <div class="col-xs-1">
+                        <p class="text-center"><h4>To</h4></p>
+                    </div>
+                    <div class="col-xs-3 text-center">
+                        <img src="@Model.RequesterPicture?width=150&height=150" class="img-rounded img-responsive" />
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-xs-4">
+            <div class="fb-activity" data-app-id="315854161864272" data-site="http://www.borentra.com" data-action="likes" data-width="100%" data-colorscheme="light" data-header="false"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Borentra: Official Company Registration";
+    ViewBag.Description = "Company Registration";
+    Layout = "~/Views/Shared/Layouts/_HomepageLayout.cshtml";
+    ViewBag.SelectedTheme = "company";
+}
+<div class="container">
+    <div class="hero">
+        <div class="container">
+            <h1>Looking for a new rental market?</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    &nbsp;
+                </div>
+                <div class="col-md-6">
+                    <div class="home-message">
+                        <div class="message-sheet"></div>
+                        <div class="message-gutter">
+                            <form method="post" action="/company">
+                                <h4><strong>Email</strong></h4>
+                                <input class="form-control" type="email" name="email" id="email" required />
+                                <br />
+                                <h4><strong>Company</strong></h4>
+                                <input class="form-control" type="text" name="name" id="name" required />
+                                <br />
+                                <button class="btn btn-success" title="Beta Sign-Up">Beta Sign-Up</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="home-borentra-explanation row" style="background-color:white; opacity:.8">
+                <div class="col-md-4">
+                    <h3>Product Rental</h3>
+                    <p>Attract new customers who are already searching for the products you rent!</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Asset Tracking</h3>
+                    <p>Nothing to install, you are up and running in minutes. See who has what and when it will be returned.</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>How does it work?</h3>
+                    <p>Create a company profile, and add your inventory. It is really that simple!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

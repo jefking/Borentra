@@ -1,0 +1,106 @@
+﻿@using Borentra;
+@{
+    ViewBag.Title = "Need a little help? | Borentra: Borrow, Rent, Trade.";
+    ViewBag.Description = "Here is a little help for you, if you have questions contact us. Borrow what you need, when you need it; from your family, friends & community!";
+
+    Layout = "~/Views/Shared/Layouts/_ContentLayout.cshtml";
+    ViewBag.DisableJavaScript = true;
+}
+
+<section class="main-content">
+    <div class="container marketing-content">
+        <h1>Help Section</h1>
+        <div class="content-container">
+            <div class="gutter">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h3>How to add offers?</h3>
+                        <ol>
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <li>Sign in</li>
+                            }
+                            <li>Use the Multi Add Widget on the Dashboard by clicking the <strong>I Have!</strong> tab</li>
+                            <li>Begin by typing an item you have (ex. Playstation 3)</li>
+                            <li><em>Optional:</em> add a photo via Mobile Phone hitting the <span class="glyphicon glyphicon-camera"></span> icon on desktop or mobile</li>
+                            <li><em>Optional:</em> add a photo via Bing Image Search hitting the <span class="glyphicon glyphicon-picture"></span> icon on desktop or mobile</li>
+                            <li><em>Optional:</em> add hash tags to make it easily searchable</li>
+                            <li>Use the <strong>Submit Request</strong> button</li>
+                        </ol>
+
+                        <h3>How to make requests (wanted)?</h3>
+                        <ol>
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <li>Sign in</li>
+                            }
+                            <li>Use the Multi Add Widget on the Dashboard by clicking the <strong>I Want!</strong> tab</li>
+                            <li>Begin by typing an item you want (ex. XBOX360)</li>
+                            <li><em>Optional:</em> add a photo via hitting the <span class="glyphicon glyphicon-picture"></span> icon on desktop or mobile</li>
+                            <li><em>Optional:</em> add hash tags to make it easily searchable</li>
+                            <li>Use the <strong>Submit Request</strong> button</li>
+                        </ol>
+
+                        <h3>How do I use the Quick Add Widget?</h3>
+                        <ol>
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <li>Sign in</li>
+                            }
+                            <li>View the list of 5 offers on the side</li>
+                            <li>Use <strong>I want!</strong> or <strong>I have!</strong> to add to your collection or requests</li>
+                            <li><em>Optional:</em> Use the <em>Skip</em> button to paginate through more offers in the Quick Add Widget</li>
+                        </ol>
+
+                        <h2>How to borrow from others?</h2>
+                        <ol>
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <li>Sign in and search for offers</li>
+                            }
+                            else
+                            {
+                                <li>Search for offers</li>
+                            }
+                            <li>View an item</li>
+                            <li>Use the <strong><span class="glyphicon glyphicon-refresh"></span>Borrow</strong> button</li>
+                            <li>Get notified via email when the owner of the item accepts or rejects the borrow request</li>
+                            <li>Meet with the owner of the item</li>
+                        </ol>
+
+                        <h3>How to trade with others?</h3>
+
+                        <ol>
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <li>Sign in and search for offers</li>
+                            }
+                            else
+                            {
+                                <li>Search for offers</li>
+                            }
+                            <li>Use the <strong><span class="glyphicon glyphicon-retweet"></span>Trade</strong> button</li>
+                            <li>Select your own offers you'd like to trade for their offers (you may select more of their items too)</li>
+                            <li>Use the <strong>Trade Request</strong> button</li>
+                            <li>Meet with the person you are trading with once the person has accepted the trade request</li>
+                        </ol>
+
+                        <div class="well">
+                            <h4>Additional Resources</h4>
+                            <a href="/help/faq" title="Frequently Asked Questions">View our FAQ</a>
+                            <h4>Failing that:</h4>
+                            <a href="/home/contact" title="Contact Us">Contact Us</a>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+

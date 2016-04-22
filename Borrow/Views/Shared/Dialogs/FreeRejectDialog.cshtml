@@ -1,0 +1,32 @@
+﻿<div id="dialogFreeReject" class="modal fade" tabindex="-1" role="dialog">
+  <form id="reject-free-form">
+    <input type="hidden" id="identifier" name="identifier" value="" />
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3>Not giving your item away?</h3>
+    </div>
+    <div class="modal-body">
+      <section class="comments"></section>
+      <div class="row-fluid">
+        <h4>Optional Comment</h4>
+          <textarea class="span12" style="width:100%;" id="comment" placeholder="ex. Sorry, but I already have given it to someone else!" rows="5" maxlength="2000"></textarea>
+      </div>
+    </div>
+    <script type="text/x-handlebars-template" class="record">
+      {{#each comments}}
+            <div class="media">
+              <a class="pull-left" href="#">
+                <img class="media-object" src="{{UserPicture}}?width=30&height=30">
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading">{{UserName}}</h4>
+                {{Comment}}
+              </div>
+            </div>
+      {{/each}}
+    </script>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary" data-loading-text="Working it! Please wait!" onclick="_gaq.push(['_trackEvent', 'Dialogue', 'Free', 'Rejected']);">Confirm</button>
+    </div>
+  </form>
+</div>

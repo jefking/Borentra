@@ -1,0 +1,42 @@
+﻿<div id="dialogItemRequestEdit" class="modal fade dialog-request-item-edit" tabindex="-1" role="dialog" aria-labelledby="addDialogModalLabel" aria-hidden="true">
+    <form id="quick-request-item-edit-form">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3>Update your request.</h3>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <input type="hidden" name="request-identifier" id="request-identifier" />
+                <input type="text" id="title" class="form-control" placeholder="What are you looking for? (required)" maxlength="256" required>
+                <textarea class="form-control" id="description" placeholder="Do you have additional information on what you are looking for? (optional)" rows="5" maxlength="1024"></textarea>
+                <div class="hide alert alert-success">
+                    <p>Successfully updated your item request! We'll be redirecting you in a few seconds...</p>
+                </div>
+            </div>
+            <div class="row">
+                <span>
+                    Borrow
+                    <input type="checkbox" class="form-group" checked id="for-share" name="for-share" title="To Lend" />
+                </span>
+                <span>
+                    Rent
+                    <input type="checkbox" class="form-group" id="for-rent" name="for-rent" title="To Rent" />
+                </span>
+                <span>
+                    Trade
+                    <input type="checkbox" class="form-group" id="for-trade" name="for-trade" title="To Trade" />
+                </span>
+                <span>
+                    Free
+                    <input type="checkbox" class="form-group " checked id="for-free" name="for-free" title="For Free" />
+                </span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn btn-sm btn-danger btn-dialog-delete-item-request2" title="Delete" onclick="_gaq.push(['_trackEvent', 'Dialogue', 'Request', 'Delete']);">
+                <span class="glyphicon glyphicon-remove"></span>
+            </a>
+            <button type="submit" class="btn btn-primary btn-success" data-loading-text="Working it! Please wait!" onclick="_gaq.push(['_trackEvent', 'Dialogue', 'Request', 'Update']);">Save</button>
+        </div>
+    </form>
+</div>

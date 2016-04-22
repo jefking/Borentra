@@ -1,0 +1,37 @@
+﻿@model Borentra.Models.DashboardInfo<Borentra.Models.History>
+@{
+    ViewBag.Title = "Your History | Borentra: Borrow, Rent, Trade";
+    Layout = "~/Views/Shared/Layouts/_LoggedInLayout.cshtml";
+}
+
+<div class="borentra-view dashboard dashboard-history">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h1><span class="glyphicon glyphicon-calendar"></span>&nbsp; Your History <small>@Model.Info.All.Count()</small></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-10">
+                @if (null != Model.Info.All && 0 < Model.Info.All.Count())
+                {
+                    @Html.Partial("~/Views/Shared/Dashboard/_OfferHistory.cshtml", Model.Info.All)
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        <h4><span class="glyphicon glyphicon-info-sign"></span>&nbsp;No history found; get sharing!</h4>
+                    </div>
+                }
+            </div>
+            <div class="col-xs-2">
+                @Html.Partial("~/Views/Shared/Dashboard/_Menu.cshtml", Model)
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+﻿@using System.Linq;
+@using Borentra;
+
+@model IEnumerable<Borentra.Models.ItemFree>
+<table class="table">
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="span9">
+                    <div class="media">
+                        @if (!string.IsNullOrWhiteSpace(item.PrimaryImageThumbnail))
+                        {
+                            <a class="pull-left" href="/offer/@item.ItemKey" title="View Item">
+                                <img class="media-object img-rounded"  src="@Url.ContentCdn("~" + item.PrimaryImageThumbnail, true)" />
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="pull-left" href="/offer/@item.ItemKey" title="View Item Details">
+                                <img class="media-object img-rounded" src="@Url.ContentCdn("~/assets/img/ui/thumbnail.png")" />
+                            </a>
+                        }
+                        <div class="media-body">
+                            <h4 class="media-heading"><a href="/offer/@item.ItemKey">@item.ItemTitle</a></h4>
+                            <div class="media">
+                                @if (item.Item.IsMine)
+                                {
+                                    <a class="pull-left" href="/Profile/@item.RequesterKey">
+                                        <img src="@item.RequesterPicture?width=30&height=30" class="img-requester img-rounded" />
+                                    </a>
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><a href="/profile/@item.RequesterKey">@item.RequesterDisplayName</a></h5>
+                                        <p class="muted"><span class="glyphicon glyphicon-map-marker"></span>@item.RequesterLocation</p>
+
+                                    </div>
+                                }
+                                else
+                                {
+                                    <a class="pull-left" href="/profile/@item.OwnerKey" title="You are !!! this item from @item.OwnerDisplayName.">
+                                        <img src="@item.OwnerPicture?width=30&height=30" class="img-owner img-rounded" /></a>
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><a href="/profile/@item.OwnerKey">@item.OwnerDisplayName</a></h5>
+                                        <p class="muted"><span class="glyphicon glyphicon-map-marker"></span>@item.OwnerLocation</p>
+                                    </div>
+                                }
+
+                                @if (item.Item.IsMine)
+                                {
+                                    switch (item.Status)
+                                    {
+                                        case Borentra.Models.FreeStatus.Pending:
+                                    <a href="#" class="btn btn-success btn-free-accept input-block-level" title="Lend" data-identifier="@item.Identifier" onclick="_gaq.push(['_trackEvent', 'Item', 'Free', 'Give']);"><span class="glyphicon glyphicon-ok"></span>&nbsp; Give</a><br />
+                                    <a href="#" class="btn btn-danger btn-free-reject input-block-level" title="Decline" data-identifier="@item.Identifier" onclick="_gaq.push(['_trackEvent', 'Item', 'Free', 'Decline']);"><span class="glyphicon glyphicon-remove"></span>&nbsp; Decline</a>
+                                            break;
+                                    }
+                                }
+                                else
+                                {
+                                    switch (item.Status)
+                                    {
+                                        case Borentra.Models.FreeStatus.Pending:
+                                    <a href="#" class="btn btn-danger btn-small btn-free-delete" title="Cancel Request" data-identifier="@item.Identifier"><span class="glyphicon glyphicon-remove"></span>&nbsp; Cancel Request</a>
+                                            break;
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

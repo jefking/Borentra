@@ -1,0 +1,66 @@
+﻿﻿@model IEnumerable<Borentra.DataAccessLayer.Admin.ProfileReport>
+
+@if (0 < Model.Count())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Stats</th>
+                <th>Identifier</th>
+                <th>Commands</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var profile in Model)
+            {
+                <tr>
+                    <td style="width: 60px;">
+                        <a href="/profile/@profile.Key" title="@profile.Name" target="_blank">
+                            <img src="@profile.Picture?width=100&height=100" width="100" height="100" class="img-rounded" />
+                        </a>
+                    </td>
+                    <td nowrap>
+                        <a href="/profile/@profile.Key" target="_blank">@profile.Name</a>
+                        <br />
+                        @profile.CreatedOn.ToShortDateString()
+                        <br />
+                        @profile.Location
+                        <br />
+                        Privacy: @profile.PrivacyLevel.ToString()
+                        <br />
+                        Theme: @profile.LandingTheme
+                        <br />
+                        Radius: @profile.SearchRadius
+                    </td>
+                    <td>
+                        <a href="/offer?user=@profile.Identifier" target="_blank">Offers</a>: @profile.ItemCount
+                        <br />
+                        <a href="/wanted?user=@profile.Identifier" target="_blank">Requests</a>: @profile.ItemRequestCount
+                        <br />
+                        Share: @profile.LendCount / @profile.BorrowCount
+                        <br />
+                        Free: @profile.GiveCount / @profile.RecieveCount
+                        <br /> 
+                        Trade: @profile.TradeCount
+                        <br />
+                        Friends: @profile.FriendCount
+                        <br />
+                        Nearby: @profile.MembersNearbyCount
+                    </td>
+                    <td>
+                        <input type="text" readonly value="@profile.Identifier" class="form-control" onclick="this.select()"/>
+                    </td>
+                    <td>
+                        <ul class="list-unstyled">
+                            <li><a href="/admin/users?id=@profile.Identifier" class="btn btn-default"><span class="glyphicon glyphicon-import"></span>&nbsp; Import Friends</a></li>
+                            <li><a href="/api/Conversation/Save" class="btn btn-default btn-profile-message" data-user="@profile.Identifier"><span class="glyphicon glyphicon-envelope"></span>&nbsp; Message</a></li>
+                        </ul>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

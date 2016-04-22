@@ -1,0 +1,96 @@
+﻿@using Borentra
+
+@model  Borentra.Models.Thing
+@{
+    var isOffer = Model is Borentra.Models.Item;
+    var isRequest = Model is Borentra.Models.ItemRequest;
+    var offer = Model as Borentra.Models.Item;
+}
+<a href="/profile/@Model.OwnerKey">
+    <img class="img-rounded img-responsive" src="@Model.OwnerPicture?width=50&height=50" title="@Model.OwnerName" />
+</a>
+@if (@Model.IsMine)
+{
+    <h4><a href="/profile/@Model.OwnerKey">@Model.OwnerName</a></h4>
+}
+else if (@Model.IsFriend)
+{
+    <h4><a href="/profile/@Model.OwnerKey">@Model.OwnerName</a>&nbsp;<span class="label label-primary">Your Friend</span></h4>
+}
+<hr />
+@if (!Model.IsMine)
+{
+    <h5>More from @Model.OwnerName.FirstPart()</h5>
+    <ul class="item-operations-menu list-unstyled">
+        <li>
+            @if (isRequest)
+            {
+                <a href="/wanted?&user=@Model.UserIdentifier" class="label label-default"><span class="glyphicon glyphicon-star"></span>&nbsp;Requests</a>
+            }
+            else
+            {
+                <a href="/offer?&user=@Model.UserIdentifier" class="label label-default"><span class="glyphicon glyphicon-star"></span>&nbsp;Offers</a>
+                if (offer.SharePrivacyLevel == Borentra.DataAccessLayer.PrivacyLevel.Public)
+                {
+                    <a href="/share?user=@offer.UserIdentifier" class="label label-default"><span class="glyphicon glyphicon-refresh"></span>Lending</a>
+                }
+                if (offer.RentPrivacyLevel == Borentra.DataAccessLayer.PrivacyLevel.Public)
+                {
+                    <a href="/rent?user=@offer.UserIdentifier" class="label label-default"><span class="glyphicon glyphicon-usd"></span>Renting</a>
+                }
+                if (offer.TradePrivacyLevel == Borentra.DataAccessLayer.PrivacyLevel.Public)
+                {
+                    <a href="/trade?user=@offer.UserIdentifier" class="label label-default"><span class="glyphicon glyphicon-retweet"></span>Trading</a>
+                }
+                if (offer.FreePrivacyLevel == Borentra.DataAccessLayer.PrivacyLevel.Public)
+                {
+                    <a href="/free?user=@offer.UserIdentifier" class="label label-default"><span class="glyphicon glyphicon-gift"></span>Giving</a>
+                }
+            }
+        </li>
+    </ul>
+}
+@if (null != Model.Categories && 0 < Model.Categories.Count())
+{
+    <h5>Tags</h5>
+    foreach (var category in Model.Categories)
+    {
+        if (isRequest)
+        {
+            <a class="label label-default" href="/search/wanted?s=@category&c=tag_cloud">#@category</a>
+        }
+        else
+        {
+            <a class="label label-default" href="/search/offer?s=@category&c=tag_cloud">#@category</a>
+        }
+    }
+    <hr />
+}
+@if (!string.IsNullOrWhiteSpace(Model.Location))
+{
+    <h5><span class="glyphicon glyphicon-map-marker"></span>&nbsp;@Model.Location</h5>
+}
+@if (0 != Model.Longitude && 0 != Model.Latitude)
+{
+    <div style="height: 150px; width: 275px;">
+        <div id='mapDiv' style="position: absolute; width: 275px; height: 150px;"></div>
+    </div>
+    <script type="text/javascript">
+        var mapOptions = {
+            credentials: "AmNdvMfoNaRAhIY1fu-wahvhYKntEeCeMnEQ_hewUU4EGQeKXzyvs-sbrLv2IGz1"
+            , mapTypeId: Microsoft.Maps.MapTypeId.road
+            , center: new Microsoft.Maps.Location(@(Model.Latitude), @(Model.Longitude))
+                , zoom: 13
+                , showScalebar: false
+                , disablePanning: true
+                , disableTouchInput: true
+                , disableUserInput: true
+                , fixedMapPosition: true
+                , showCopyright: false
+                , showDashboard: false
+        }
+        var mapDiv = document.getElementById("mapDiv");
+        var map = new Microsoft.Maps.Map(mapDiv, mapOptions);
+    </script>
+    <hr />
+}

@@ -1,0 +1,71 @@
+﻿@using System.Linq;
+@using Borentra;
+
+@model Borentra.Models.SearchResults<Borentra.Models.ItemRequest>
+@{
+    ViewBag.Title = "Offers that our community are looking for";
+    ViewBag.Description = "Thins that our community is actively looking for, please help if you can.";
+
+    var title = string.IsNullOrWhiteSpace(Model.SearchDisplayText) ? "Wanted Search" : string.Format("Wanted Search: '{0}'", Model.SearchDisplayText);
+    Layout = "~/Views/Shared/Layouts/_LoggedInLayout.cshtml";
+
+    var searchParam = string.IsNullOrWhiteSpace(Model.SearchDisplayText) ? null : string.Format("?s={0}&amp;c=tab", Model.SearchDisplayText);
+}
+<div class="borentra-view">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="page-header">
+                    <h1><span class="glyphicon glyphicon-search"></span>&nbsp;Search Results</h1>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="borentra-view-cta">
+                    <div class="pull-right">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a href="/dashboard/wanted" class="btn btn-default"><span class="glyphicon glyphicon-hand-up"></span>&nbsp;<span class="btn-label">My Wants</span></a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="item-request-view container">
+        <div class="gutter">
+            <div class="row">
+                <div class="col-md-2">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a href="/search/offer@(searchParam)"><span class="glyphicon glyphicon-hand-up"></span>&nbsp;Offers</a>
+                        </li>
+                        <li class="active">
+                            <a href="/search/wanted@(searchParam)"><span class="glyphicon glyphicon-th-list"></span>&nbsp;Wanted</a>
+                        </li>
+                        <li>
+                            <a href="/search/member@(searchParam)"><span class="glyphicon glyphicon-user"></span>&nbsp;Members</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-10">
+                    <div class="page-header">
+                        <h1>Wanted <small>@Model.Manifest.Count()</small></h1>
+                    </div>
+                    @if (null != Model && 0 < Model.Manifest.Count())
+                    {
+                        @Html.Partial("~/Views/Shared/_Things.cshtml", Model.Manifest)
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            <h4><span class="glyphicon glyphicon-info-sign"></span>&nbsp;No results found for <em>"@Model.SearchDisplayText"</em></h4>
+                            <p>Sorry your search query yielded no results. Please try to broaden your search.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

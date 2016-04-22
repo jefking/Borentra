@@ -1,0 +1,48 @@
+.multi-add-component
+  .loading-screen
+    background-color: transparent
+  .nav-tabs
+
+  .tab-content
+    border-left: 1px solid #ddd
+    border-right: 1px solid #ddd
+    border-bottom: 1px solid #ddd
+    padding: 10px
+    font-size: 11px
+  .item-request-description, .item-description
+    font-size: 11px
+    margin-top: 5px
+
+  .item-option-row
+    margin-left: -6px
+    margin-right: -6px
+  .for-trade, .for-free, .for-share, .for-rent
+
+    .item-option 
+      margin-right: 1px
+      padding-left: 0
+      text-align: center
+      span.glyphicon
+        font-size: 200%
+    &.active
+      color: #428bca
+      text-shadow: 0px 0px 5px #aad4d5
+  .upload-photos
+    > input[type=file]
+      opacity: 0
+      z-index: 9999
+      cursor: pointer
+      position: absolute
+      top: 0
+      right: 1px
+      width: 32px
+      height: 100%
+      outline: 1px solid red
+
+
+@media (max-width: 480px)
+  .multi-add-component
+    .nav-tabs
+      font-size: 11px
+      a
+        padding: 5px 8px

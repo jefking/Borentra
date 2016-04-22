@@ -1,0 +1,236 @@
+﻿@using Borentra;
+
+@model Borentra.Models.Item
+
+@if (null != Model)
+{
+    <section class="item-detail-section">
+        <div class="row">
+            <div class="col-md-8">
+                @if (string.IsNullOrWhiteSpace(Model.PrimaryImageLarge))
+                {
+                    <img src="@Url.ContentCdn("~/assets/img/ui/bg-missing-photo.png")" class="img-rounded img-responsive" title="@Model.Title" />
+                }
+                else
+                {
+                    <div class="text-center">
+                        <img itemprop="image" src="@Url.ContentCdn("~" + Model.PrimaryImageLarge, true)" title="@Model.Title" alt="@Model.Title" class="img-rounded img-responsive item-view-thumbnail item-detail-big-image" />
+                    </div>
+                }
+            </div>
+            <div class="col-md-4">
+                <ul class="list-unstyled item-operations-menu">
+                    @if (!this.User.Identity.IsAuthenticated)
+                    {
+                        <li><a href="https://sharingiscaring.accesscontrol.windows.net/v2/wsfederation?wa=wsignin1.0&wtrealm=http://@Request.Url.Authority" class="btn btn-lg btn-success  btn-requires-auth" title="Log in with Facebook" onclick="_gaq.push(['_trackEvent', 'Offsite', 'Registration', 'Item']);"><span class="glyphicon glyphicon-log-in"></span>Log in for access</a></li>
+                    }
+                    else
+                    {
+                        if (!Model.IsMine)
+                        {
+                            switch (Model.SharePrivacyLevel)
+                            {
+                                case Borentra.DataAccessLayer.PrivacyLevel.Friends:
+                                    if (Model.IsFriend)
+                                    {
+                                        <li><a href="#" class="btn btn-lg btn-default btn-borrow" data-id="@Model.Identifier" onclick="_gaq.push(['_trackEvent', 'Item', 'Borrow', 'Request']);"><span class="glyphicon glyphicon-refresh"></span>Request to Borrow</a></li>
+                                    }
+                                    break;
+                                case Borentra.DataAccessLayer.PrivacyLevel.Community:
+                                case Borentra.DataAccessLayer.PrivacyLevel.Public:
+                                <li><a href="#" class="btn btn-lg btn-default btn-borrow" data-id="@Model.Identifier" onclick="_gaq.push(['_trackEvent', 'Item', 'Borrow', 'Request']);"><span class="glyphicon glyphicon-refresh"></span>Request to Borrow</a></li>
+                                    break;
+                            }
+                            if (User.Identity.IsManager())
+                            {
+                                switch (Model.RentPrivacyLevel)
+                                {
+                                    case Borentra.DataAccessLayer.PrivacyLevel.Friends:
+                                        if (Model.IsFriend)
+                                        {
+                                            <li>
+                                                <div class="alert alert-info">
+                                                    <span class="label label-info">Staff Feature</span>
+                                                    <a href="#" class="btn btn-lg btn-default btn-rent" data-id="@Model.Identifier" onclick="_gaq.push(['_trackEvent', 'Item', 'Rent', 'Request']);"><span class="glyphicon glyphicon-usd"></span>@Model.Price.ToString("0.00") Per Day</a>
+                                                </div>
+                                            </li>
+                                        }
+                                        break;
+                                    case Borentra.DataAccessLayer.PrivacyLevel.Community:
+                                    case Borentra.DataAccessLayer.PrivacyLevel.Public:
+                                    <li>
+                                        <div class="alert alert-info">
+                                            <span class="label label-info">Staff Feature</span>
+                                            <a href="#" class="btn btn-lg btn-default btn-rent" data-id="@Model.Identifier" onclick="_gaq.push(['_trackEvent', 'Item', 'Rent', 'Request']);"><span class="glyphicon glyphicon-usd"></span>@Model.Price.ToString("0.00") Per Day</a>
+                                        </div>
+                                    </li>
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                switch (Model.RentPrivacyLevel)
+                                {
+                                    case Borentra.DataAccessLayer.PrivacyLevel.Friends:
+                                        if (Model.IsFriend)
+                                        {
+                                            <li>
+                                                <button class="btn btn-lg btn-default" disabled onclick="_gaq.push(['_trackEvent', 'Item', 'Rent', 'Request']);" title="Rent coming soon!"><span class="glyphicon glyphicon-usd"></span>@Model.Price.ToString("0.00") Per Day <small>(coming soon)</small></button>
+                                            </li>
+                                        }
+                                        break;
+                                    case Borentra.DataAccessLayer.PrivacyLevel.Community:
+                                    case Borentra.DataAccessLayer.PrivacyLevel.Public:
+                                    <li>
+                                        <button class="btn btn-lg btn-default" disabled onclick="_gaq.push(['_trackEvent', 'Item', 'Rent', 'Request']);" title="Rent coming soon!"><span class="glyphicon glyphicon-usd"></span>@Model.Price.ToString("0.00") Per Day <small>(coming soon)</small></button>
+                                    </li>
+                                        break;
+                                }
+                            }
+                            switch (Model.TradePrivacyLevel)
+                            {
+                                case Borentra.DataAccessLayer.PrivacyLevel.Friends:
+                                    if (Model.IsFriend)
+                                    {
+                                        <li><a href="/profile/@Model.OwnerKey/Trade?item=@Model.Identifier" class="btn btn-lg btn-default btn-trade " data-id="@Model.Identifier" onclick="_gaq.push(['_trackEvent', 'Item', 'Trade', 'Request']);"><span class="glyphicon glyphicon-retweet"></span>Request to Trade</a></li>
+                                    }
+                                    break;
+                                case Borentra.DataAccessLayer.PrivacyLevel.Community:
+                                case Borentra.DataAccessLayer.PrivacyLevel.Public:
+                                <li><a href="/profile/@Model.OwnerKey/Trade?item=@Model.Identifier" class="btn btn-lg btn-default btn-trade " data-id="@Model.Identifier" onclick="_gaq.push(['_trackEvent', 'Item', 'Trade', 'Request']);"><span class="glyphicon glyphicon-retweet"></span>Request to Trade</a></li>
+                                    break;
+                            }
+                            switch (Model.FreePrivacyLevel)
+                            {
+                                case Borentra.DataAccessLayer.PrivacyLevel.Friends:
+                                    if (Model.IsFriend)
+                                    {
+                                        <li><a href="#" class="btn btn-lg btn-default btn-free " data-id="@Model.Identifier" onclick="_gaq.push(['_trackEvent', 'Item', 'Free', 'Request']);"><span class="glyphicon glyphicon-gift"></span>Request to Keep</a></li>
+                                    }
+                                    break;
+                                case Borentra.DataAccessLayer.PrivacyLevel.Community:
+                                case Borentra.DataAccessLayer.PrivacyLevel.Public:
+                                <li><a href="#" class="btn btn-lg btn-default btn-free " data-id="@Model.Identifier" onclick="_gaq.push(['_trackEvent', 'Item', 'Free', 'Request']);"><span class="glyphicon glyphicon-gift"></span>Request to Keep</a></li>
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="#" class="btn btn-lg btn-primary  btn-dialog-edit-item" data-id="@Model.Identifier" data-title="@Model.Title" data-description="@Model.Description" data-shareprivacylevel="@((int)Model.SharePrivacyLevel)" data-freeprivacylevel="@((int)Model.FreePrivacyLevel)" data-tradeprivacylevel="@((int)Model.TradePrivacyLevel)" data-rentprivacylevel="@((int)Model.RentPrivacyLevel)" data-price="@Model.Price.ToString("0.00")" title="Edit" onclick="_gaq.push(['_trackEvent', 'Item', 'Edit', 'Item']);"><span class="glyphicon glyphicon-pencil"></span>Edit Offer</a>
+                            </li>
+                            if (Model.IsMine)
+                            {
+                                <li>
+                                    <form action="/api/Product/UploadImage" method="post" class="upload-photos">
+                                        <div class="upload-form-ui">
+                                            <input class="item-files" type="file" name="files[]" multiple>
+                                            <input type="hidden" name="identifier" value="@Model.Identifier" />
+                                            <div class="drag-drop-target upload-content">
+                                                <span class="glyphicon glyphicon-cloud-upload"></span>
+                                                <h5>Drag photos here!</h5>
+                                            </div>
+                                        </div>
+                                        <div class="hide progress progress-striped active">
+                                            <div class="bar" style="width: 0%;"></div>
+                                        </div>
+                                        <div class="alert hide alert-info">
+                                            Please wait while we upload your photos!
+                                        </div>
+                                    </form>
+                                </li>
+                            }
+                        }
+                    }
+
+                    @if (!User.Identity.IsAuthenticated || Model.IsMine)
+                    {
+                        <li>
+                            @Html.Partial("Item/_ItemPrivacy", Model)
+                        </li>
+                    }
+                    @if (User.Identity.IsManager())
+                    {
+                        if (!Model.IsMine)
+                        {
+                            <li>
+                                <div class="alert alert-info">
+                                    <span class="label label-info">Staff Feature</span>
+                                    <a href="/Admin/Tag?key=@Model.Key" class="btn btn-lg btn-primary" title="Tag" onclick="_gaq.push(['_trackEvent', 'Offer', 'Edit', 'Tag']);"><span class="glyphicon glyphicon-pencil"></span>Tag Offer</a>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <div class="alert alert-info">
+                                    <span class="label label-info">New Edit</span>
+                                    <a href="/dashboard/offer/@Model.Key" class="btn btn-lg btn-primary" title="Edit Offer"><span class="glyphicon glyphicon-pencil"></span>Edit Offer</a>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+
+                @if (Model.Status == Borentra.Models.BorrowStatus.Accepted)
+                {
+                    <br />
+                    <div class="alert alert-info">
+                        <h5><span class="glyphicon glyphicon-info-sign"></span>&nbsp;Currently Lent Out</h5>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <hr />
+                <div class="component item-image-gallery-component" data-id="@Model.Identifier">
+                    <ul id="item-image-gallery" class="list-inline thumbnails items " data-bind="foreach: $root.Photos">
+                        <li class="gallery-item">
+                            <img src="" class="img-rounded" width="50" height="50" data-bind="click: $root.Show, attr: { src: '//cdn.borentra.com' + $data.Thumbnail }" />
+                        </li>
+                    </ul>
+                </div>
+
+                @if (string.IsNullOrWhiteSpace(Model.Description))
+                {
+                    <div class="alert alert-info">
+                        <p>It looks like there's no description on this item.</p>
+                    </div>
+                }
+                else
+                {
+                    <p itemprop="description">
+                        @Html.Raw(Model.RenderDisplayHtml())
+                    </p>
+                }
+                @if (!Model.IsMine)
+                {
+                    <div class="hide">
+                        <h5>Available for:</h5>
+                        @if (Model.FreePrivacyLevel != Borentra.DataAccessLayer.PrivacyLevel.Private)
+                        {
+                            <a class="label label-info" href="/free">Free</a>
+                        }
+                        @if (Model.SharePrivacyLevel != Borentra.DataAccessLayer.PrivacyLevel.Private)
+                        {
+                            <a class="label label-info" href="/share">Share</a>
+                        }
+                        @if (Model.TradePrivacyLevel != Borentra.DataAccessLayer.PrivacyLevel.Private)
+                        {
+                            <a class="label label-info" href="/trade">Trade</a>
+                        }
+                        @if (Model.RentPrivacyLevel != Borentra.DataAccessLayer.PrivacyLevel.Private)
+                        {
+                            <a class="label label-info" href="/rent">Rental</a>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+        @if (null != Model.ExternalReviews)
+        {
+            @Html.Raw(Model.ExternalReviews);
+        }
+    </section>
+}

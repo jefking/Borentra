@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>SICDB</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{36f1fe3c-151f-42c9-b105-e96738213951}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureDatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>SharingIsCaring</RootNamespace>
+    <AssemblyName>SharingIsCaring</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchema</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <Containment>None</Containment>
+    <IsNestedTriggersOn>True</IsNestedTriggersOn>
+    <IsTransformNoiseWordsOn>False</IsTransformNoiseWordsOn>
+    <TwoDigitYearCutoff>2049</TwoDigitYearCutoff>
+    <NonTransactedFileStreamAccess>OFF</NonTransactedFileStreamAccess>
+    <TargetRecoveryTimePeriod>0</TargetRecoveryTimePeriod>
+    <TargetRecoveryTimeUnit>SECONDS</TargetRecoveryTimeUnit>
+    <IsChangeTrackingOn>False</IsChangeTrackingOn>
+    <IsChangeTrackingAutoCleanupOn>True</IsChangeTrackingAutoCleanupOn>
+    <ChangeTrackingRetentionPeriod>2</ChangeTrackingRetentionPeriod>
+    <ChangeTrackingRetentionUnit>Days</ChangeTrackingRetentionUnit>
+    <IsEncryptionOn>False</IsEncryptionOn>
+    <IsBrokerPriorityHonored>False</IsBrokerPriorityHonored>
+    <Trustworthy>False</Trustworthy>
+    <AutoUpdateStatisticsAsynchronously>False</AutoUpdateStatisticsAsynchronously>
+    <PageVerify>CHECKSUM</PageVerify>
+    <ServiceBrokerOption>DisableBroker</ServiceBrokerOption>
+    <DateCorrelationOptimizationOn>False</DateCorrelationOptimizationOn>
+    <Parameterization>SIMPLE</Parameterization>
+    <AllowSnapshotIsolation>True</AllowSnapshotIsolation>
+    <ReadCommittedSnapshot>True</ReadCommittedSnapshot>
+    <VardecimalStorageFormatOn>True</VardecimalStorageFormatOn>
+    <SupplementalLoggingOn>False</SupplementalLoggingOn>
+    <CompatibilityMode>100</CompatibilityMode>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <AnsiNullDefault>False</AnsiNullDefault>
+    <AnsiNulls>False</AnsiNulls>
+    <AnsiPadding>False</AnsiPadding>
+    <AnsiWarnings>False</AnsiWarnings>
+    <ArithAbort>False</ArithAbort>
+    <ConcatNullYieldsNull>False</ConcatNullYieldsNull>
+    <QuotedIdentifier>False</QuotedIdentifier>
+    <NumericRoundAbort>False</NumericRoundAbort>
+    <RecursiveTriggersEnabled>False</RecursiveTriggersEnabled>
+    <DatabaseChaining>False</DatabaseChaining>
+    <DatabaseState>ONLINE</DatabaseState>
+    <CloseCursorOnCommitEnabled>False</CloseCursorOnCommitEnabled>
+    <DefaultCursor>GLOBAL</DefaultCursor>
+    <AutoClose>False</AutoClose>
+    <AutoCreateStatistics>True</AutoCreateStatistics>
+    <AutoShrink>False</AutoShrink>
+    <AutoUpdateStatistics>True</AutoUpdateStatistics>
+    <TornPageDetection>False</TornPageDetection>
+    <DatabaseAccess>MULTI_USER</DatabaseAccess>
+    <Recovery>FULL</Recovery>
+    <EnableFullTextSearch>False</EnableFullTextSearch>
+    <TargetDatabase>SharingIsCaring</TargetDatabase>
+    <DacVersion>1.0.0.2</DacVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <SqlCodeAnalysisRules>-!Microsoft.Rules.Data.SR0014;+!Microsoft.Rules.Data.SR0008;-!Microsoft.Rules.Data.SR0010;+!Microsoft.Rules.Data.SR0013;+!Microsoft.Rules.Data.SR0001;+!Microsoft.Rules.Data.SR0009;+!Microsoft.Rules.Data.SR0012;+!Microsoft.Rules.Data.SR0011;+!Microsoft.Rules.Data.SR0016;+!Microsoft.Rules.Data.SR0015;+!Microsoft.Rules.Data.SR0005;+!Microsoft.Rules.Data.SR0006;-!Microsoft.Rules.Data.SR0004;-!Microsoft.Rules.Data.SR0007</SqlCodeAnalysisRules>
+    <RunSqlCodeAnalysis>True</RunSqlCodeAnalysis>
+    <TreatTSqlWarningsAsErrors>True</TreatTSqlWarningsAsErrors>
+  </PropertyGroup>
+  <!-- VS10 without SP1 will not have VisualStudioVersion set, so do that here -->
+  <PropertyGroup />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Goods\" />
+    <Folder Include="User\" />
+    <Folder Include="Social" />
+    <Folder Include="Stats" />
+    <Folder Include="Goods\Table" />
+    <Folder Include="Goods\Sproc" />
+    <Folder Include="Goods\View" />
+    <Folder Include="Social\Table" />
+    <Folder Include="Social\Sproc" />
+    <Folder Include="Social\View" />
+    <Folder Include="User\Table" />
+    <Folder Include="User\View" />
+    <Folder Include="User\Sproc" />
+    <Folder Include="Stats\Sproc" />
+    <Folder Include="Geo" />
+    <Folder Include="Geo\Table" />
+    <Folder Include="Admin" />
+    <Folder Include="Admin\Sproc" />
+    <Folder Include="Geo\Sproc" />
+    <Folder Include="Test" />
+    <Folder Include="Test\Sproc" />
+    <Folder Include="Test\Table" />
+    <Folder Include="Company" />
+    <Folder Include="Company\Table" />
+    <Folder Include="Company\View" />
+    <Folder Include="Company\Sproc" />
+    <Folder Include="dbo" />
+    <Folder Include="Device" />
+    <Folder Include="Device\Table" />
+    <Folder Include="Device\View" />
+    <Folder Include="Device\Sproc" />
+    <Folder Include="Test\View" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Social\Social.sql" />
+    <Build Include="User\User.sql" />
+    <Build Include="Goods\Goods.sql" />
+    <Build Include="Stats\Stats.sql" />
+    <Build Include="Goods\Table\Item.sql" />
+    <Build Include="Goods\Table\ItemImage.sql" />
+    <Build Include="Goods\Table\ItemShare.sql" />
+    <Build Include="Goods\Table\ItemTrade.sql" />
+    <Build Include="Goods\Table\ItemActionComment.sql" />
+    <Build Include="Goods\Table\Trade.sql" />
+    <Build Include="Goods\Sproc\Borrow.sql" />
+    <Build Include="Goods\Sproc\BorrowAccept.sql" />
+    <Build Include="Goods\Sproc\BorrowDelete.sql" />
+    <Build Include="Goods\Sproc\BorrowReject.sql" />
+    <Build Include="Goods\Sproc\BorrowReturn.sql" />
+    <Build Include="Goods\Sproc\RecentItemShare.sql" />
+    <Build Include="Goods\Sproc\SaveItem.sql" />
+    <Build Include="Goods\Sproc\SaveItemImage.sql" />
+    <Build Include="Goods\Sproc\SearchItemTrade.sql" />
+    <Build Include="Goods\Sproc\SaveItemShare.sql" />
+    <Build Include="Goods\Sproc\SaveItemActionComment.sql" />
+    <Build Include="Goods\Sproc\SearchItem.sql" />
+    <Build Include="Goods\Sproc\SearchItemImage.sql" />
+    <Build Include="Goods\Sproc\SearchItemShare.sql" />
+    <Build Include="Goods\Sproc\SearchItemActionComment.sql" />
+    <Build Include="Goods\Sproc\TradeAccept.sql" />
+    <Build Include="Goods\Sproc\TradeReject.sql" />
+    <Build Include="Goods\Sproc\TradeRequest.sql" />
+    <Build Include="Goods\View\vwItem.sql" />
+    <Build Include="Goods\View\vwItemImage.sql" />
+    <Build Include="Goods\View\vwItemShare.sql" />
+    <Build Include="Goods\View\vwItemActionComment.sql" />
+    <Build Include="Social\Table\Network.sql" />
+    <Build Include="Social\Table\Conversation.sql" />
+    <Build Include="Social\Sproc\SaveConnection.sql" />
+    <Build Include="Social\Sproc\SaveFacebookConnection.sql" />
+    <Build Include="Social\Sproc\SearchBadges.sql" />
+    <Build Include="Social\Sproc\SearchConnection.sql" />
+    <Build Include="Social\View\vwConversation.sql" />
+    <Build Include="Social\View\vwNetwork.sql" />
+    <Build Include="User\Table\Activity.sql" />
+    <Build Include="User\View\vwProfile.sql" />
+    <Build Include="User\View\vwActivity.sql" />
+    <Build Include="User\Sproc\SaveActivity.sql" />
+    <Build Include="User\Sproc\SaveConversation.sql" />
+    <Build Include="User\Sproc\SaveProfile.sql" />
+    <Build Include="User\Sproc\SearchActivity.sql" />
+    <Build Include="User\Sproc\SearchConversation.sql" />
+    <Build Include="User\Sproc\SearchProfile.sql" />
+    <Build Include="Social\Table\Badge.sql" />
+    <Build Include="Social\View\vwBadge.sql" />
+    <Build Include="Social\Table\BadgeInformation.sql" />
+    <Build Include="Social\View\vwBadgeInformation.sql" />
+    <Build Include="Stats\Sproc\ItemsByMonth.sql" />
+    <Build Include="Stats\Sproc\LatestItems.sql" />
+    <Build Include="Stats\Sproc\LatestUsers.sql" />
+    <Build Include="Stats\Sproc\UsersByMonth.sql" />
+    <Build Include="Stats\Sproc\CommunityShare.sql" />
+    <Build Include="Goods\Table\ItemFree.sql" />
+    <Build Include="Goods\View\vwItemFree.sql" />
+    <Build Include="Goods\Sproc\SaveItemFree.sql" />
+    <Build Include="Goods\Sproc\SearchItemFree.sql" />
+    <Build Include="Goods\Table\ItemRequest.sql" />
+    <Build Include="Goods\View\vwItemRequest.sql" />
+    <Build Include="Goods\Sproc\SaveItemRequest.sql" />
+    <Build Include="Goods\Sproc\SearchItemRequest.sql" />
+    <Build Include="Goods\Sproc\TradeDelete.sql" />
+    <Build Include="Goods\Sproc\SearchItemRss.sql" />
+    <Build Include="Stats\Sproc\CommunityFree.sql" />
+    <Build Include="Social\Sproc\CreateBadges.sql" />
+    <Build Include="Goods\Table\ItemRequestFulfill.sql" />
+    <Build Include="Goods\View\vwItemRequestFulfill.sql" />
+    <Build Include="Goods\Sproc\SaveItemRequestFulfill.sql" />
+    <Build Include="Goods\Sproc\SearchItemRequestFulfill.sql" />
+    <Build Include="Goods\Sproc\FulfillDecline.sql" />
+    <Build Include="Goods\Sproc\FulfillDelete.sql" />
+    <Build Include="Goods\Sproc\FulfillAccept.sql" />
+    <Build Include="Stats\Sproc\Dashboard.sql" />
+    <Build Include="Social\Table\Favorite.sql" />
+    <Build Include="Social\Table\Comment.sql" />
+    <Build Include="Social\Table\Rating.sql" />
+    <Build Include="Social\View\vwRating.sql" />
+    <Build Include="Social\View\vwComment.sql" />
+    <Build Include="Social\View\vwFavorite.sql" />
+    <Build Include="Social\Sproc\SaveComment.sql" />
+    <Build Include="Social\Sproc\SearchComment.sql" />
+    <Build Include="Social\Sproc\SaveRating.sql" />
+    <Build Include="Social\Sproc\SearchRating.sql" />
+    <Build Include="Social\Sproc\SaveFavorite.sql" />
+    <Build Include="Social\Sproc\SearchFavorite.sql" />
+    <Build Include="User\Sproc\SearchUserActivity.sql" />
+    <Build Include="Geo\Geo.sql" />
+    <Build Include="Geo\Table\City.sql" />
+    <Build Include="Geo\Table\Country.sql" />
+    <Build Include="Stats\Sproc\CountryPercentages.sql" />
+    <Build Include="Goods\Sproc\SearchTrade.sql" />
+    <Build Include="User\Table\ProfileArchive.sql" />
+    <Build Include="Goods\Table\ItemArchive.sql" />
+    <Build Include="Goods\Table\ItemRequestArchive.sql" />
+    <Build Include="Admin\Admin.sql" />
+    <Build Include="Admin\Sproc\Archive.sql" />
+    <Build Include="Goods\Sproc\ItemOwnerChange.sql" />
+    <Build Include="Goods\Sproc\ItemRequestToItem.sql" />
+    <Build Include="Goods\Table\ItemRequestImage.sql" />
+    <Build Include="Goods\View\vwItemRequestImage.sql" />
+    <Build Include="Goods\Sproc\SaveItemRequestImage.sql" />
+    <Build Include="Goods\Sproc\SearchItemRequestImage.sql" />
+    <Build Include="User\Sproc\SaveProfileArchive.sql" />
+    <Build Include="Admin\Sproc\FindProfile.sql" />
+    <Build Include="Admin\Sproc\FindItem.sql" />
+    <Build Include="Admin\Sproc\FindItemRequest.sql" />
+    <Build Include="User\Table\ProfileStats.sql" />
+    <Build Include="User\View\vwProfileStats.sql" />
+    <Build Include="Stats\Sproc\LandingConverstions.sql" />
+    <Build Include="Social\Table\Tags.sql" />
+    <Build Include="Social\View\vwTags.sql" />
+    <Build Include="Social\Sproc\SaveTags.sql" />
+    <Build Include="Social\Sproc\UserNotifications.sql" />
+    <Build Include="Admin\Sproc\GenerateBadges.sql" />
+    <Build Include="Stats\Sproc\CommunityTrade.sql" />
+    <Build Include="Goods\View\vwTrade.sql" />
+    <Build Include="Goods\View\vwItemTrade.sql" />
+    <Build Include="User\View\vwProfileWithStats.sql" />
+    <Build Include="Admin\Sproc\GenerateForProfile.sql" />
+    <Build Include="Admin\Sproc\GenerateSocialData.sql" />
+    <Build Include="Admin\Sproc\AddToProfileStats.sql" />
+    <Build Include="Goods\Sproc\GetItem.sql" />
+    <Build Include="User\View\vwProfileArchive.sql" />
+    <Build Include="User\Sproc\GetProfile.sql" />
+    <Build Include="Stats\Sproc\LeaderBoard.sql" />
+    <Build Include="Goods\Sproc\GetItemRequest.sql" />
+    <Build Include="Social\Sproc\CreateBadge.sql" />
+    <Build Include="Geo\Table\LocationIpBlocks.sql" />
+    <Build Include="Geo\Table\Location.sql" />
+    <Build Include="Admin\Sproc\SetTopLocation.sql" />
+    <Build Include="Admin\Sproc\SetTopGeoLocation.sql" />
+    <Build Include="Admin\Sproc\GetSearchableContent.sql" />
+    <Build Include="Admin\Sproc\GetItemUsers.sql" />
+    <Build Include="Admin\Sproc\GetItemRequestUsers.sql" />
+    <Build Include="Admin\Sproc\GetProfileUsers.sql" />
+    <Build Include="Geo\Sproc\LocationByIpRange.sql" />
+    <Build Include="Stats\Sproc\Totals.sql" />
+    <Build Include="Test\Test.sql" />
+    <Build Include="Test\Table\SignUp.sql" />
+    <Build Include="Test\Sproc\SaveGroupSignUp.sql" />
+    <Build Include="Test\Sproc\SaveCompanySignUp.sql" />
+    <Build Include="Goods\Table\ItemRent.sql" />
+    <Build Include="Goods\Table\ItemRenting.sql" />
+    <Build Include="Company\Company.sql" />
+    <Build Include="Company\Table\Company.sql" />
+    <Build Include="Company\Table\CompanyAdministrator.sql" />
+    <Build Include="Company\View\vwCompany.sql" />
+    <Build Include="Company\View\vwCompanyAdministrator.sql" />
+    <Build Include="Company\Table\CompanyItemRent.sql" />
+    <Build Include="Company\View\vwCompanyItemRent.sql" />
+    <Build Include="Goods\View\vwItemRent.sql" />
+    <Build Include="Goods\View\vwItemRenting.sql" />
+    <Build Include="Company\Sproc\SaveCompany.sql" />
+    <Build Include="Company\Sproc\SaveCompanyAdministrator.sql" />
+    <Build Include="Company\Sproc\SaveCompanyItemRent.sql" />
+    <Build Include="Goods\Sproc\SaveItemRent.sql" />
+    <Build Include="Company\Sproc\SearchCompany.sql" />
+    <Build Include="Goods\Sproc\SearchItemRent.sql" />
+    <Build Include="Goods\Sproc\SaveItemRenting.sql" />
+    <Build Include="Goods\Sproc\RentAccept.sql" />
+    <Build Include="Goods\Sproc\RentDelete.sql" />
+    <Build Include="Goods\Sproc\RentReject.sql" />
+    <Build Include="Goods\Sproc\RentReturn.sql" />
+    <Build Include="Goods\Sproc\RentRequest.sql" />
+    <Build Include="Goods\Sproc\SearchItemRenting.sql" />
+    <Build Include="Company\Table\CompanyArchive.sql" />
+    <Build Include="dbo\ComputePrice.sql" />
+    <Build Include="dbo\ConvertIpAddress.sql" />
+    <Build Include="dbo\EnsureSet.sql" />
+    <Build Include="dbo\EnsureSetBigInt.sql" />
+    <Build Include="dbo\EnsureSetBool.sql" />
+    <Build Include="dbo\EnsureSetFloat.sql" />
+    <Build Include="dbo\EnsureSetMoney.sql" />
+    <Build Include="dbo\EnsureSetSmallInt.sql" />
+    <Build Include="dbo\EnsureSetTinyInt.sql" />
+    <Build Include="dbo\MakeKey.sql" />
+    <Build Include="dbo\MakeKeyUnique.sql" />
+    <Build Include="dbo\MatchWeight.sql" />
+    <Build Include="dbo\Minimum.sql" />
+    <Build Include="dbo\Split.sql" />
+    <Build Include="dbo\Trim.sql" />
+    <Build Include="dbo\TrimOrNull.sql" />
+    <Build Include="dbo\UUIDIsInvalid.sql" />
+    <Build Include="Stats\Sproc\CommunityRent.sql" />
+    <Build Include="Device\Device.sql" />
+    <Build Include="Device\Table\Device.sql" />
+    <Build Include="Device\View\vwDevice.sql" />
+    <Build Include="Device\Sproc\SaveDevice.sql" />
+    <Build Include="Device\Sproc\GetDevice.sql" />
+    <Build Include="Device\Sproc\InvalidateDeviceKey.sql" />
+    <Build Include="Social\Table\Contact.sql" />
+    <Build Include="Social\Sproc\SaveContact.sql" />
+    <Build Include="dbo\IsAdministrator.sql" />
+    <Build Include="dbo\SubstringFormat.sql" />
+    <Build Include="dbo\Maximum.sql" />
+    <Build Include="User\Sproc\DeleteProfile.sql" />
+    <Build Include="Stats\Sproc\LatestDevice.sql" />
+    <Build Include="Stats\Sproc\DeviceByMonth.sql" />
+    <Build Include="Social\Sproc\SearchBadgeInformation.sql" />
+    <Build Include="Test\Sproc\SearchSignUp.sql" />
+    <Build Include="Test\View\vwSignUp.sql" />
+    <Build Include="Goods\Sproc\MyHistory.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SharingIsCaring.publish.xml" />
+    <None Include="localhost.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="User\Table\Profile.sql" />
+  </ItemGroup>
+</Project>

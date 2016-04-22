@@ -1,0 +1,43 @@
+﻿@using Borentra;
+
+@model IList<Borentra.Models.Badge>
+
+@{
+    ViewBag.Title = "Social Achievement | Borentra: Borrow, Rent, Trade.";
+    ViewBag.Description = "Information about the badges which are awarded to members based on the sharing they do.";
+
+    Layout = "~/Views/Shared/Layouts/_ContentLayout.cshtml";
+    ViewBag.DisableJavaScript = true;
+}
+<section class="main-content">
+    <div class="container marketing-content">
+        <h1>Social Achievements</h1>
+        <br />
+        <div class="content-container">
+            <div class="gutter">
+                <table>
+                    <tr>
+                        <td>Achievement</td>
+                        <td>Icon</td>
+                        <td>Points</td>
+                        <td>Members with Badge</td>
+                        <td>Description</td>
+                    </tr>
+                    @foreach (var badge in Model)
+                    {
+                        <tr>
+                            <td><span class="muted">@badge.Title</span></td>
+                            <td><img src="@Url.ContentCdn(string.Format("~/assets/img/badges/{0}", @badge.IconName))" title="@badge.Title" width="50px" height="50px" style="height:50px;width:50px;" /></td>
+                            <td>@badge.Points</td>
+                            <td>@badge.MembersWithBadge</td>
+                            <td>
+                                @badge.Description
+                            </td>
+                        </tr>
+
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

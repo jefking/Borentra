@@ -1,0 +1,21 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.4.0",
+    "ejs": "*",
+    "node-neo4j": "*",
+    "underscore": "*",
+    "request": "*",
+    "mkdirp": "*",
+    "http-get": "*"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm":  "1.2.x"
+  }
+}

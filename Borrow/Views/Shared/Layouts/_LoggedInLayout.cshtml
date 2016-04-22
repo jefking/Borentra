@@ -1,0 +1,141 @@
+﻿@using Borentra;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="@ViewBag.Description">
+    <link rel="alternate" type="application/rss+xml" href="/Rss" title="Borentra Community Latest Offers & Requests">
+    <link rel="apple-touch-icon" href="@Url.ContentCdn("~/assets/img/ui/logo-borentra-150x150.png")" />
+    <!--
+    <meta name="apple-itunes-app" content="app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL">
+    -->
+    @if (null != ViewBag.Image)
+    {
+        <meta property="og:image" content="@ViewBag.Image?width=220&height=220" />
+        <meta name="og:image:width" content="220" />
+        <meta name="og:image:height" content="220" />
+        <meta name="twitter:image:src" content="@ViewBag.Image?width=220&height=220" />
+        <meta name="twitter:image:width" content="220" />
+        <meta name="twitter:image:height" content="220" />
+    }
+
+    @if (!string.IsNullOrWhiteSpace(ViewBag.DisplayName))
+    {
+        <meta property="og:type" content="profile" />
+        <meta property="og:profile:username" content="@ViewBag.DisplayName" />
+    }
+    else
+    {
+        <meta property="og:type" content="website" />
+    }
+    <meta property="og:url" content="@Request.Url" />
+    <meta property="og:title" content="@ViewBag.Title | Borentra: Borrow, Rent, Trade." />
+    <meta name="author" content="Borentra Services Inc.">
+    <meta property="og:description" content="@ViewBag.Description" />
+    <meta property="og:site_name" content="Borentra™" />
+
+    <!-- Twitter Meta -->
+    <meta name="twitter:site" content="@("@Borentra")" />
+    <meta name="twitter:url" content="@Request.Url" />
+    <meta name="twitter:title" content="@ViewBag.Title" />
+    <meta name="twitter:description" content="@ViewBag.Description" />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="shortcut icon" href="@Url.ContentCdn("~/assets/img/favicon.ico")">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+    <link href="@Url.ContentCdn("~/assets/bootstrap/css/bootstrap.css")" rel="stylesheet">
+    <link href="@Url.ContentCdn("~/assets/bootstrap/css/bootstrap-theme.css")" rel="stylesheet">
+    <link href="@Url.ContentCdn("~/assets/css/bootstrap-image-gallery.css")" rel="stylesheet">
+    <link href="@Url.ContentCdn("~/assets/css/datepicker.css")" rel="stylesheet">
+    <link href="@Url.ContentCdn("~/assets/css/bootstrap-modal-bs3patch.css")" rel="stylesheet">
+    <link href="@Url.ContentCdn("~/assets/css/bootstrap-modal.css")" rel="stylesheet">
+    <link href="@Url.ContentCdn("~/assets/css/animate.css")" rel="stylesheet">
+    <style>
+        .datepicker {
+            z-index: 9999;
+        }
+    </style>
+    <link href="@Url.ContentBlob("~/assets/css/borentra_v2.css")" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+        <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+    <script>
+
+        var UserContentBlob = '@Url.ContentBlob("~/user/", true)';
+        var UserContentCDN = '@Url.ContentCdn("~/user/", true)';
+        var ContentDeliveryNetworkScriptsURL = '@Url.ContentCdn("~/assets/js/")';
+        var BlobScriptsURL = '@Url.ContentBlob("~/assets/js/")';
+        var isMobile = (/iphone|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
+        var isManager = @User.Identity.IsManager().ToString().ToLowerInvariant();
+        var currentUserId = "@User.Identifier()";
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0">
+    </script>
+
+    @Html.Partial("Analytics/_PingDomScript")
+</head>
+@Html.Partial("Analytics/_GoogleAnalyticsScript")
+<body class="borentra-body authenticated">
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=315854161864272";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    @Html.Partial("_LoggedInMasthead")
+    <section class="main-content">
+        @RenderBody()
+    </section>
+
+    <footer>
+        @Html.Partial("_Footer")
+    </footer>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.Partial("Dialogs/ItemEditDialog")
+        @Html.Partial("Dialogs/ProfileMessageDialog")
+
+        @Html.Partial("Dialogs/ItemRequestDialog")
+        @Html.Partial("Dialogs/ItemRequestEditDialog")
+        @Html.Partial("Dialogs/ItemRequestFulfillDialog")
+        @Html.Partial("Dialogs/ItemRequestFulfillAcceptDialogue")
+        @Html.Partial("Dialogs/ItemRequestFulfillDeclineDialogue")
+        @Html.Partial("Dialogs/ItemRequestFulfillDeleteDialogue")
+
+        @Html.Partial("Dialogs/BorrowDialog")
+        @Html.Partial("Dialogs/BorrowAcceptDialog")
+        @Html.Partial("Dialogs/BorrowRejectDialog")
+        @Html.Partial("Dialogs/BorrowReturnDialog")
+        @Html.Partial("Dialogs/BorrowDeleteDialog")
+
+        @Html.Partial("Dialogs/OfferConversationDialog")
+
+        @Html.Partial("Dialogs/RentDialog")
+        @Html.Partial("Dialogs/RentAcceptDialog")
+        @Html.Partial("Dialogs/RentRejectDialog")
+        @Html.Partial("Dialogs/RentReturnDialog")
+        @Html.Partial("Dialogs/RentDeleteDialog")
+
+        @Html.Partial("Dialogs/FreeDialog")
+        @Html.Partial("Dialogs/FreeAcceptDialog")
+        @Html.Partial("Dialogs/FreeDeleteDialog")
+        @Html.Partial("Dialogs/FreeRejectDialog")
+    }
+
+    @Html.Partial("Dialogs/ItemImageGallery")
+</body>
+<script>var switchTo5x = true;</script>
+<script src="//w.sharethis.com/button/buttons.js"></script>
+<script>stLight.options({ publisher: "c632d507-b20e-4aa2-8fea-8db147f11c8b" });</script>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+@Scripts.Render("~/bundles/application")
+</html>

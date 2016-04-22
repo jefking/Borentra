@@ -1,0 +1,104 @@
+﻿@using System.Linq;
+@using Borentra;
+
+@model IEnumerable<Borentra.Models.OfferHistory>
+@if (null != Model)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>With</th>
+                <th>Item</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @switch (item.Type)
+                        {
+                            case Borentra.Models.OfferType.Free:
+                                 <span class="glyphicon glyphicon-share-alt" title="Free" />
+                                break;
+                            case Borentra.Models.OfferType.Rent:
+                                    <span class="glyphicon glyphicon-usd" title="Rent" />
+                                break;
+                            case Borentra.Models.OfferType.Share:
+                                     <span class="glyphicon glyphicon-refresh" title="Share" />
+                                break;
+                            case Borentra.Models.OfferType.Trade:
+                                     <span class="glyphicon glyphicon-retweet" title="Trade" />
+                                break;
+                        }
+                    </td>
+                    <td>
+                        @item.StatusDisplay
+                        @*@switch (item.Status)
+                        {
+                            case Borentra.Models.BorrowStatus.Accepted:
+                                <span class="label label-success">
+                                    <span class="glyphicon glyphicon-ok-circle"></span> Approved
+                                </span>
+                                break;
+                            case Borentra.Models.BorrowStatus.Returned:
+                            <span class="label label-success">
+                                <span class="glyphicon glyphicon-ok-circle"></span> Returned
+                            </span>
+                                break;
+                            case Borentra.Models.BorrowStatus.Rejected:
+                            <span class="label label-danger">
+                                <span class="glyphicon glyphicon-remove-circle"></span> Rejected
+                            </span>
+                                break;
+                            default:
+                            <span class="label label-success">
+                                <span class="glyphicon glyphicon-ok-circle"></span> Pending
+                            </span>
+                                break;
+                        }*@
+                    </td>
+                    <td nowrap>
+                        <p class="muted">@item.On.ToShortDateString()</p>
+                    </td>
+                    <td>
+                        <span>
+                            @if (item.RequesterUserIdentifier == User.Identifier())
+                            {
+                                <a class="pull-left" href="/profile/@item.OwnerKey" title="@item.OwnerDisplayName">
+                                    <img src="@item.OwnerPicture?width=30&height=30" class="img-owner img-rounded" />
+                                </a>
+                                <a class="pull-left" href="/profile/@item.OwnerKey" title="@item.OwnerDisplayName">
+                                    @item.OwnerDisplayName
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="pull-left" href="/profile/@item.RequesterKey">
+                                    <img src="@item.RequesterPicture?width=30&height=30" class="img-requester img-rounded" />
+                                </a>
+                                <a class="pull-left" href="/profile/@item.RequesterKey" title="@item.RequesterDisplayName">
+                                    @item.RequesterDisplayName
+                                </a>
+                            }
+                        </span>
+                    </td>
+                    <td>
+                        @if (!string.IsNullOrWhiteSpace(item.PrimaryImageThumbnail))
+                        {
+                            <a href="/offer/@item.ItemKey">
+                                <img src="@Url.ContentCdn("~" + item.PrimaryImageThumbnail, true)" width="30px" class="img-requester img-rounded" />
+                            </a>
+                        }
+                        <a href="/offer/@item.ItemKey">
+                            @item.ItemTitle
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,68 @@
+﻿@using Borentra
+
+@model Borentra.Models.MyProfile
+
+@if (null != Model.PendingRequests && 0 < Model.PendingRequests.Count())
+{
+    <h5>Others asking to borrow <small>@Model.PendingRequests.Count() items</small></h5>
+    @Html.Partial("~/Views/Shared/_ItemShareTableView.cshtml", Model.PendingRequests)
+}
+@if (null != Model.BorrowRequests && 0 < Model.BorrowRequests.Count())
+{
+    <h5>You have requested to borrow&nbsp;<small>@Model.BorrowRequests.Count() items</small></h5>
+    @Html.Partial("~/Views/Shared/_ItemShareTableView.cshtml", Model.BorrowRequests)
+}
+@if (null != Model.Lent && 0 < Model.Lent.Count())
+{
+    <h5>Currently lent out&nbsp;<small>@Model.Lent.Count() items</small></h5>
+    @Html.Partial("~/Views/Shared/_ItemShareTableView.cshtml", Model.Lent)
+}
+@if (null != Model.Borrowed && 0 < Model.Borrowed.Count())
+{
+    <h5>Currently borrowing&nbsp;<small>@Model.Borrowed.Count() items</small></h5>
+    @Html.Partial("~/Views/Shared/_ItemShareTableView.cshtml", Model.Borrowed)
+}
+@if (null != Model.FreeRequested && 0 < Model.FreeRequested.Count())
+{
+    <h5>Requesting&nbsp;<small>@Model.FreeRequested.Count() items</small></h5>
+    @Html.Partial("~/Views/Shared/_ItemFreeTableView.cshtml", Model.FreeRequested)
+}
+@if (null != Model.FreeAsk && 0 < Model.FreeAsk.Count())
+{
+    <h5>Give away?&nbsp;<small>@Model.FreeAsk.Count() items</small></h5>
+    @Html.Partial("~/Views/Shared/_ItemFreeTableView.cshtml", Model.FreeAsk)
+}
+@if (null != Model.FulfillOthers && 0 < Model.FulfillOthers.Count())
+{
+    <h5>Requested Items Ready!&nbsp;<small>@Model.FulfillOthers.Count() items</small></h5>
+    @Html.Partial("~/Views/Shared/_ItemRequestFulfillmentTableView.cshtml", Model.FulfillOthers)
+}
+@if (null != Model.FulfillMine && 0 < Model.FulfillMine.Count())
+{
+    <h5>Help Others?&nbsp;<small>@Model.FulfillMine.Count() items</small></h5>
+    @Html.Partial("~/Views/Shared/_ItemRequestFulfillmentTableView.cshtml", Model.FulfillMine)
+}
+@if (null != Model.RentAsks && 0 < Model.RentAsks.Count())
+{
+    <h5>Others asking to rent&nbsp;<small>@Model.RentAsks.Count() items</small></h5>
+    @Html.Partial("~/Views/Shared/_ItemRentTableView.cshtml", Model.RentAsks)
+}
+@if (null != Model.RentRequests && 0 < Model.RentRequests.Count())
+{
+    <h5>You have requested to rent&nbsp;<small>@Model.RentRequests.Count() items</small></h5>
+    @Html.Partial("~/Views/Shared/_ItemRentTableView.cshtml", Model.RentRequests)
+}
+@if (null != Model.Rented && 0 < Model.Rented.Count())
+{
+    <h5>You have rented&nbsp;<small>@Model.Rented.Count() items</small></h5>
+    @Html.Partial("~/Views/Shared/_ItemRentTableView.cshtml", Model.Rented)
+}
+@if (null != Model.Renting && 0 < Model.Renting.Count())
+{
+    <h5>You are renting&nbsp;<small>@Model.Renting.Count() items</small></h5>
+    @Html.Partial("~/Views/Shared/_ItemRentTableView.cshtml", Model.Renting)
+}
+@if (null != Model.Badges && 0 < Model.Badges.Count())
+{
+    @Html.Partial("~/Views/Shared/Profile/_Badges.cshtml", Model.Badges)
+}

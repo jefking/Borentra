@@ -1,0 +1,177 @@
+﻿@using Borentra
+
+@model Borentra.Models.DashboardInfo<Guid>
+@{
+  ViewBag.Title = "My Messages | Borentra: Borrow, Rent, Trade";
+  Layout = "~/Views/Shared/Layouts/_LoggedInLayout.cshtml";
+}
+
+<div class="borentra-view dashboard dashboard-messages component-conversations" user="@Model.Info">
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="page-header">
+          <h1><span class="glyphicon glyphicon-envelope"></span>&nbsp; Your Messages</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class=" container">
+    <div class="row">
+
+      <div class="col-xs-10">
+        <section>
+
+          <div class="alert alert-success" data-bind="visible: $root.uiMessages().length > 0">
+            <ul data-bind="foreach: $root.uiMessages" class="list-unstyled">
+              <li>
+                <p data-bind="text: $data.message"></p>
+              </li>
+            </ul>
+          </div>
+          <div class="alert alert-error" data-bind="visible: $root.uiErrors().length > 0">
+            <ul data-bind="foreach: $root.uiErrors" class="list-unstyled">
+              <li>
+                <p data-bind="text: $data.message"></p>
+              </li>
+            </ul>
+          </div>
+          <div class="loading-screen" data-bind="visible: $root.isLoading() == true"></div>
+
+          <div class="carousel slide">
+            <div class="carousel-inner">
+              <div class="item">
+                <!-- compose -->
+                <h1>
+                  <span>Compose</span>
+                  <button class="btn btn-default pull-right" data-bind="click: $root.back">Back to Inbox&nbsp;<span class="glyphicon glyphicon-arrow-right"></span></button>
+                </h1>
+                <form role="form" class="form" data-bind="submit: $root.composeSend">
+
+                  <h5>
+                    <label for="toUser">To</label></h5>
+                  <input id="toUser" class="form-control input-sm typeahead" type="text" placeholder="Add a recipient" data-bind="value: $root.Compose.ToName">
+
+                  <h5>
+                    <label for="toBody">What would you like to say?</label></h5>
+                  <textarea id="toBody" class="form-control input-sm" rows="5" placeholder="Add a message" data-bind="value: $root.Compose.Body"></textarea>
+
+                  <br />
+                  <br>
+                  <button class="btn btn-sm btn-success"><span class="glyphicon glyphicon-send"></span>&nbsp;Send</button>
+                </form>
+
+              </div>
+              <div class="item active">
+                <!-- inbox -->
+                <div class="row">
+                  <div class="col-xs-6">
+                    <button class="btn btn-sm btn-primary btn-compose" data-bind="click: $root.compose"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Compose</button>
+                  </div>
+                  <div class="col-xs-6 text-right">
+                    <button class="btn btn-default btn-sm btn-refresh" data-bind="click: $root.refresh"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Refresh</button>
+                    <button class="btn btn-default btn-sm btn-mark-as-read hide" data-bind="click: $root.markAsRead"><span class="glyphicon glyphicon-fire"></span>&nbsp;Mark as Read</button>
+                  </div>
+                </div>
+                <br />
+                <ul class="nav nav-tabs">
+                  <li class="view-inbox" data-bind="css: { 'active': $root.view() == 'inbox' }">
+                    <a href="#">Inbox <span class="badge" data-bind="  text: $root.viewInbox().length"></span></a></li>
+                </ul>
+
+                <div class="conversations-content">
+
+                  <table class="table table-hover" data-bind="visible: $root.conversations().length > 0">
+                    <thead>
+                      <tr class="">
+                        @*<th class="col-xs-1">
+                          <input type="checkbox" data-bind="click: $root.selectAll " />
+                        </th>*@
+                        <th class="col-xs-2">Participants</th>
+                        <th class="col-xs-6">Message</th>
+                        <th class="col-xs-3">Date</th>
+                      </tr>
+                    </thead>
+                    <tbody data-bind="foreach: $root.conversations">
+                      <tr data-bind="css: { 'info unread': $data.Read() == false }">
+                        @*<td>
+                          <input type="checkbox" data-bind="checked: $data.Selected() " />
+                        </td>*@
+                        <td>
+                            <a target="_blank" data-bind="text: $data.FromDisplayName, attr: { href: '/profile/' + $data.FromKey }" onclick="_gaq.push(['_trackEvent', 'Conversation', 'Message', 'FromProfile']);"></a>
+                            to <a target="_blank" data-bind="text: $data.ToDisplayName, attr: { href: '/profile/' + $data.ToKey }" onclick="_gaq.push(['_trackEvent', 'Conversation', 'Message', 'ToProfile']);"></a>
+                        </td>
+                        <td>
+                          <a href="#" data-bind="text: $data.Body, click: $root.viewMessage" onclick="_gaq.push(['_trackEvent', 'Conversation', 'Message', 'View']);"></a>
+                        </td>
+                        <td><span data-bind="text: $data.On"></span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <div class="alert alert-info" data-bind="visible: $root.conversations().length == 0">
+                    <h3>No messages found</h3>
+                    <p>We weren't able to find any conversations.</p>
+                    <p>Why don't you start one with a friend on the platform by pressing <strong>Compose</strong>?</p>
+                  </div>
+
+                </div>
+              </div>
+              <div class="item thread-view">
+                <!-- thread view -->
+                <div class="row">
+                  <div class="col-xs-12">
+                    <h1>
+                      <button class="btn btn-default" data-bind="click: $root.back"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp; Back to Inbox</button>
+                      <span data-bind="text: $root.Thread.Title">N/A</span></h1>
+
+                    <ul class="media-list messages-list" data-bind="foreach: $root.Thread.Messages">
+                      <li class="media">
+                        <a class="pull-left" href="#">
+                          <img class="media-object img-rounded" height="30" width="30" src="" data-bind="attr: { 'src': 'http://graph.facebook.com/' + $data.FromFacebookId + '/picture?width=30&height=30' }" />
+                        </a>
+                        <div class="media-body well well-small">
+                          <h5 class="media-heading">
+                            <span class="text-info" data-bind="text: $data.FromDisplayName"></span>&nbsp;says
+                                                <small class="pull-right text-info" data-bind="text: $data.On"></small>
+                          </h5>
+                          <p class="muted" data-bind="text: $data.Body"></p>
+                        </div>
+                      </li>
+                    </ul>
+
+                    <div class="input-append message-input">
+                      <form data-bind="submit: $root.send">
+
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="input-group">
+                              <input class="form-control input-sm" type="text" placeholder="Say something..." data-bind="value: $root.sendInput" />
+                              <span class="input-group-btn">
+                                <button class="btn btn-default btn-sm" type="button" type="submit" data-bind="disable: $root.isLoading() == true, click: $root.send"><span class="glyphicon glyphicon-send"></span>&nbsp;Send</button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="col-xs-2">
+        @Html.Partial("~/Views/Shared/Dashboard/_Menu.cshtml", Model)
+
+      </div>
+    </div>
+  </div>
+</div>

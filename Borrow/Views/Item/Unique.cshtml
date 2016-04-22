@@ -1,0 +1,96 @@
+﻿@using System.Linq;
+@using Borentra;
+
+@model Borentra.Models.ItemMaster
+@{
+    if (null == Model.Display.Categories)
+    {
+        ViewBag.Title = Model.Display.Title;
+    }
+    else
+    {
+        ViewBag.Title = string.Format("{0} | {1}", Model.Display.Title, string.Join(", ", Model.Display.Categories));
+    }
+
+    if (!string.IsNullOrWhiteSpace(Model.Display.PrimaryImageThumbnail))
+    {
+        ViewBag.Image = Url.ContentCdn("~" + Model.Display.PrimaryImageThumbnail, true);
+    }
+    ViewBag.Description = Model.Display.Description;
+    Layout = "~/Views/Shared/Layouts/_LoggedInLayout.cshtml";
+    var newItem = Request.QueryString["new"] != null;
+}
+<div itemscope itemtype="http://schema.org/Product" class="item-view container">
+    @if (!newItem && Model.Display.IsPublic)
+    {
+        <div class="pull-right">
+            @Html.Partial("~/Views/Shared/_ShareSocial.cshtml", string.Format("offer/{0}", Model.Display.Key))
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-9">
+            <div class="page-header">
+                <h1>
+                    <a href="/offer/@Model.Display.Key"><span itemprop="name">@Model.Display.Title</span></a>
+                </h1>
+            </div>
+            <div class="item-description">
+                @if (newItem && Model.Display.IsPublic)
+                {
+                    <div class="alert alert-success text-center">
+                        Make sure you share this with your friends!<br />
+                        @Html.Partial("~/Views/Shared/_ShareSocial.cshtml", string.Format("offer/{0}", Model.Display.Key))
+                    </div>
+                }
+
+                @Html.Partial("~/Views/Shared/_ItemDisplay.cshtml", Model.Display)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Partial("~/Views/Shared/Thing/_SideBar.cshtml", Model.Display)
+            @if (Model.Display.SharePrivacyLevel == Borentra.DataAccessLayer.PrivacyLevel.Public)
+            {
+                <div class="fb-like" data-href="@Request.Url" data-colorscheme="light" data-layout="standard" data-action="like" data-show-faces="true" data-send="false"></div>
+                <hr />
+            }
+            @if (null != Model.Display.Shares && 0 < Model.Display.Shares.Count())
+            {
+                <h5>People who have borrowed this</h5>
+                <ul class="media-list">
+                    @foreach (var share in Model.Display.Shares)
+                    {
+                        <li class="media">
+                            <a href="/profile/@share.RequesterKey" class="pull-left" title="@share.RequesterDisplayName">
+                                <img src="@share.RequesterPicture?width=50&height=50" class="media-object img-rounded" />
+                            </a>
+                            <div class="media-body">
+                                <h5 class="media-heading">
+                                    <a href="/profile/@share.RequesterKey" title="@share.RequesterDisplayName">@share.RequesterDisplayName</a>
+                                </h5>
+                                <p><span class="glyphicon glyphicon-map-marker"></span>&nbsp;@share.RequesterLocation</p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+                <hr />
+            }
+
+            @if (Model.Results != null && 0 < Model.Results.Count())
+            {
+                <div class="page-header">
+                    <h5>Offers You'll Love</h5>
+                </div>
+
+                @Html.Partial("~/Views/Shared/Search/_RelatedSideResults.cshtml", Model.Results)
+                <hr />
+            }
+            else if (null != Model.Display && Model.Display.IsMine)
+            {
+                <div class="alert alert-info">
+                    <h3><span class="glyphicon glyphicon-info-sign"></span>Protip</h3>
+                    <p>By adding <b>#HashTags</b> to your offers you will enable the related offers area to populate. This helps our community find what they are looking for.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

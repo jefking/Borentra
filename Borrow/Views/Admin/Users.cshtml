@@ -1,0 +1,23 @@
+﻿@model System.Collections.Generic.IEnumerable<Borentra.DataAccessLayer.Admin.ProfileReport>
+@{
+    ViewBag.Title = "All Users";
+    Layout = "~/Views/Shared/Layouts/_AdminLayout.cshtml";
+}
+
+<div class="item-view admin-reports">
+    <div class="row">
+        <div class="col-xs-10">
+            @if (null != Model)
+            {
+                <div class="page-header">
+                    <h1>Users <small>@Model.Count()</small></h1>
+                    <a href="?count=255">Top 255</a>
+                </div>
+                @Html.Partial("~/Views/Shared/Admin/_ProfilesTableView.cshtml", Model);
+            }
+        </div>
+        <div class="col-xs-2">
+            @Html.Partial("~/Views/Shared/Admin/_AdminMenu.cshtml")
+        </div>
+    </div>
+</div>

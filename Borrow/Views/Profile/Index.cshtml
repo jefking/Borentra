@@ -1,0 +1,72 @@
+﻿@using System.Linq;
+@using Borentra;
+
+@model Borentra.Models.SearchResults<Borentra.Models.Profile>
+@{
+    ViewBag.Title = "Community Members | Borentra: Borrow, Rent, Trade";
+    ViewBag.Description = "Search for community members";
+
+    Layout = "~/Views/Shared/Layouts/_LoggedInLayout.cshtml";
+
+    var title = string.IsNullOrWhiteSpace(Model.SearchDisplayText) ? "Profile Search" : string.Format("Profile Search: '{0}'", Model.SearchDisplayText);
+    var searchParam = string.IsNullOrWhiteSpace(Model.SearchDisplayText) ? null : string.Format("?s={0}&amp;c=tab", Model.SearchDisplayText);
+}
+
+<div class="borentra-view">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="page-header">
+                    <h1><span class="glyphicon glyphicon-search"></span>&nbsp;Search Results</h1>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="borentra-view-cta">
+                    <div class="pull-right">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a href="/dashboard/friends" class="btn btn-default"><span class="glyphicon glyphicon-user"></span>&nbsp;Go To My Friends</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="profile-view container">
+        <div class="gutter">
+            <div class="row">
+
+                <div class="col-md-2">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a href="/search/offer@(searchParam)"><span class="glyphicon glyphicon-hand-up"></span>&nbsp;Offers</a>
+                        </li>
+                        <li>
+                            <a href="/search/wanted@(searchParam)"><span class="glyphicon glyphicon-th-list"></span>&nbsp;Wanted</a>
+                        </li>
+                        <li class="active">
+                            <a href="/search/member@(searchParam)"><span class="glyphicon glyphicon-user"></span>&nbsp;Members</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-10">
+                    <div class="page-header">
+                        <h1>Members <small>@Model.Manifest.Count()</small></h1>
+                    </div>
+                    @if (null != Model.Manifest && 0 < Model.Manifest.Count())
+                    {
+                        @Html.Partial("~/Views/Shared/_Profiles.cshtml", Model.Manifest)
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            <h4><span class="glyphicon glyphicon-info-sign"></span>&nbsp;No results found for <em>"@Model.SearchDisplayText"</em></h4>
+                            <p>Sorry your search query yielded no results. Please try to broaden your search.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+﻿@model string
+@{
+    var size = ViewData["Size"] as string;
+    size = size == null ? "_large" : size;
+}
+<div class="">
+    <span class="st_facebook@(size)" st_url="@string.Format("//{0}/{1}", Request.Url.Authority, Model)"></span>
+    <span class="st_twitter@(size)" st_url="@string.Format("//{0}/{1}", Request.Url.Authority, Model)"></span>
+    <span class="st_googleplus@(size)" st_url="@string.Format("//{0}/{1}", Request.Url.Authority, Model)"></span>
+</div>

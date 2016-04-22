@@ -1,0 +1,30 @@
+﻿@using Borentra;
+
+@model Borentra.Models.Thing
+@{
+    var page = Model is Borentra.Models.Item ? "offer" : "wanted";
+}
+<td style="width: 60px;">
+    <a href="/profile/@Model.OwnerKey" title="@Model.OwnerName" target="_blank">
+        <img src="@Model.OwnerPicture?width=60&height=60" class="img-rounded" />
+    </a>
+</td>
+<td style="width: 60px;">
+    <a href="/@page/@Model.Key" title="@Model.Title" target="_blank">
+        @if (string.IsNullOrWhiteSpace(Model.PrimaryImageThumbnail))
+        {
+            <b>no image</b>
+        }
+        else
+        {
+            <img src="@Url.ContentCdn("~" + Model.PrimaryImageThumbnail, true)" class="img-rounded" style="width:60px" />
+        }
+    </a>
+</td>
+<td>
+    @Model.Title
+    <br />
+    @Model.Location
+    <br />
+    <input type="text" readonly value="@Model.Identifier" class="form-control" onclick="this.select()" />
+</td>

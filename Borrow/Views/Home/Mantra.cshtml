@@ -1,0 +1,39 @@
+﻿@using Borentra
+@{
+
+    ViewBag.Title = "Our Mantra";
+    ViewBag.Description = "Our mantra unites the way we think about the world. Borrow what you need, when you need it; from your family, friends & community!";
+
+    Layout = "~/Views/Shared/Layouts/_ContentLayout.cshtml";
+    ViewBag.DisableJavaScript = true;
+}
+<section class="main-content">
+  <div class="container marketing-content">
+    <div class="page-header">
+      <h1>Our Mantra <small>Our values that we hold on to dearly</small></h1>
+    </div>
+    <div class="content-container">
+      <div class="row">
+        <div class="col-xs-8">
+          <ul>
+            <li>
+              <h3>On this planet tread lightly, connect deeply.</h3>
+            </li>
+            <li>
+              <h3>Buy what you need, borrow what you want.</h3>
+            </li>
+            <li>
+              <h3>Share your happiness with those around you.</h3>
+            </li>
+            <li>
+              <h3>Get to know your neighbours.</h3>
+            </li>
+          </ul>
+        </div>
+        <div class="col-xs-4">
+          <img src="@Url.ContentCdn("~/assets/img/mascot/red300x300.png")" class="img-responsive pull-right"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

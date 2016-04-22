@@ -1,0 +1,47 @@
+﻿<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<li class="media">
+      <a class="pull-left" href="http://www.borentra.com/profile/<#=Trade.Requester.Key#>?utm_source=request&utm_campaign=trade&utm_medium=email">
+        <img class="media-object img-rounded" src="<#=Trade.Requester.Picture#>?width=50&height=50" width="50" height="50" />
+      </a>
+      <div class="media-body">
+        <small class="muted"><#=Trade.CreatedOn.ToShortDateString()#></small>
+        <div class="clearfix">
+          <h5>Your offers</h5>
+          <ul class="list-inline">
+<#
+	foreach (var item in Trade.RequesterItems)
+	{
+#>
+        <li>
+            <a class="pull-left" href="http://www.borentra.com/offer/<#=item.Key#>?utm_source=request&utm_campaign=trade&utm_medium=email" title="<#=item.Title#>">
+            <#=item.Title#>
+            </a>
+        </li>
+<#
+	}
+#>
+        </ul>
+    </div>
+    <div class="clearfix">
+        <h5>for <a href="http://www.borentra.com/profile/<#=Trade.Receiver.Key#>?utm_source=request&utm_campaign=trade&utm_medium=email"><#=Trade.Receiver.Name#></a>'s items</h5>
+        <ul class="list-inline">
+<#
+        foreach (var item in Trade.ReceiverItems)
+        {
+#>
+            <li>
+            <a class="pull-left" href="http://www.borentra.com/item/<#=item.Key#>?utm_source=request&utm_campaign=trade&utm_medium=email" title="<#=item.Title#>">
+                <#=item.Title#>
+                </a>
+            </li>
+<#
+        }
+#>
+        </ul>
+    </div>
+    </div>
+</li>

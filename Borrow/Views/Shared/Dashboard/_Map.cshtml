@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Borentra.Models.Profile>
+@{
+    var user = ViewBag.User as Borentra.Models.Profile;
+}
+
+<div style="height: 400px; width: 750px;" class="visible-lg">
+    <div id='mapDiv' style="position: absolute; width: 750px; height: 400px;"></div>
+</div>
+<script type="text/javascript">
+    var userLocation = new Microsoft.Maps.Location(@(user.Latitude), @(user.Longitude));
+    var mapOptions = {
+        credentials: "AmNdvMfoNaRAhIY1fu-wahvhYKntEeCeMnEQ_hewUU4EGQeKXzyvs-sbrLv2IGz1"
+        , mapTypeId: Microsoft.Maps.MapTypeId.road
+        , center: userLocation
+        , zoom: 8
+        , showScalebar: false
+        , disableTouchInput: true
+        , disableBirdseye: true
+        , showCopyright: false
+    }
+    var mapDiv = document.getElementById("mapDiv");
+    var map = new Microsoft.Maps.Map(mapDiv, mapOptions);
+                    
+    var pin = new Microsoft.Maps.Pushpin(userLocation, {text: 'Me'}); 
+    map.entities.push(pin);
+
+    var locations = new Array(3);
+
+    @if (null != Model)
+    {
+        var notFirst = false;
+        Write("locations = [\r\n");
+        foreach (var friend in Model)
+        {
+            if (notFirst)
+            {
+                Write(",\r\n");
+            }
+            WriteLiteral(string.Format("[\"\", {0}, {1}]", friend.Latitude, friend.Longitude));
+            notFirst = true;
+        }
+
+        Write("\r\n]\r\n");
+    }
+
+    if (null != locations && 0 < locations.length)
+    {
+        var view = new Array(locations.length);
+        for (var i=0;i<locations.length;i++)
+        {
+            var loc = new Microsoft.Maps.Location(locations[i][1], locations[i][2]);
+            var pin = new Microsoft.Maps.Pushpin(loc, {text: locations[i][0]}); 
+            map.entities.push(pin);
+            view[i] = loc;
+        }
+        var viewRect = Microsoft.Maps.LocationRect.fromLocations(view);
+
+        map.setView({bounds: viewRect});
+    }
+</script>

@@ -1,0 +1,164 @@
+﻿@using System.Linq;
+@using Borentra
+
+@model Borentra.Models.ProfileMaster
+@{
+    if (0 == Model.Display.Points)
+    {
+        ViewBag.Title = string.Format("{0} | Borentra: Borrow, Rent, Trade.", Model.Display.Name);
+    }
+    else
+    {
+        ViewBag.Title = string.Format("{0} | Karma Points {1} | Borentra: Borrow, Rent, Trade.", Model.Display.Name, Model.Display.Points);   
+    }
+    ViewBag.Description = string.Format("{0} - {1}", Model.Display.Name, Model.Display.Status);
+    ViewBag.Image = Model.Display.Picture;
+    ViewBag.DisplayName = Model.Display.Name;
+    ViewBag.Theme = "";
+    ViewBag.ThumbnailWidth = "50";
+    Layout = "~/Views/Shared/Layouts/_LoggedInLayout.cshtml";
+}
+
+<div class="profile-view container">
+    <div class="gutter">
+        <div class="row profile-section">
+            <div class="col-sm-3 profile-picture">
+                <img class="img-rounded img-responsive" src="@Model.Display.Picture?width=300&height=300" alt="@Model.Display.Name" title="@Model.Display.Name" />
+                <br />
+                <h1>@(Model.Display.Name ?? "Anonymous")</h1>
+                @if (!string.IsNullOrWhiteSpace(Model.Display.Status))
+                {
+                    <h6>
+                        <span class="glyphicon glyphicon-bullhorn"></span>&nbsp;
+                        @Html.Raw(Model.Display.Status.Replace("\n", "<br/>"))
+                    </h6>
+                }
+                <ul class="profile-meta">
+                    @if (!string.IsNullOrWhiteSpace(Model.Display.Location))
+                    {
+                        <li>
+                            <span class="glyphicon glyphicon-map-marker"></span> @Model.Display.Location
+                        </li>
+                    }
+                    <li>
+                        <span class="glyphicon glyphicon-time"></span>&nbsp; Member Since: @Model.Display.CreatedOn.ToString("MMMM, yyyy")
+                    </li>
+                    @if (0 < Model.Display.Points)
+                    {
+                        <li><span class="glyphicon glyphicon-star"></span>&nbsp;Karma Points <span class="text-info">@Model.Display.Points</span></li>
+                    }
+                    @if (0 < Model.Display.LendCount)
+                    {
+                        <li><span class="glyphicon glyphicon-refresh"></span>&nbsp;Lent <span class="text-info">@Model.Display.LendCount</span></li>
+                    }
+                    @if (0 < Model.Display.GiveCount)
+                    {
+                        <li>
+                            <span class="glyphicon glyphicon-gift"></span>&nbsp;Given <span class="text-info">@Model.Display.GiveCount</span>
+                        </li>
+                    }
+                    @if (0 < Model.Display.BorrowCount)
+                    {
+                        <li>
+                            <span class="glyphicon glyphicon-refresh"></span>&nbsp;Borrowed <span class="text-info">@Model.Display.BorrowCount</span>
+                        </li>
+                    }
+                    @if (0 < Model.Display.TradeCount)
+                    {
+                        <li>
+                            <span class="glyphicon glyphicon-retweet"></span>&nbsp;Traded <span class="text-info">@Model.Display.TradeCount</span>
+                        </li>
+                    }
+                </ul>
+
+                <hr />
+                @if (!Model.Display.IsMine)
+                {
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <ul class="list-inline">
+                            @if (null != Model.Display.Items && 0 < Model.Display.Items.Count())
+                            {
+                                <li>
+                                    <a href="/Profile/@Model.Display.Key/Trade" class="btn btn-default btn-sm btn-trade" title="Trade with @Model.Display.Name" onclick="_gaq.push(['_trackEvent', 'Profile', 'Trade', 'Trade Request']);"><span class="glyphicon glyphicon-retweet"></span>&nbsp; Trade</a>
+                                </li>
+                            }
+                            <li>
+                                <a href="/api/Conversation/Save" class="btn btn-default btn-sm btn-profile-message" data-user="@Model.Display.Identifier"><span class="glyphicon glyphicon-envelope"></span>&nbsp; Message</a>
+                            </li>
+                        </ul>
+                        <hr />
+                    }
+                }
+
+                @if (null != Model.Display.Activities)
+                {
+                    @Html.Partial("~/Views/Shared/Profile/_Activity.cshtml", Model.Display.Activities)
+                }
+
+                @if (null != Model.Display.Badges)
+                {
+                    @Html.Partial("~/Views/Shared/Profile/_Badges.cshtml", Model.Display.Badges)
+                }
+            </div>
+
+            <div class="col-sm-9 profile-description">
+                @if (Model.Display.IsPublic)
+                {
+                    Html.Partial("~/Views/Shared/_ShareSocial.cshtml", string.Format("profile/{0}", Model.Display.Key));
+                }
+
+                @if (null == Model.Display.Items || 0 == Model.Display.Items.Count())
+                {
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="alert alert-info">
+                                <p>@Model.Display.Name isn't sharing anything yet.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                @Html.Partial("Dashboard/_QuickStart", Model.Display)
+                            }
+                            else
+                            {
+                                <p>Sign in today and you'll be able to start borrowing, renting, and trading with others on the platform!</p>
+                                <a href="https://sharingiscaring.accesscontrol.windows.net/v2/wsfederation?wa=wsignin1.0&wtrealm=http://@Request.Url.Authority" class="btn btn-get-started-now btn-success" onclick="_gaq.push(['_trackEvent', 'Profile', 'Profile', 'Register']);">Get Started Now</a>
+                            }
+                        </div>
+                    </div>
+                }
+                @if (null != Model.Display.Items && 0 < Model.Display.Items.Count())
+                {
+                    <div class="page-header">
+                        <h3>Offers <small>@Model.Display.Items.Count()</small></h3>
+                    </div>
+                    @Html.Partial("~/Views/Shared/_Things.cshtml", Model.Display.Items)
+                }
+
+                @if (null != Model.ItemRequests && 0 < Model.ItemRequests.Count())
+                {
+                    <div class="page-header">
+                        <h3>Wanted <small>@Model.ItemRequests.Count()</small></h3>
+                    </div>
+                    @Html.Partial("~/Views/Shared/_Things.cshtml", Model.ItemRequests)
+                }
+                @if (null != Model.Lent && 0 < Model.Lent.Count())
+                {
+                    <div class="page-header">
+                        <h3>Lent <small>@Model.Lent.Count()</small></h3>
+                    </div>
+                    @Html.Partial("~/Views/Shared/_ItemShares.cshtml", Model.Lent)
+                }
+                @if (null != Model.Borrowed && 0 < Model.Borrowed.Count())
+                {
+                    <div class="page-header">
+                        <h3>Borrowed <small>@Model.Borrowed.Count()</small></h3>
+                    </div>
+                    @Html.Partial("~/Views/Shared/_ItemShares.cshtml", Model.Borrowed)
+                }
+            </div>
+        </div>
+    </div>
+</div>

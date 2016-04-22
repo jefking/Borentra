@@ -1,0 +1,42 @@
+﻿@using Borentra
+
+@model Borentra.Models.DashboardInfo<Borentra.Models.MyProfile>
+@{
+    ViewBag.Title = "My Offers | Borentra: Borrow, Rent, Trade";
+    Layout = "~/Views/Shared/Layouts/_LoggedInLayout.cshtml";
+}
+
+<div class="dashboard dashboard-inventory borentra-view">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h1><span class="glyphicon glyphicon-list"></span>&nbsp;Your Offers <small>@Model.Info.Items.Count()</small></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-10">
+                @Html.Partial("Dashboard/_MultiAddWidget")
+                @if (null != Model.Info.Items && 0 < Model.Info.Items.Count())
+                {
+                    <br />
+                    @Html.Partial("~/Views/Shared/Item/_ItemsManagement.cshtml", Model.Info.Items, new ViewDataDictionary { { "Heading", "Your Collection" } })
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        <h2>No offers found</h2>
+                        <p>You currently don't have any offers available. You can add offers to your collection above!</p>
+                    </div>
+                }
+            </div>
+            <div class="col-xs-2">
+                @Html.Partial("~/Views/Shared/Dashboard/_Menu.cshtml", Model)
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+﻿@using Borentra
+
+<div class="component news-feed-component">
+    <div class="loading-screen" data-bind="visible: $root.isLoading() == true"></div>
+    <input type="hidden" id="activityId" value="@ViewBag.ActivityId" />
+
+    <ul class="media-list hidden" data-bind="foreach: $root.items, css: { hidden: false }">
+
+        <li class="media" data-bind="attr: { id: $data.Identifier() }">
+            <div class="gutter">
+                <a class="pull-left" href="#" data-bind="attr: { href: '/profile/' + $data.UserKey() }">
+                    <img class="media-object img-rounded" src="" width="50" height="50" data-bind="attr: { src: $data.UserPicture() + '?width=50&height=50' }" />
+                </a>
+                <div class="media-body news-feed-item-body">
+                    <div class="wrapper">
+                        <h5 class="media-heading">
+                            <span class="text-info">
+                                <span class="glyphicon glyphicon-user" title="Mine" data-bind="visible: $data.UserContext() == 1"></span>
+                                <span class="glyphicon glyphicon-globe" title="Friend" data-bind="visible: $data.UserContext() == 2"></span>
+                                <span class="glyphicon glyphicon-map-marker" title="Nearby" data-bind="visible: $data.UserContext() == 3"></span>
+                                <a href="#" class="user-name" data-bind="text: $data.UserDisplayName, attr: { href: '/profile/' + $data.UserKey() }"></a>
+                            </span>
+                        </h5>
+                        <p>
+                            <span data-bind="visible: $data.Type() == 0, text: $data.Text()" class="muted"></span>
+                            <a href="#" data-bind="visible: $data.Type() == 1, text: $data.Text(), attr: { href: '/profile/' + $data.ReferenceKey() }" class="muted"></a>
+                            <a href="#" data-bind="visible: $data.Type() == 2, text: $data.Text(), attr: { href: '/offer/' + $data.ReferenceKey() }" class="muted"></a>
+                            <a href="#" data-bind="visible: $data.Type() == 3, text: $data.Text(), attr: { href: '/wanted/' + $data.ReferenceKey() }" class="muted"></a>
+                            <span data-bind="visible: $data.Type() == 4, text: $data.Text()" class="muted"></span>
+                            <a href="#" data-bind="visible: $data.Type() == 5, text: $data.Text(), attr: { href: '/offer/' + $data.ReferenceKey() }" class="muted"></a>
+                            <a class="btn-link-to-activity" href="#" data-bind="attr: { href: '/activity/' + $data.Identifier() }"><small class="muted" data-bind="  text: $data.ModifiedOn"></small></a>
+                        </p>
+                        <img data-bind="visible: $data.ImageThumbnail() != null, attr: { src: 'http://cdn.borentra.com' + $data.ImageThumbnail() }" src="" width="100" height="100" class="img-rounded" />
+
+                    </div>
+
+                    <div class="news-feed-item-footer">
+
+                        <div class="news-feed-item-controls">
+
+                            <a class="btn-favorite btn btn-xs" data-bind="click: $root.Favorite" href="#">
+                                <span class="glyphicon glyphicon-heart" data-bind="  css: { 'active': $data.CallerFavorited() == true }"></span>
+                                <span class="btn-label" data-bind="css: { 'active': $data.CallerFavorited() == true}, text: ($data.CallerFavorited() == true) ? 'Liked' : 'Like'"></span>
+                            </a>
+                            <a class="btn-comment btn btn-xs" data-bind="click: $root.Comment" href="#">
+                                <span class="glyphicon glyphicon-comment"></span>
+                                <span class="btn-label">Comment</span>
+                            </a>
+                        </div>
+                        <div class="people-like-this">
+                            <p>
+                                <small data-bind="visible: $data.FavoriteCount() >= 0" class="muted">
+                                    <span data-bind="visible: $data.FavoriteCount() == 0">
+                                        Be the first to like this.
+                                    </span>
+                                    <span data-bind="visible: $data.FavoriteCount() == 1">
+                                        <span data-bind="text: $data.FavoriteCount()" class="text-info">0</span> person likes this.
+                                    </span>
+                                    <span data-bind="visible: $data.FavoriteCount() > 1">
+                                        <span data-bind="text: $data.FavoriteCount()" class="text-info">0</span> others like this.
+                                    </span>
+                                </small>
+                                <small data-bind="visible: $data.CommentCount() > 0" class="muted">
+                                    <span data-bind="visible: $data.CommentCount() == 1">
+                                        <span data-bind="text: $data.CommentCount()" class="text-info">0</span> comment on this.
+                                    </span>
+                                    <span data-bind="visible: $data.CommentCount() > 1">
+                                        <span data-bind="text: $data.CommentCount()" class="text-info">0</span> comments on this.
+                                    </span>
+                                </small>
+                            </p>
+                        </div>
+
+                        <ul class="media-list activity-comments" data-bind="foreach: $data.Comments">
+                            <li class="media" data-bind="attr: { id: $data.Identifier}">
+                                <div class="gutter">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object img-rounded" src="" data-bind="attr: { src: $data.OwnerPicture() + '?width=30&height=30' }" width="30" height="30" />
+                                    </a>
+                                    <div class="media-body">
+                                        <h6 class="media-heading">
+                                            <a href="#" class="user-name" data-bind="text: $data.OwnerName(), attr: { href: '/profile/' + $data.OwnerKey() }"></a>
+                                        </h6>
+                                        <button class="close" aria-hidden="true" data-bind="click: $data.Delete, visible: $data.IsMine() == true">&times;</button>
+
+                                        <span data-bind="text: $data.Comment"></span>
+                                        <small class="muted" data-bind="text: $data.CreatedOn"></small>
+
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <form action="/" method="post" role="form" data-bind="submit: $root.SaveComment, attr: { id: 'comment-form-' + $data.Identifier() }">
+                                    <input type="text" placeholder="Leave a comment..." class="form-control input-sm borentra-text" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

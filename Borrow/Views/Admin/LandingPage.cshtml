@@ -1,0 +1,146 @@
+﻿@using System.Linq;
+
+@model System.Collections.Generic.IEnumerable<Borentra.Models.Admin.LandingTheme>
+@{
+    ViewBag.Title = "Landing Theme";
+    Layout = "~/Views/Shared/Layouts/_AdminLayout.cshtml";
+
+    var totalCount = 0;
+    var dictionary = new Dictionary<string, string>();
+    var themeCount = new Dictionary<string, int>();
+    foreach (var theme in (from lt in Model
+                           select lt.Theme).Distinct())
+    {
+        var items = from lt in Model
+                    where lt.Theme == theme
+                    select lt;
+
+        themeCount.Add(theme, 0);
+
+        var series = string.Empty;
+        foreach (var item in items)
+        {
+            themeCount[theme] += item.ConverstionCount;
+            totalCount += item.ConverstionCount;
+            series += string.Format("[Date.UTC({0:yyyy}, {1}, {2:dd}), {3}],", item.Date, item.Date.Month - 1, item.Date, item.ConverstionCount);
+        }
+
+        series = series.Remove(series.Length - 1);
+
+        dictionary.Add(theme, series);
+    }
+
+    var allSeries = string.Empty;
+    foreach (var key in dictionary.Keys)
+    {
+        allSeries += "{" + string.Format(@"name: '{0}',data: [{1}]", key, dictionary[key]) + "},";
+    }
+    allSeries = allSeries.Remove(allSeries.Length - 1);
+
+    var allPercentages = string.Empty;
+    foreach (var key in themeCount.Keys)
+    {
+        var percentage = (themeCount[key] / totalCount) * 100;
+        allPercentages += string.Format(@"['{0}',{1}],", key, themeCount[key]);
+    }
+    allPercentages = allPercentages.Remove(allPercentages.Length - 1);
+}
+<div class="admin-reports">
+    <div class="row">
+        <div class="col-xs-10">
+            <h1>Landing Theme Conversions</h1>
+            <div>
+                <a href="?days=7">7</a>
+                <a href="?days=14">14</a>
+                <a href="?days=31">31</a>
+                <a href="?days=90">90</a>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="graph">
+                        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                        <script>
+                            $(document).ready(function () {
+
+                                $('#container').highcharts({
+                                    chart: {
+                                        type: 'spline'
+                                    },
+                                    title: {
+                                        text: 'Landing Theme Conversions'
+                                    },
+                                    xAxis: {
+                                        type: 'datetime',
+                                        dateTimeLabelFormats: { // don't display the dummy year
+                                            month: '%e. %b',
+                                            year: '%b'
+                                        }
+                                    },
+                                    yAxis: {
+                                        title: {
+                                            text: 'Members Joined'
+                                        },
+                                        min: 0
+                                    },
+                                    tooltip: {
+                                        formatter: function () {
+                                            return '<b>' + this.series.name + '</b><br/>' +
+                                            Highcharts.dateFormat('%e. %b', this.x) + '; ' + this.y + ' users';
+                                        }
+                                    },
+                                    series: [
+                                    @{
+                                        WriteLiteral(allSeries);
+                                        }
+                                    ]
+                                });
+                          });
+                        </script>
+                        <div id="piechart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                        <script>
+                            $(document).ready(function () {
+                                $('#piechart').highcharts({
+                                    chart: {
+                                        plotBackgroundColor: null,
+                                        plotBorderWidth: null,
+                                        plotShadow: false
+                                    },
+                                    title: {
+                                        text: 'Theme conversion, in specified date range.'
+                                    },
+                                    tooltip: {
+                                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                    },
+                                    plotOptions: {
+                                        pie: {
+                                            allowPointSelect: true,
+                                            cursor: 'pointer',
+                                            dataLabels: {
+                                                enabled: true,
+                                                color: '#000000',
+                                                connectorColor: '#000000',
+                                                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                                            }
+                                        }
+                                    },
+                                    series: [{
+                                        type: 'pie',
+                                        name: 'Landing Theme',
+                                        data: [
+                                    @{
+                                        WriteLiteral(allPercentages);
+                                        }
+                                        ]
+                                    }]
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            @Html.Partial("~/Views/Shared/Admin/_AdminMenu.cshtml")
+        </div>
+    </div>
+</div>

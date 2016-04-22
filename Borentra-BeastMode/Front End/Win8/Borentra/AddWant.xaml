@@ -1,0 +1,62 @@
+﻿<SettingsFlyout
+    x:Class="Borentra.AddWant"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Borentra"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    IconSource="Assets/SmallLogo.png"
+    Title="Add"
+    d:DesignWidth="300">
+
+    <SettingsFlyout.Resources>
+        <CollectionViewSource x:Name="imagesSource"
+                              Source="{Binding Images}"
+                              />
+    </SettingsFlyout.Resources>
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" >
+        <StackPanel Style="{StaticResource SettingsFlyoutSectionStyle}" Width="250">
+            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="4" Text="Title" />
+            <RichEditBox Name="Title" PlaceholderText="What would you like?" Margin="0,4"
+                         IsSpellCheckEnabled="True"
+                         LostFocus="Title_LostFocus" />
+            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="4" Text="Description" />
+            <RichEditBox IsSpellCheckEnabled="True" Name="Description" Margin="0,4"
+                         Height="150" PlaceholderText="Add a description" />
+            <ListView
+                x:Name="images"
+                Margin="4"
+                HorizontalAlignment="Left"
+                ItemsSource="{Binding Source={StaticResource imagesSource}}"
+                IsSwipeEnabled="False"
+                SelectionMode="Single">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+                               HorizontalAlignment="Left"
+                               Height="125">
+                            <Image
+                                Stretch="UniformToFill"
+                                Source="{Binding ThumbnailUrl}"
+                                />
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="FrameworkElement">
+                        <Setter Property="Margin" Value="0,0,0,10"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+            <Button
+                HorizontalAlignment="Right"
+                Click="Save_Click"
+                Background="OrangeRed"
+                Name="Save">
+                <TextBlock>Add</TextBlock>
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</SettingsFlyout>

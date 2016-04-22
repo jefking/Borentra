@@ -1,0 +1,35 @@
+.component-conversations
+  position: relative
+  .thread-view, .conversations-content
+    position: relative
+  .conversations-list
+    height: 355px
+    overflow-y: auto
+    overflow-x: hidden
+    > li
+      cursor: pointer
+  .loading-screen
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background: #fff url(../img/ui/loading-48x48.gif) center center no-repeat
+    opacity: .75
+    z-index: 500
+
+  .carousel
+    .item
+      min-height: 500px
+  table
+    tr.unread
+      p, span, a
+        font-weight: bold
+  ul.messages-list
+    height: 300px
+    overflow-x: none
+    overflow-y: auto
+  div.message-input
+    position: relative
+    bottom: 0
+    width: 99%

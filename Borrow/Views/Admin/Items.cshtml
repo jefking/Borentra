@@ -1,0 +1,25 @@
+﻿@model System.Collections.Generic.IEnumerable<Borentra.Models.Item>
+@{
+    ViewBag.Title = " Offers";
+    Layout = "~/Views/Shared/Layouts/_AdminLayout.cshtml";
+}
+
+<div class="admin-reports">
+    <div class="row">
+        <div class="col-xs-10">
+            @if (null != Model)
+            {
+                <div class="page-header">
+                    <h1>Offers <small>@Model.Count()</small></h1>
+                    <a href="?count=255">Top 255</a>
+                    <a href="/admin/OffersUnTagged">Untagged</a>
+                </div>
+                @Html.Partial("~/Views/Shared/Admin/_ItemsTableView.cshtml", Model);
+            }
+        </div>
+
+        <div class="col-xs-2">
+            @Html.Partial("~/Views/Shared/Admin/_AdminMenu.cshtml")
+        </div>
+    </div>
+</div>

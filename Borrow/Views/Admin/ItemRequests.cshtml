@@ -1,0 +1,23 @@
+﻿@model System.Collections.Generic.IEnumerable<Borentra.Models.ItemRequest>
+@{
+    ViewBag.Title = " Item Requests";
+    Layout = "~/Views/Shared/Layouts/_AdminLayout.cshtml";
+}
+
+<div class="admin-reports">
+    <div class="row">
+        <div class="col-xs-10">
+            @if (null != Model)
+            {
+                <div class="page-header">
+                    <h1>Item Requests <small>@Model.Count()</small></h1>
+                    <a href="?count=255">Top 255</a>
+                </div>
+                @Html.Partial("~/Views/Shared/Admin/_ItemRequestsTableView.cshtml", Model);
+            }
+        </div>
+        <div class="col-xs-2">
+            @Html.Partial("~/Views/Shared/Admin/_AdminMenu.cshtml")
+        </div>
+    </div>
+</div>

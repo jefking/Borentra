@@ -1,0 +1,10 @@
+﻿@using Borentra
+
+<div class="component omnibox-search-component">
+    <form id="omnibox-search-form" action="/search" role="form" class="form">
+        <div class="loading-screen" data-bind="visible: $root.UILoading() == true"></div>
+        <input type="text" name="s" class="form-control typeahead tt-query" placeholder="Find nearby offers, requests, or people" value="">
+        <input type="hidden" id="c" name="c" value="organic" />
+        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+    </form>
+</div>

@@ -1,0 +1,111 @@
+﻿@using System.Linq;
+
+@model Borentra.DataAccessLayer.Admin.Statistics<Borentra.DataAccessLayer.Admin.DeviceCount>
+@{
+    ViewBag.Title = "Device Growth";
+    Layout = "~/Views/Shared/Layouts/_AdminLayout.cshtml";
+
+    var dailyTotal = 0;
+    foreach (var item in Model.Daily)
+    {
+        dailyTotal += item.Count;
+    }
+
+    var monthlyTotal = 0;
+    foreach (var item in Model.Monthly)
+    {
+        monthlyTotal += item.Count;
+    }
+
+
+    var lastMonth = 0;
+    var lastMonthApple = 0;
+    var lastMonthWindows = 0;
+    var lastMonthUnknown = 0;
+}
+<div class="admin-reports admin-reports-device-growth">
+    <div class="row">
+        <div class="col-xs-10">
+            <h1>Device Growth Month over Month <small>@monthlyTotal</small></h1>
+            <div>
+                <a href="?days=7">7</a>
+                <a href="?days=14">14</a>
+                <a href="?days=31">31</a>
+                <a href="?days=90">90</a>
+            </div>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        @foreach (var item in Model.Monthly)
+                        {
+                            if (lastMonth > 0)
+                            {
+                                var data = (((float)item.Count / lastMonth) * 100);
+                                if (item.CreateDate > DateTime.Now.AddMonths(-4))
+                                {
+                                    <td>
+                                        <h3 class="text-center">@item.CreateDate.ToString("MMMM")</h3>
+                                        <div class="alert alert-success text-center">
+                                            <h3>@(data.ToString("#.##"))%</h3>
+                                            <p>Growth</p>
+                                        </div>
+                                        <div class="well">
+                                            <div>
+                                                <div>
+                                                    iOs <span class="badge">@lastMonthApple</span>+<span class="badge badge-success">@item.AppleCount</span>=<span class="badge badge-success">@(item.AppleCount + lastMonthApple)</span>
+                                                    <br />
+                                                    Win8 <span class="badge">@lastMonthWindows</span>+<span class="badge badge-success">@item.WindowsCount</span>=<span class="badge badge-success">@(item.WindowsCount + lastMonthWindows)</span>
+                                                    <br />
+                                                    ? <span class="badge">@lastMonthUnknown</span>+<span class="badge badge-success">@item.UnknownCount</span>=<span class="badge badge-success">@(item.UnknownCount + lastMonthUnknown)</span><br />
+                                                    <br />
+                                                    Total <span class="badge">@lastMonth</span>+<span class="badge badge-success">@item.Count</span>=<span class="badge badge-success">@(item.Count + lastMonth)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                }
+                            }
+
+                            lastMonth += item.Count;
+                            lastMonthUnknown += item.UnknownCount;
+                            lastMonthApple += item.AppleCount;
+                            lastMonthWindows += item.WindowsCount;
+                        }
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="graph">
+                        <div class="graph-visualization">
+                        </div>
+                        <div class="graph-data hide">
+                            @foreach (var item in Model.Daily)
+                            {
+                                <span class="record">
+                                    <span class="key">@item.CreateDate.ToShortDateString()</span>
+                                    <span class="value">@item.Count</span>
+                                </span>
+                                <span class="windows">
+                                    <span class="key">@item.CreateDate.ToShortDateString()</span>
+                                    <span class="value">@item.WindowsCount</span>
+                                </span>
+                                <span class="apple">
+                                    <span class="key">@item.CreateDate.ToShortDateString()</span>
+                                    <span class="value">@item.AppleCount</span>
+                                </span>
+                                <span class="unknown">
+                                    <span class="key">@item.CreateDate.ToShortDateString()</span>
+                                    <span class="value">@item.UnknownCount</span>
+                                </span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            @Html.Partial("~/Views/Shared/Admin/_AdminMenu.cshtml")
+        </div>
+    </div>
+</div>

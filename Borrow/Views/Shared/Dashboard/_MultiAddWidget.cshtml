@@ -1,0 +1,208 @@
+﻿@using Borentra;
+<div class="component multi-add-component">
+    <div class="row">
+        <div class="loading-screen hidden" data-bind="visible: $root.UILoading() == true, css: { hidden: $root.UILoading() == false}"></div>
+        <ul class="nav nav-tabs hidden" data-bind="css: { hidden: false }">
+            <li data-bind="css: { hidden: true }"><a href="#multi-add-status" data-toggle="tab"><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;Status</a></li>
+            <li><a href="#multi-add-item" data-toggle="tab"><span class="glyphicon glyphicon-th-list"></span>&nbsp;I Have</a></li>
+            <li><a href="#multi-add-request" data-toggle="tab"><span class="glyphicon glyphicon-hand-up"></span>&nbsp;I Want</a></li>
+        </ul>
+        <div class="tab-content hidden" data-bind="css: { hidden: false }">
+            <div class="tab-pane " id="multi-add-status">
+                <form role="form" data-bind="submit: $root.SaveStatusUpdate">
+                    <div class="input-group input-group-sm">
+                        <input data-bind="value: $root.Status.Text" type="text" class="form-control status-input" placeholder="What's on your mind?">
+                        <span class="input-group-btn">
+                            <button data-bind="click: $root.SaveStatusUpdate" class="btn btn-default" type="button"><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;Update!</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane" id="multi-add-item">
+
+                <form class="add-item-form" role="form" action="/api/Product/UploadImage" method="post">
+                    <input type="hidden" name="ItemIdentifier" data-bind="value: $root.Item.Identifier" />
+                    <div class="alert alert-success hidden" data-bind="visible: $root.Item.UIMessages().length > 0, css: { hidden: false }">
+
+                        <ul data-bind="foreach: $root.Item.UIMessages" class="list-unstyled">
+                            <li data-bind="html: $data.message"></li>
+                        </ul>
+                    </div>
+
+                    <div class="alert alert-danger hidden" data-bind="visible: $root.Item.UIErrors().length > 0, css: { hidden: false }">
+                        <ul data-bind="foreach: $root.Item.UIErrors" class="list-unstyled">
+                            <li data-bind="text: $data.message"></li>
+                        </ul>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <input data-bind="value: $root.Item.Title, valueUpdate: 'keyup'" type="text" class="item-search form-control" placeholder="What do you have?">
+                        <span class="input-group-btn">
+                            <button data-bind="click: $root.Item.SearchPhotos" class="btn btn-default" type="button"><span class="glyphicon glyphicon-picture"></span></button>
+                            <a href="#" data-bind="css: { hidden: !$root.Item.IsValidUpload() }" class="btn btn-default hidden">
+                                <span class="glyphicon glyphicon-camera"></span>
+                            </a>
+                            <div data-bind="css: { hidden: !$root.Item.IsValidUpload() }" class="upload-photos hidden">
+                                <input class="item-files" type="file" name="files[]" multiple data-bind="events: { change: $root.Item.FileUpload}">
+                            </div>
+                        </span>
+                    </div>
+                    <div data-bind="css: { hidden: $root.Item.HideDescription() }" class="hidden">
+                        <input data-bind="value: $root.Item.Description" type="text" class="item-description form-control input-sm" placeholder="Add Hashtags Here (ex. #mtg #boardgame #book)">
+                    </div>
+
+                    <ul data-bind="foreach: $root.Item.PhotoSearchResults, css: { hidden: false }" class="hidden photo-results list-inline">
+                        <li>
+                            <label class="checkbox">
+                                <input type="checkbox" data-bind="value: $data.Url">
+                                <img src="@Url.ContentCdn("~/assets/img/ui/thumbnail.png")" cl class="img-rounded hidden-md hidden-lg" width="50" height="50" data-bind="attr: { src: $data.ThumbnailUrl }">
+                                <img src="@Url.ContentCdn("~/assets/img/ui/thumbnail.png")" cl class="img-rounded visible-md visible-lg" width="150" height="150" data-bind="attr: { src: $data.ThumbnailUrl }">
+                            </label>
+                        </li>
+                    </ul>
+
+                    <div class="row item-option-row hidden" data-bind="css: { hidden: $root.Item.HideOptions() }">
+                        <div class="muted text-center ">
+                            <br />
+                            I have this item for...
+                        </div>
+                        <div class="col-xs-3 for-trade" data-bind="css: { 'active': $root.Item.ForTrade() == true }">
+                            <div class="checkbox item-option">
+                                <label>
+                                    <input type="checkbox" class="hidden" data-bind="checked: $root.Item.ForTrade" />
+                                    <p class="text-center">
+                                        <span class="glyphicon glyphicon-retweet"></span><br />
+                                        <strong>Trade</strong>
+                                    </p>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 for-free" data-bind="css: { 'active': $root.Item.ForFree() == true }">
+                            <div class="checkbox item-option">
+                                <label>
+                                    <input type="checkbox" class="hidden" data-bind="checked: $root.Item.ForFree">
+                                    <p class="text-center">
+                                        <span class="glyphicon glyphicon-gift"></span><br />
+                                        <strong>Free</strong>
+                                    </p>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 for-share" data-bind="css: { 'active': $root.Item.ForShare() == true }">
+                            <div class="checkbox item-option">
+                                <label>
+                                    <input type="checkbox" class="hidden" data-bind="checked: $root.Item.ForShare">
+                                    <p class="text-center">
+                                        <span class="glyphicon glyphicon-refresh"></span><br />
+                                        <strong>Borrowing</strong>
+                                    </p>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 for-rent" data-bind="css: { 'active': $root.Item.ForRent() == true }">
+                            <div class="checkbox item-option">
+                                <label>
+                                    <input type="checkbox" class="hidden" data-bind="checked: $root.Item.ForRent">
+                                    <p class="text-center">
+                                        <span class="glyphicon glyphicon-usd"></span><br />
+                                        <strong>Renting</strong>
+                                    </p>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <button data-bind="click: $root.Item.SaveItem, css: { hidden: $root.Item.HideOptions() }" class="btn btn-sm btn-success hidden"><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;Add To Collection</button>
+                </form>
+            </div>
+            <div class="tab-pane" id="multi-add-request">
+                <form role="form" data-bind="submit: $root.SearchPhotos">
+                    <div class="alert alert-success hidden" data-bind="visible: $root.UIMessages().length > 0, css: { hidden: false }">
+                        <ul data-bind="foreach: $root.UIMessages" class="list-unstyled">
+                            <li data-bind="html: $data.message"></li>
+                        </ul>
+                    </div>
+
+                    <div class="alert alert-danger hidden" data-bind="visible: $root.UIErrors().length > 0, css: { hidden: false }">
+
+                        <ul data-bind="foreach: $root.UIErrors" class="list-unstyled">
+                            <li data-bind="text: $data.message"></li>
+                        </ul>
+                    </div>
+
+                    <div class="input-group input-group-sm">
+                        <input data-bind="value: $root.Request.Title, valueUpdate: 'keyup'" type="text" class="item-request-search form-control" placeholder="What would you like?">
+                        <span class="input-group-btn">
+                            <button data-bind="click: $root.SearchPhotos" class="btn btn-default" type="button"><span class="glyphicon glyphicon-picture"></span></button>
+                        </span>
+                    </div>
+                    <div data-bind="css: { hidden: $root.Request.HideDescription() }" class="hidden">
+                        <input data-bind="value: $root.Request.Description" type="text" class="item-request-description form-control input-sm" placeholder="Add Hashtags Here (ex. #mtg #boardgame #book)">
+                    </div>
+
+                    <ul data-bind="foreach: $root.PhotoSearchResults, css: { hidden: false }" class="hidden photo-results list-inline">
+                        <li>
+                            <label class="checkbox">
+                                <input type="checkbox" data-bind="value: $data.Url">
+                                <img src="@Url.ContentCdn("~/assets/img/ui/thumbnail.png")" class="img-rounded hidden-md hidden-lg" width="50" height="50" data-bind="attr: { src: $data.ThumbnailUrl }">
+                                <img src="@Url.ContentCdn("~/assets/img/ui/thumbnail.png")" class="img-rounded visible-md visible-lg " width="150" height="150" data-bind="attr: { src: $data.ThumbnailUrl }">
+                            </label>
+                        </li>
+                    </ul>
+
+                    <div class="row item-option-row hidden" data-bind="css: { hidden: $root.Request.HideOptions() }">
+                        <div class="muted text-center ">
+                            <br />
+                            I am offering this for...
+                        </div>
+                        <div class="col-xs-3 for-trade" data-bind="css: { 'active': $root.Request.ForTrade() == true }">
+                            <div class="checkbox item-option">
+                                <label>
+                                    <input type="checkbox" class="hidden" data-bind="checked: $root.Request.ForTrade" />
+                                    <p class="text-center">
+                                        <span class="glyphicon glyphicon-retweet"></span><br />
+                                        <strong>Trade</strong>
+                                    </p>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 for-free" data-bind="css: { 'active': $root.Request.ForFree() == true }">
+                            <div class="checkbox item-option">
+                                <label>
+                                    <input type="checkbox" class="hidden" data-bind="checked: $root.Request.ForFree">
+                                    <p class="text-center">
+                                        <span class="glyphicon glyphicon-gift"></span><br />
+                                        <strong>Free</strong>
+                                    </p>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 for-share" data-bind="css: { 'active': $root.Request.ForShare() == true }">
+                            <div class="checkbox item-option">
+                                <label>
+                                    <input type="checkbox" class="hidden" data-bind="checked: $root.Request.ForShare">
+                                    <p class="text-center">
+                                        <span class="glyphicon glyphicon-refresh"></span><br />
+                                        <strong>Borrowing</strong>
+                                    </p>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 for-rent" data-bind="css: { 'active': $root.Request.ForRent() == true }">
+                            <div class="checkbox item-option">
+                                <label>
+                                    <input type="checkbox" class="hidden" data-bind="checked: $root.Request.ForRent">
+                                    <p class="text-center">
+                                        <span class="glyphicon glyphicon-usd"></span><br />
+                                        <strong>Renting</strong>
+                                    </p>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <button data-bind="click: $root.Request.Save, css: { hidden: $root.Request.HideControls() }" class="hidden btn btn-sm btn-success"><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;Submit Request</button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

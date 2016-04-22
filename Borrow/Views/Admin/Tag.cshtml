@@ -1,0 +1,45 @@
+﻿@using Borentra;
+
+@model Borentra.Models.Item
+
+@{
+    ViewBag.Title = "Tag Item";
+    Layout = "~/Views/Shared/Layouts/_AdminLayout.cshtml";
+}
+
+<div class="admin-reports">
+    <div class="row">
+        <div class="col-xs-10">
+            <div class="page-header">
+                <h1>@Model.Title</h1>
+                @if (!string.IsNullOrWhiteSpace(Model.Description))
+                {
+                    <span>@Model.Description</span>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.PrimaryImageLarge))
+                {
+                    <div class="text-center">
+                        <img itemprop="image" src="@Url.ContentCdn("~" + Model.PrimaryImageThumbnail, true)" title="@Model.Title" alt="@Model.Title" class="img-rounded img-responsive item-view-thumbnail item-detail-big-image" />
+                    </div>
+                }
+            </div>
+            <form action="/Admin/SaveTag" method="post">
+                <input type="hidden" id="itemIdentifier" name="itemIdentifier" value="@Model.Identifier" />
+                <ul>
+                    @if (null != Model.Categories)
+                    {
+                    foreach (var category in Model.Categories)
+                    {
+                        <li>@category</li>
+                    }
+                    }
+                    <li>Tags <input type="text" name="tags" id="tags" class="form-control" /></li>
+                    <li><input type="submit" class="form-control" alt="Save" /></li>
+                </ul>
+            </form>
+        </div>
+        <div class="col-xs-2">
+            @Html.Partial("~/Views/Shared/Admin/_AdminMenu.cshtml")
+        </div>
+    </div>
+</div>

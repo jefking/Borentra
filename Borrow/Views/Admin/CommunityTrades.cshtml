@@ -1,0 +1,67 @@
+﻿@using System.Linq;
+
+@model System.Collections.Generic.IEnumerable<Borentra.Models.Trade>
+@{
+    ViewBag.Title = "Community Trades";
+    Layout = "~/Views/Shared/Layouts/_AdminLayout.cshtml";
+}
+<div class="admin-reports">
+    <div class="row">
+        <div class="col-xs-10">
+            @if (0 < Model.Count())
+            {
+                <div class="page-header">
+                    <h1>Community Trades <small>@Model.Count()</small></h1>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Requester</th>
+                            <th>Reciever</th>
+                            <th>Created On</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var trade in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="/profile/@trade.Requester.Key" target="_blank">@trade.Requester.Name</a>
+                                    @if (null != trade.ReceiverItems)
+                                    {
+                                        <ul>
+                                            @foreach (var item in trade.RequesterItems)
+                                            {
+                                                <li>
+                                                    <a href="/offer/@item.Key" target="_blank">@item.Title</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="/profile/@trade.Receiver.Key" target="_blank">@trade.Receiver.Name</a>
+                                    @if (null != trade.RequesterItems)
+                                    {
+                                        <ul>
+                                            @foreach (var item in trade.ReceiverItems)
+                                            {
+                                                <li>
+                                                    <a href="/offer/@item.Key" target="_blank">@item.Title</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                </td>
+                                <td>@trade.CreatedOn.ToShortDateString()</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+        <div class="col-xs-2">
+            @Html.Partial("~/Views/Shared/Admin/_AdminMenu.cshtml")
+        </div>
+    </div>
+</div>

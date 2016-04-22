@@ -1,0 +1,16 @@
+﻿<div id="dialogFreeItem" class="modal fade" tabindex="-1" role="dialog">
+  <form id="free-item-form">
+    <input type="hidden" id="itemId" name="itemId" value="" />
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3>Would you like this item?</h3>
+    </div>
+    <div class="modal-body">
+      <h4>Comment</h4>
+      <textarea class="span6" id="comment" placeholder="Lets meet at our favorite coffee shop tonight." rows="5" maxlength="1024"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary" data-loading-text="Working it! Please wait!" onclick="_gaq.push(['_trackEvent', 'Dialogue', 'Free', 'Requested']);">Confirm</button>
+    </div>
+  </form>
+</div>

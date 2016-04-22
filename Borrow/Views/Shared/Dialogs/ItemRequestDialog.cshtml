@@ -1,0 +1,28 @@
+﻿<div id="dialogItemRequest" class="modal fade dialog-request-item" tabindex="-1" role="dialog" aria-labelledby="addDialogModalLabel" aria-hidden="true">
+    <form id="quick-request-item-form">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="addDialogModalLabel">What are you looking for?</h3>
+        </div>
+        <div class="modal-body">
+
+            <div class="row">
+                <h4><em>Let's start off with the basics...</em></h4>
+
+                <input type="text" id="item-title" class="form-control" placeholder="What are you looking for? (required)" maxlength="256" required>
+                <textarea class="form-control" id="item-description" placeholder="Do you have additional information on what you are looking for? (optional)" rows="5" maxlength="1024"></textarea>
+                <div class="hide alert alert-success">
+                    <p>Successfully created your item request! We'll be redirecting you in a few seconds...</p>
+                </div>
+                For Free <input type="checkbox" checked id="for-free" name="for-free" title="For Free" />
+                To Borrow <input type="checkbox" checked id="for-share" name="for-share" title="To Lend" />
+                To Rent <input type="checkbox" id="for-rent" name="for-rent" title="To Rent" />
+                To Trade<input type="checkbox" id="for-trade" checked name="for-trade" title="To Trade" />
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" data-loading-text="Working it! Please wait!" onclick="_gaq.push(['_trackEvent', 'Dialogue', 'Item', 'Request']);">Done</button>
+        </div>
+    </form>
+</div>
